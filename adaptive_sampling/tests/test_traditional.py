@@ -1,5 +1,9 @@
 import sys
-sys.path.append('src')
+import os
+current_dir = os.path.dirname(os.path.abspath(__file__))
+adaptive_dir = os.path.join(current_dir, '..')
+sys.path.append(adaptive_dir)
+
 from traditional_approach import TraditionalApproach
 from base_simulator import MockSimulator
 import numpy as np

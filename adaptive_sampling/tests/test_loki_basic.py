@@ -3,8 +3,8 @@
 Test script to verify LoKI is available and can run a basic simulation.
 """
 import sys
-sys.path.append('src')
-from base_simulator import LoKISimulator
+#sys.path.append('src')
+from adaptive_sampling.src.base_simulator import LoKISimulator
 import numpy as np
 
 print("Testing LoKI availability...")

@@ -3,9 +3,13 @@ Test script for the MockSimulator and basic functionality.
 """
 import sys
 import os
-sys.path.append(os.path.join('..', 'src'))
+# Add the adaptive_sampling/src directory to path
+# Add the adaptive_sampling/src directory to path using absolute path
+#current_dir = os.path.dirname(os.path.abspath(__file__))
+#adaptive_dir = os.path.join(current_dir, '..')
+#sys.path.append(adaptive_dir)
 
-from base_simulator import MockSimulator
+from adaptive_sampling.src.base_simulator import MockSimulator
 import numpy as np
 
 def test_mock_simulator():

@@ -1,0 +1,40 @@
+{
+  "approach": "traditional",
+  "model_type": "svm_multi",
+  "sampling_method": "latin_hypercube",
+  "n_train": 200,
+  "n_test": 100,
+  "k_columns": [
+    0,
+    1,
+    2
+  ],
+  "k_bounds": [
+    [
+      3e-16,
+      1.2e-15
+    ],
+    [
+      6.5e-16,
+      2.6e-15
+    ],
+    [
+      4.8e-16,
+      1.92e-15
+    ]
+  ],
+  "train_metrics": {
+    "r2_score": 0.9393437119574529,
+    "mse": 9.501206632619872e-33,
+    "rmse": 9.74741331462859e-17,
+    "relative_error": 5.973251207927824e-07,
+    "training_time": 0.031488656997680664
+  },
+  "test_metrics": {
+    "r2_score": 0.3388251112593393,
+    "mse": 1.0962462090306417e-31,
+    "rmse": 3.3109609013557404e-16,
+    "relative_error": 2.527308666744489e-06
+  },
+  "total_simulations": 300
+}

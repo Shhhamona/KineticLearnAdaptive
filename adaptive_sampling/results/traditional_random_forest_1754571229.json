@@ -1,0 +1,40 @@
+{
+  "approach": "traditional",
+  "model_type": "random_forest",
+  "sampling_method": "latin_hypercube",
+  "n_train": 200,
+  "n_test": 100,
+  "k_columns": [
+    0,
+    1,
+    2
+  ],
+  "k_bounds": [
+    [
+      3e-16,
+      1.2e-15
+    ],
+    [
+      6.5e-16,
+      2.6e-15
+    ],
+    [
+      4.8e-16,
+      1.92e-15
+    ]
+  ],
+  "train_metrics": {
+    "r2_score": 0.9235205021131025,
+    "mse": 1.2780401637325632e-32,
+    "rmse": 1.1305043846587077e-16,
+    "relative_error": 8.939699685712417e-07,
+    "training_time": 0.4876217842102051
+  },
+  "test_metrics": {
+    "r2_score": 0.4847866273692219,
+    "mse": 8.733783191941596e-32,
+    "rmse": 2.9552974794327552e-16,
+    "relative_error": 2.3633059077527254e-06
+  },
+  "total_simulations": 300
+}

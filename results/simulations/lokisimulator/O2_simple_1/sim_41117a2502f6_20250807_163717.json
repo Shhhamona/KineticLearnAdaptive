@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-07T16:37:17.991675",
+    "simulator_type": "LoKISimulator",
+    "setup_file": "setup_O2_simple.in",
+    "chem_file": "O2_simple_1.chem",
+    "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+    "execution_time_seconds": 95.296467,
+    "simulation_hash": "41117a2502f6",
+    "n_simulations": 1,
+    "n_k_varied": 3,
+    "n_species": 3,
+    "k_columns_varied": [
+      0,
+      1,
+      2
+    ],
+    "reference_k_values": [
+      6e-16,
+      1.3e-15,
+      9.6e-16,
+      2.2e-15,
+      7e-22,
+      3e-44,
+      3.2e-45,
+      5.2,
+      53.0
+    ],
+    "loki_version": "v3.1.0",
+    "chemistry": "O2_simple"
+  },
+  "inputs": {
+    "k_values": [
+      [
+        6e-16,
+        1.3e-15,
+        9.6e-16
+      ]
+    ],
+    "k_shape": [
+      1,
+      3
+    ]
+  },
+  "outputs": {
+    "compositions": [
+      [
+        "1.08495604921485e+23",
+        "3.53181278254990e+21",
+        "1.60525918503328e+22"
+      ]
+    ],
+    "composition_shape": [
+      1,
+      3
+    ]
+  }
+}
