@@ -1,0 +1,79 @@
+{
+  "experiment_name": "adaptive_vs_traditional_comparison",
+  "description": "Comparison of adaptive sampling vs traditional approach for rate coefficient determination",
+  
+  "simulation": {
+    "setup_file": "setup_O2_simple.in",
+    "chem_file": "O2_simple_1.chem",
+    "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+    "k_columns": [0, 1, 2],
+    "true_k_values": [6e-16, 1.3e-15, 9.6e-16],
+    "use_mock_simulator": true
+  },
+  
+  "traditional_approach": {
+    "n_train": 200,
+    "n_test": 100,
+    "sampling_method": "latin_hypercube",
+    "models": [
+      {
+        "type": "random_forest",
+        "params": {
+          "n_estimators": 100,
+          "max_depth": 10,
+          "random_state": 42
+        }
+      },
+      {
+        "type": "svm_multi",
+        "params": {
+          "C": 10.0,
+          "epsilon": 0.1,
+          "kernel": "rbf",
+          "gamma": "scale"
+        }
+      }
+    ]
+  },
+  
+  "adaptive_approach": {
+    "n_initial": 50,
+    "n_iteration": 25,
+    "max_iterations": 8,
+    "convergence_threshold": 1e-3,
+    "initial_hypercube_size": 0.5,
+    "hypercube_reduction": 0.8,
+    "sampling_method": "latin_hypercube",
+    "models": [
+      {
+        "type": "random_forest",
+        "params": {
+          "n_estimators": 100,
+          "max_depth": 10,
+          "random_state": 42
+        }
+      },
+      {
+        "type": "svm_multi",
+        "params": {
+          "C": 10.0,
+          "epsilon": 0.1,
+          "kernel": "rbf",
+          "gamma": "scale"
+        }
+      }
+    ]
+  },
+  
+  "comparison": {
+    "metrics": [
+      "r2_score",
+      "rmse", 
+      "relative_error",
+      "total_simulations",
+      "training_time"
+    ],
+    "create_plots": true,
+    "save_results": true
+  }
+}

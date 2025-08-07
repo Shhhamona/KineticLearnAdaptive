@@ -1,0 +1,120 @@
+{
+  "random_forest": {
+    "approach": "traditional",
+    "model_type": "random_forest",
+    "sampling_method": "latin_hypercube",
+    "n_train": 100,
+    "n_test": 30,
+    "k_columns": [
+      0,
+      1,
+      2
+    ],
+    "k_bounds": [
+      [
+        1e-16,
+        1e-14
+      ],
+      [
+        5e-16,
+        5e-15
+      ],
+      [
+        1e-16,
+        2e-15
+      ]
+    ],
+    "train_metrics": {
+      "r2_score": 0.9362553343671928,
+      "mse": 2.250319621521867e-31,
+      "rmse": 4.743753388954645e-16,
+      "relative_error": 3.19702162223644e-06,
+      "training_time": 0.2778360843658447
+    },
+    "test_metrics": {
+      "r2_score": 0.6088696796917493,
+      "mse": 1.4767457929461111e-30,
+      "rmse": 1.2152142991859958e-15,
+      "relative_error": 8.405696265676855e-06
+    },
+    "total_simulations": 130
+  },
+  "neural_network": {
+    "approach": "traditional",
+    "model_type": "neural_network",
+    "sampling_method": "latin_hypercube",
+    "n_train": 100,
+    "n_test": 30,
+    "k_columns": [
+      0,
+      1,
+      2
+    ],
+    "k_bounds": [
+      [
+        1e-16,
+        1e-14
+      ],
+      [
+        5e-16,
+        5e-15
+      ],
+      [
+        1e-16,
+        2e-15
+      ]
+    ],
+    "train_metrics": {
+      "r2_score": 0.8420235575377771,
+      "mse": 6.936126448059314e-31,
+      "rmse": 8.328341040122765e-16,
+      "relative_error": 4.914013042893493e-06,
+      "training_time": 0.3213472366333008
+    },
+    "test_metrics": {
+      "r2_score": 0.6469094466291166,
+      "mse": 1.4173372141766804e-30,
+      "rmse": 1.190519724396316e-15,
+      "relative_error": 7.680622400636014e-06
+    },
+    "total_simulations": 130
+  },
+  "metadata": {
+    "timestamp": "20250715_154835",
+    "simulator_type": "mock",
+    "chem_file": "chem.chem",
+    "setup_file": "setup.in",
+    "analysis_config": {
+      "simulator_type": "mock",
+      "setup_file": "setup.in",
+      "chem_file": "chem.chem",
+      "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+      "k_columns": [
+        0,
+        1,
+        2
+      ],
+      "k_bounds": [
+        [
+          1e-16,
+          1e-14
+        ],
+        [
+          5e-16,
+          5e-15
+        ],
+        [
+          1e-16,
+          2e-15
+        ]
+      ],
+      "n_train": 100,
+      "n_test": 30,
+      "sampling_method": "latin_hypercube",
+      "models": [
+        "random_forest",
+        "neural_network"
+      ]
+    }
+  }
+}

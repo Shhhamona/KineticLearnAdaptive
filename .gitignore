@@ -7,3 +7,5 @@ Images/**/*.png
 __pycache__/
 *.png
 .vscode/
+.venv
+.venv_10

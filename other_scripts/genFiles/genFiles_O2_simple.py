@@ -2,6 +2,15 @@ import numpy as np
 import matlab.engine
 import os
 import re
+
+import sys
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Get the directory one level up
+parent_dir = os.path.dirname(current_dir)
+# Add the parent directory to Python's path
+sys.path.append(parent_dir)
+
 import SamplingMorrisMethod as morris
 from scipy.stats import qmc 
 np.random.seed(10) # Recover reproducibility
@@ -263,6 +272,8 @@ class Simulations():
             # Write out the setUp files
             outfile = open(self.loki_path+ '\\Code\\Input\\'+self.outptFolder+'\\'+self.setup_file[:-3]+'_' +str(j)+'.in', 'w')
             outfile.write(setup_data)
+
+            print("Setup files: ",  outfile)
             outfile.close()
 
 
@@ -282,6 +293,7 @@ class Simulations():
         # Read data from all output folders
         for i in range(self.nsimulations):
             file_address = self.loki_path+ '\\Code\\Output\\'+self.outptFolder+'_' + str(i) + '\\chemFinalDensities.txt'
+            print("Output File address: ", file_address )
             densities.append(readFile(file_address))
 
         return np.array(densities)
@@ -313,7 +325,12 @@ class Simulations():
         eng = matlab.engine.start_matlab()
         s = eng.genpath(self.loki_path)
         eng.addpath(s, nargout=0) # add loki code folder to search path of matlab
-        eng.loki_loop(nargout=0)  # run the matlab script
+        
+        # Run LoKI for each setup file individually
+        for j in range(self.nsimulations):
+            setup_file_name = self.outptFolder + '\\' + self.setup_file[:-3] + '_' + str(j) + '.in'
+            print(f"Running LoKI for setup file: {setup_file_name}")
+            eng.loki(setup_file_name, nargout=0)  # run the matlab script for this setup file
 
 
 
@@ -366,13 +383,15 @@ if __name__ == '__main__':
 
     # path to LoKI
     loki_path = "D:\\Marcelo" + '\\LoKI_v3.1.0'
+
+    loki_path = 'C:\MyPrograms\LoKI_v3.1.0-v2'
     
     # Definition of reaction scheme and setup files
     chem_file = "O2_simple_1.chem" 
     setup_file = "setup_O2_simple.in"
 
     k_columns = [0,1,2] # if None, changes all columns
-    n_simulations = 10
+    n_simulations = 1
 
     simul = Simulations(setup_file, chem_file, loki_path, n_simulations)
     simul.set_ChemFile_ON() # turn off/on for fixed/changing values of k's

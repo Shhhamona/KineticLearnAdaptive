@@ -2,6 +2,16 @@ import numpy as np
 import matlab.engine
 import os
 import re
+
+import sys
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Get the directory one level up
+parent_dir = os.path.dirname(current_dir)
+# Add the parent directory to Python's path
+sys.path.append(parent_dir)
+
+
 import SamplingMorrisMethod as morris
 from scipy.stats import qmc
 np.random.seed(10) # Recover reproducibility
@@ -291,6 +301,7 @@ class Simulations():
         # Read data from all output folders
         for i in range(self.nsimulations):
             file_address = self.loki_path+ '\\Code\\Output\\'+self.outptFolder+'_' + str(i) + '\\chemFinalDensities.txt'
+            print("Output File address: ", file_address )
             densities.append(readFile(file_address))
 
         return np.array(densities)
@@ -323,7 +334,13 @@ class Simulations():
         eng = matlab.engine.start_matlab()
         s = eng.genpath(self.loki_path)
         eng.addpath(s, nargout=0) # add loki code folder to search path of matlab
-        eng.loki_loop(nargout=0)  # run the matlab script
+        
+        # Run LoKI for each setup file individually
+        for j in range(self.nsimulations):
+            setup_file_name = self.outptFolder + '\\' + self.setup_file[:-3] + '_' + str(j) + '.in'
+            print(f"Running LoKI for setup file: {setup_file_name}")
+            eng.loki(setup_file_name, nargout=0)  # run the matlab script for this setup file
+
 
 
 
@@ -376,6 +393,9 @@ if __name__ == '__main__':
 
     # path to LoKI
     loki_path = "D:\\Marcelo" + '\\LoKI_v3.1.0'
+
+    loki_path = "C:\MyPrograms\LoKI_v3.1.0-v2"
+
     
     # Definition of reaction scheme and setup files
     chem_file = "oxygen_novib.chem" 
@@ -384,7 +404,7 @@ if __name__ == '__main__':
     k_columns = [0,1,2,3,3] # we can repeat the same index for more than one parameter in the same reaction
     k_true_values = [7.6e-22, 3E-44, 4e-20, 4e-20, 1e-16] # WARNING: the order of the k's is too low to input into the scaler 
     pressures = [666.66] 
-    n_simulations = 5
+    n_simulations = 1
 
     simul = Simulations(setup_file, chem_file, loki_path, n_simulations)
     simul.set_ChemFile_ON() # turn off/on for fixed/changing values of k's
@@ -395,4 +415,4 @@ if __name__ == '__main__':
 
     # Run simulations
     simul.runSimulations()
-    # simul.writeDataFile(filename='datapoints_O2_novib_pressure_0.txt')
+    simul.writeDataFile(filename='datapoints_O2_novib_pressure_0.txt')

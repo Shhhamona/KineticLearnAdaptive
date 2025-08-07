@@ -1,0 +1,120 @@
+{
+  "random_forest": {
+    "approach": "traditional",
+    "model_type": "random_forest",
+    "sampling_method": "latin_hypercube",
+    "n_train": 20,
+    "n_test": 10,
+    "k_columns": [
+      0,
+      1,
+      2
+    ],
+    "k_bounds": [
+      [
+        1e-16,
+        1e-15
+      ],
+      [
+        5e-16,
+        5e-15
+      ],
+      [
+        1e-16,
+        2e-15
+      ]
+    ],
+    "train_metrics": {
+      "r2_score": 0.923800169006726,
+      "mse": 1.0079571428148532e-31,
+      "rmse": 3.1748340788375905e-16,
+      "relative_error": 1.8733047109600473e-06
+    },
+    "test_metrics": {
+      "r2_score": 0.4289891594369781,
+      "rmse": 9.027471162673465e-16,
+      "relative_error": 0.3617687654797461
+    },
+    "total_simulations": 30,
+    "simulation_time": 162.192809343338,
+    "training_time": 0.2907686233520508
+  },
+  "neural_network": {
+    "approach": "traditional",
+    "model_type": "neural_network",
+    "sampling_method": "latin_hypercube",
+    "n_train": 20,
+    "n_test": 10,
+    "k_columns": [
+      0,
+      1,
+      2
+    ],
+    "k_bounds": [
+      [
+        1e-16,
+        1e-15
+      ],
+      [
+        5e-16,
+        5e-15
+      ],
+      [
+        1e-16,
+        2e-15
+      ]
+    ],
+    "train_metrics": {
+      "r2_score": 0.8702630536491701,
+      "mse": 2.1402605234839224e-31,
+      "rmse": 4.626294979228976e-16,
+      "relative_error": 2.212834515887106e-06
+    },
+    "test_metrics": {
+      "r2_score": 0.49956126971144776,
+      "rmse": 8.941108003501402e-16,
+      "relative_error": 0.23269294486767234
+    },
+    "total_simulations": 30,
+    "simulation_time": 162.192809343338,
+    "training_time": 0.20898008346557617
+  },
+  "metadata": {
+    "timestamp": "20250715_160346",
+    "simulator_type": "loki",
+    "chem_file": "O2_simple_1.chem",
+    "setup_file": "setup_O2_simple.in",
+    "analysis_config": {
+      "simulator_type": "loki",
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+      "k_columns": [
+        0,
+        1,
+        2
+      ],
+      "k_bounds": [
+        [
+          1e-16,
+          1e-15
+        ],
+        [
+          5e-16,
+          5e-15
+        ],
+        [
+          1e-16,
+          2e-15
+        ]
+      ],
+      "n_train": 20,
+      "n_test": 10,
+      "sampling_method": "latin_hypercube",
+      "models": [
+        "random_forest",
+        "neural_network"
+      ]
+    }
+  }
+}

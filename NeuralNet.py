@@ -17,7 +17,9 @@ from sklearn import preprocessing
 from sklearn.metrics import mean_squared_error
 from tqdm import tqdm
 import sys
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
+
 
 from src.NeuralNetworkModels import NeuralNet
 from src.config import dict as dictionary

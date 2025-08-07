@@ -78,9 +78,14 @@ if __name__ == "__main__":
     nspecies = dictionary[scheme]['n_densities']
     num_pressure_conditions = dictionary[scheme]['n_conditions']
 
+    print("src file")
+
     # Load the training data
     dataset_train = LoadMultiPressureDatasetNumpy(src_file_train, nspecies, num_pressure_conditions, react_idx=dictionary[scheme]['k_columns'])
     x_train, y_train = dataset_train.get_data()
+
+    print(dataset_train.x_data)
+
 
     # Load the test data
     dataset_test = LoadMultiPressureDatasetNumpy(src_file_test, nspecies, num_pressure_conditions, react_idx=dictionary[scheme]['k_columns'], 
@@ -141,23 +146,25 @@ if __name__ == "__main__":
     grid_results = []
 
     ################## START GRID SEARCH ##################
-    # start = time.time()
-    # # For each output, perform hyperparameter tuning with GridSearchCV
-    # for i in range(y_train.shape[1]):
-    #     grid_search = GridSearchCV(model, refined_param_grid_v3, cv=5, scoring='neg_mean_squared_error')
-    #     grid_search.fit(x_train, y_train[:, i])
-    #     best_model = grid_search.best_estimator_
-    #     models.append(best_model)
-    #     grid_results.append(grid_search.cv_results_)
+    """
+    start = time.time()
+    #For each output, perform hyperparameter tuning with GridSearchCV
+    for i in range(y_train.shape[1]):
+        grid_search = GridSearchCV(model, refined_param_grid_v3, cv=5, scoring='neg_mean_squared_error')
+        grid_search.fit(x_train, y_train[:, i])
+        best_model = grid_search.best_estimator_
+        models.append(best_model)
+        grid_results.append(grid_search.cv_results_)
 
-    #     # Print the best hyperparameters for this output
-    #     print(f"Best hyperparameters for output {i}: {grid_search.best_params_}")
-    # end = time.time()
-    # print(f"Training time: {end-start}")
+        #Print the best hyperparameters for this output
+       #print(f"Best hyperparameters for output {i}: {grid_search.best_params_}")
+    end = time.time()
+    print(f"Training time: {end-start}")
 
-    # # Convert the grid results to a pandas DataFrame
-    # df_grid_results = pd.concat([pd.DataFrame(g) for g in grid_results], keys=[f'Output_{i}' for i in range(y_train.shape[1])])
-    # df_grid_results.to_csv('SVM_grid_search_results_revised.csv')  # Save to a CSV file for later use
+    #Convert the grid results to a pandas DataFrame
+    df_grid_results = pd.concat([pd.DataFrame(g) for g in grid_results], keys=[f'Output_{i}' for i in range(y_train.shape[1])])
+    df_grid_results.to_csv('SVM_grid_search_results_revised.csv')  # Save to a CSV file for later use
+    """
     ################## END GRID SEARCH ##################
 
 

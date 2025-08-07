@@ -1,0 +1,26 @@
+{
+  "random_forest": {
+    "approach": "adaptive_sampling",
+    "model_type": "random_forest",
+    "k_columns": [
+      0,
+      1,
+      2
+    ],
+    "true_k_values": [
+      1e-15,
+      2e-15,
+      8e-16
+    ],
+    "final_prediction": [
+      1.0221787632642271e-15,
+      1.862422068444302e-15,
+      1.063241675095686e-15
+    ],
+    "initial_error": 0.08709785355810634,
+    "final_error": 0.12541828193271307,
+    "error_improvement": -43.996983632945316,
+    "total_simulations": 100,
+    "total_time": 5.800125360488892,
+    "iterations_completed": 8,
+    "converged": 

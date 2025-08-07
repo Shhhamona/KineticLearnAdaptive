@@ -4,6 +4,8 @@ from genFiles_O2_novib import Simulations
 if __name__ == "__main__":
     # path to LoKI
     loki_path = "D:\\Marcelo" + '\\LoKI_v3.1.0'
+
+    loki_path = "C:\MyPrograms\LoKI_v3.1.0-v2"
     
     # Definition of reaction scheme and setup files
     chem_file = "oxygen_novib.chem" 

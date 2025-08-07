@@ -1,0 +1,42 @@
+{
+  "experiment_name": "minimal_loki_working",
+  "simulation": {
+    "setup_file": "setup_O2_simple.in",
+    "chem_file": "O2_simple_1.chem",
+    "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+    "k_columns": [0, 1, 2],
+    "true_k_values": [6e-16, 1.3e-15, 9.6e-16],
+    "use_mock_simulator": false
+  },
+  "traditional_approach": {
+    "n_train": 3,
+    "n_test": 2,
+    "sampling_method": "latin_hypercube",
+    "models": [
+      {
+        "type": "svm_multi",
+        "params": {"C": 1.0, "epsilon": 0.1, "kernel": "rbf"}
+      }
+    ]
+  },
+  "adaptive_approach": {
+    "n_initial": 2,
+    "n_iteration": 1,
+    "max_iterations": 1,
+    "convergence_threshold": 1e-2,
+    "initial_hypercube_size": 0.3,
+    "hypercube_reduction": 0.8,
+    "sampling_method": "latin_hypercube",
+    "models": [
+      {
+        "type": "svm_multi",
+        "params": {"C": 1.0, "epsilon": 0.1, "kernel": "rbf"}
+      }
+    ]
+  },
+  "comparison": {
+    "metrics": ["r2_score", "rmse", "total_simulations"],
+    "create_plots": true,
+    "save_results": true
+  }
+}
