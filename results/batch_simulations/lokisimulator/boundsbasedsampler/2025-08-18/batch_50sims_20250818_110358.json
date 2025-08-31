@@ -1,0 +1,1732 @@
+{
+  "metadata": {
+    "batch_timestamp": "2025-08-18T11:03:58.114839",
+    "sampler_type": "BoundsBasedSampler",
+    "simulator_type": "LoKISimulator",
+    "simulation_type": "simple",
+    "chemistry_name": "O2_simple",
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "unique_file_combinations": 1,
+    "parallel_workers": 1
+  },
+  "n_simulations": 50,
+  "n_successful": 50,
+  "success_rate": 1.0,
+  "total_time": 388.18279814720154,
+  "parameter_sets": [
+    {
+      "k_values": [
+        6.956447139971314e-16,
+        2.235966363158068e-15,
+        1.3651704666914444e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 0,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.495819329340803e-16,
+        2.1804901006400467e-15,
+        1.0099584204030616e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 1,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.562807663376426e-16,
+        1.4171672692512052e-15,
+        1.635997348341475e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 2,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0371322777225912e-15,
+        2.335734427913809e-15,
+        1.3836890678961056e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 3,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.8109606125199467e-16,
+        1.3988599978256783e-15,
+        1.6625517257254951e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 4,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0200618756247306e-15,
+        1.1517406300497575e-15,
+        8.950845198607916e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 5,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.086137185620242e-16,
+        2.26733374366311e-15,
+        8.757049894935869e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 6,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.304129405125467e-16,
+        2.0859462724851988e-15,
+        1.3455147232308145e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 7,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.78290591494642e-16,
+        1.6398217707071708e-15,
+        1.831460443981446e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 8,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        6.925064298049509e-16,
+        1.906436899330763e-15,
+        1.49850668545167e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 9,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        5.663133859987536e-16,
+        1.0657138024883637e-15,
+        8.593005575377309e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 10,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.3380190834750993e-16,
+        2.3966324499719383e-15,
+        6.561637264056073e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 11,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.2761635633565166e-16,
+        2.5335951904402397e-15,
+        1.1405628900334037e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 12,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.077945001811101e-16,
+        1.2681530464962869e-15,
+        1.8837299991312038e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 13,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        9.70377669255061e-16,
+        2.337827605543202e-15,
+        1.4600270992000003e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 14,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.015658656127573e-16,
+        1.255053228533232e-15,
+        7.582853744925039e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 15,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        6.466022396089379e-16,
+        6.992646935920433e-16,
+        5.473044871124088e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 16,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.512655177793567e-16,
+        7.459305576587709e-16,
+        1.8518072689496985e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 17,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0544351886333236e-15,
+        1.0100223341278178e-15,
+        1.7164545822745342e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 18,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.391466177153433e-16,
+        7.846150161536454e-16,
+        1.6721805730779426e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 19,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.004443336420474e-15,
+        1.1520770756388591e-15,
+        1.8680167528871273e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 20,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0636582637052431e-15,
+        2.4314843765628153e-15,
+        1.3424684866646519e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 21,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.428466782758314e-16,
+        1.5428065483501003e-15,
+        1.8205188036207624e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 22,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0029545555612539e-15,
+        9.0391298948521e-16,
+        6.913470925613666e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 23,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.541631884302124e-16,
+        2.2292887475303485e-15,
+        6.441028446067568e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 24,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.190486720549395e-16,
+        1.4367661889372988e-15,
+        1.0157216191303216e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 25,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        9.75418149438742e-16,
+        6.9764365771717e-16,
+        1.5838465822621057e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 26,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.584379199553245e-16,
+        2.3208205331241176e-15,
+        9.424445253095417e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 27,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.126627856135458e-16,
+        1.1848748970800227e-15,
+        1.3987705171362625e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 28,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.618104369590207e-16,
+        2.0327566299403816e-15,
+        4.932783864046256e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 29,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.356188012581432e-16,
+        1.3437560685061435e-15,
+        1.2625896554038792e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 30,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0599472150854128e-15,
+        2.1989026705617417e-15,
+        9.663666915146644e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 31,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.573325053399075e-16,
+        2.2970067792305088e-15,
+        1.7731550047433022e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 32,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.131713875929249e-16,
+        1.699387658422919e-15,
+        1.8346181354158415e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 33,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0638876646301089e-15,
+        1.7402187069863537e-15,
+        1.0331354627811399e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 34,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        9.684071195694906e-16,
+        8.888944638029688e-16,
+        1.0504096209704596e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 35,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.11027781788155e-16,
+        1.3864017412194566e-15,
+        1.7720831205398613e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 36,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        6.7520856634444e-16,
+        1.4860572918016333e-15,
+        5.647042100666597e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 37,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.050565598522669e-16,
+        1.6468568602566574e-15,
+        1.0637461753385794e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 38,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        6.048112196904058e-16,
+        2.388937011374604e-15,
+        6.674527785085139e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 39,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.8519313666928774e-16,
+        1.2354106926083256e-15,
+        6.052359488514494e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 40,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        9.442477854761828e-16,
+        1.4230616638129785e-15,
+        1.6089085732209426e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 41,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.6937686397443475e-16,
+        2.1968828044038478e-15,
+        9.18585631699133e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 42,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.853552325320752e-16,
+        1.4539383508391315e-15,
+        1.3210404564795875e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 43,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.16398608306082e-16,
+        1.010491722482279e-15,
+        1.7449912969343948e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 44,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        5.644483996833913e-16,
+        2.2884822663723616e-15,
+        1.7483405672834985e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 45,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.901540684431384e-16,
+        1.7600792294175127e-15,
+        1.3453740584337741e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 46,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0232115129688976e-15,
+        7.670979008240983e-16,
+        1.409127953785008e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 47,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        6.160921526967679e-16,
+        2.5783880996825924e-15,
+        5.61544612086873e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 48,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        3.8409633924939036e-16,
+        1.0961255497438323e-15,
+        9.083770996453275e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 49,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    }
+  ],
+  "compositions": [
+    [
+      1.86688232320917e+22,
+      1.86654800142598e+21,
+      5.07876421746664e+21
+    ],
+    [
+      2.0220796189163e+22,
+      1.36604998465809e+21,
+      4.02720044992168e+21
+    ],
+    [
+      1.77133678711865e+22,
+      2.1288292367256e+21,
+      5.77203795448135e+21
+    ],
+    [
+      1.77902016432681e+22,
+      2.61186440528378e+21,
+      5.21209572743274e+21
+    ],
+    [
+      1.87229445676978e+22,
+      1.13092301633098e+21,
+      5.76034896701092e+21
+    ],
+    [
+      1.82199355420821e+22,
+      3.32851573358796e+21,
+      4.06562407325819e+21
+    ],
+    [
+      1.94349307824131e+22,
+      2.35844414675685e+21,
+      3.82067114763365e+21
+    ],
+    [
+      1.8304182575686e+22,
+      2.23732981459907e+21,
+      5.07262905894976e+21
+    ],
+    [
+      1.81297260069179e+22,
+      1.30570335504291e+21,
+      6.17886504015105e+21
+    ],
+    [
+      1.83059507184658e+22,
+      1.88976338892989e+21,
+      5.41846371373087e+21
+    ],
+    [
+      1.98357791635417e+22,
+      2.06425572178841e+21,
+      3.71400685369865e+21
+    ],
+    [
+      2.16490763095639e+22,
+      1.10035396984243e+21,
+      2.86457716363481e+21
+    ],
+    [
+      2.03369189366143e+22,
+      9.38457255728479e+20,
+      4.33868221427571e+21
+    ],
+    [
+      1.73308626682919e+22,
+      1.9541609050774e+21,
+      6.32930918738777e+21
+    ],
+    [
+      1.78060601850591e+22,
+      2.42976191538243e+21,
+      5.3783571151561e+21
+    ],
+    [
+      1.92771500825619e+22,
+      2.77091055343509e+21,
+      3.56598014461324e+21
+    ],
+    [
+      2.00394428172422e+22,
+      2.67110665623979e+21,
+      2.9034682118255e+21
+    ],
+    [
+      1.79735290543398e+22,
+      1.40935230657281e+21,
+      6.23142791258568e+21
+    ],
+    [
+      1.66305250510748e+22,
+      2.96785434093951e+21,
+      6.01591086236385e+21
+    ],
+    [
+      1.71841569351271e+22,
+      2.54290379913601e+21,
+      5.88720378144035e+21
+    ],
+    [
+      1.65697307156062e+22,
+      2.71507468549563e+21,
+      6.32953476868539e+21
+    ],
+    [
+      1.78387570850203e+22,
+      2.6591728373452e+21,
+      5.11622106466802e+21
+    ],
+    [
+      1.71882404796303e+22,
+      2.22464762038921e+21,
+      6.20142097451173e+21
+    ],
+    [
+      1.84959738785129e+22,
+      3.56512914829006e+21,
+      3.55294506864512e+21
+    ],
+    [
+      1.98040710610871e+22,
+      2.61966233528469e+21,
+      3.19028926758886e+21
+    ],
+    [
+      2.05080981726949e+22,
+      1.10700881673803e+21,
+      3.99893657638995e+21
+    ],
+    [
+      1.69100767154455e+22,
+      2.98289923250699e+21,
+      5.72127215993699e+21
+    ],
+    [
+      2.03971692892842e+22,
+      1.38662685873995e+21,
+      3.83024106409147e+21
+    ],
+    [
+      1.82209073435584e+22,
+      2.19160980786348e+21,
+      5.20164301880786e+21
+    ],
+    [
+      2.03862132797126e+22,
+      2.53283177941388e+21,
+      2.69496498090675e+21
+    ],
+    [
+      1.84843964470899e+22,
+      2.26598595247087e+21,
+      4.86374188247889e+21
+    ],
+    [
+      1.849130601182e+22,
+      2.93801563259805e+21,
+      4.18475191707945e+21
+    ],
+    [
+      1.84230957081669e+22,
+      1.15890510968082e+21,
+      6.0322614229091e+21
+    ],
+    [
+      1.8583702382175e+22,
+      8.66712668459042e+20,
+      6.16387130793498e+21
+    ],
+    [
+      1.81410203852086e+22,
+      3.08420972194236e+21,
+      4.38886255851867e+21
+    ],
+    [
+      1.795093069911e+22,
+      3.20803522798604e+21,
+      4.45513954152546e+21
+    ],
+    [
+      1.75659561562468e+22,
+      1.97065320900937e+21,
+      6.0776747613876e+21
+    ],
+    [
+      2.02893520777313e+22,
+      2.42883652984324e+21,
+      2.89582626256261e+21
+    ],
+    [
+      2.01148340955987e+22,
+      1.32250052751785e+21,
+      4.17672077716428e+21
+    ],
+    [
+      2.06357614968498e+22,
+      1.88957787449659e+21,
+      3.08867638405278e+21
+    ],
+    [
+      2.12909563167869e+22,
+      1.52425862191956e+21,
+      2.79879420155142e+21
+    ],
+    [
+      1.72692230085895e+22,
+      2.59856008205457e+21,
+      5.74645581991756e+21
+    ],
+    [
+      2.07370551016658e+22,
+      1.16142095075731e+21,
+      3.71555447653306e+21
+    ],
+    [
+      1.91798819776784e+22,
+      1.51405047322985e+21,
+      4.9201836909672e+21
+    ],
+    [
+      1.72081965894436e+22,
+      2.36592488851111e+21,
+      6.04016380334688e+21
+    ],
+    [
+      1.82066254416529e+22,
+      1.41918669318111e+21,
+      5.98844512125008e+21
+    ],
+    [
+      1.80303627114503e+22,
+      2.48184579518942e+21,
+      5.10194200572987e+21
+    ],
+    [
+      1.70988033843673e+22,
+      3.17816983610959e+21,
+      5.33722583840114e+21
+    ],
+    [
+      2.09343098247264e+22,
+      1.92369637019647e+21,
+      2.75600240621448e+21
+    ],
+    [
+      2.04483650938918e+22,
+      1.42979415901213e+21,
+      3.73587674022712e+21
+    ],
+    [
+      2.23338120201289e+23,
+      2.89423158013533e+21,
+      2.99079763277757e+22
+    ],
+    [
+      2.29411964634969e+23,
+      2.24894840940934e+21,
+      2.44792310639926e+22
+    ],
+    [
+      2.19697601747617e+23,
+      2.86639087448092e+21,
+      3.3576518497437e+22
+    ],
+    [
+      2.21595806030678e+23,
+      4.25153415277595e+21,
+      3.02929981544472e+22
+    ],
+    [
+      2.20894243729307e+23,
+      1.43704952561978e+21,
+      3.38092385872098e+22
+    ],
+    [
+      2.27650208752853e+23,
+      5.51825460892032e+21,
+      2.29716308086947e+22
+    ],
+    [
+      2.29295775590645e+23,
+      4.34561851390825e+21,
+      2.24986950431176e+22
+    ],
+    [
+      2.22969380721656e+23,
+      3.48704744098408e+21,
+      2.96838873429275e+22
+    ],
+    [
+      2.18476667668771e+23,
+      1.69370658426931e+21,
+      3.597029211995e+22
+    ],
+    [
+      2.21657047015319e+23,
+      2.74353704082871e+21,
+      3.17398297071098e+22
+    ],
+    [
+      2.30877493632824e+23,
+      3.18970497915829e+21,
+      2.2072885024654e+22
+    ],
+    [
+      2.35762465013271e+23,
+      2.15499131961828e+21,
+      1.82225678024371e+22
+    ],
+    [
+      2.28161449843455e+23,
+      1.51728816769236e+21,
+      2.6461467539684e+22
+    ],
+    [
+      2.16998417301091e+23,
+      2.47440597092286e+21,
+      3.6667887678082e+22
+    ],
+    [
+      2.20968297118294e+23,
+      3.85946561536156e+21,
+      3.13126247654025e+22
+    ],
+    [
+      2.30841372675381e+23,
+      4.79743979322787e+21,
+      2.05012371316626e+22
+    ],
+    [
+      2.34897062534936e+23,
+      4.78400918544627e+21,
+      1.64589267327972e+22
+    ],
+    [
+      2.1831422113687e+23,
+      1.61108690376933e+21,
+      3.6215375081688e+22
+    ],
+    [
+      2.17550011676687e+23,
+      3.89837563658627e+21,
+      3.46921847899204e+22
+    ],
+    [
+      2.18900756987121e+23,
+      3.17050799087632e+21,
+      3.40692728415233e+22
+    ],
+    [
+      2.16064104976044e+23,
+      3.52590531771182e+21,
+      3.65506873306705e+22
+    ],
+    [
+      2.219828738708e+23,
+      4.42793313145341e+21,
+      2.97295061180562e+22
+    ],
+    [
+      2.17223089998405e+23,
+      2.98972891894022e+21,
+      3.59278384171657e+22
+    ],
+    [
+      2.30315594254434e+23,
+      6.33274015344778e+21,
+      1.94916953033845e+22
+    ],
+    [
+      2.32208421255466e+23,
+      5.45649642838001e+21,
+      1.84751018675694e+22
+    ],
+    [
+      2.30017695646683e+23,
+      1.62183922675531e+21,
+      2.45006121596539e+22
+    ],
+    [
+      2.19364754919106e+23,
+      3.80652052939791e+21,
+      3.29691961191401e+22
+    ],
+    [
+      2.30373764310991e+23,
+      2.38167629022406e+21,
+      2.33846755407538e+22
+    ],
+    [
+      2.22773022414363e+23,
+      2.97922548391607e+21,
+      3.03881002020553e+22
+    ],
+    [
+      2.34961794873348e+23,
+      5.6911508353533e+21,
+      1.54870439341518e+22
+    ],
+    [
+      2.24414720129903e+23,
+      3.25797951733807e+21,
+      2.84675675507836e+22
+    ],
+    [
+      2.26656383121287e+23,
+      5.35402256453089e+21,
+      2.41297171502515e+22
+    ],
+    [
+      2.19269171091915e+23,
+      1.63372461334135e+21,
+      3.52377228796058e+22
+    ],
+    [
+      2.19065432540733e+23,
+      1.10852628596837e+21,
+      3.5966710043661e+22
+    ],
+    [
+      2.25731778353272e+23,
+      5.22304099206939e+21,
+      2.51853313426484e+22
+    ],
+    [
+      2.25923014547086e+23,
+      4.80552076323737e+21,
+      2.54116226858751e+22
+    ],
+    [
+      2.18274443700623e+23,
+      2.57255093633366e+21,
+      3.52936226115612e+22
+    ],
+    [
+      2.3454180761608e+23,
+      4.78562229028322e+21,
+      1.68125723106072e+22
+    ],
+    [
+      2.28840640104421e+23,
+      1.98900270228938e+21,
+      2.53105252121027e+22
+    ],
+    [
+      2.33642620183129e+23,
+      3.81633605005758e+21,
+      1.86810698441045e+22
+    ],
+    [
+      2.36151337683246e+23,
+      2.68770972127577e+21,
+      1.73009641100488e+22
+    ],
+    [
+      2.19251883255935e+23,
+      3.60621311747276e+21,
+      3.32823942647631e+22
+    ],
+    [
+      2.31247199776721e+23,
+      1.9589137847161e+21,
+      2.29339936671573e+22
+    ],
+    [
+      2.24840529268956e+23,
+      2.09659421896884e+21,
+      2.92031786296982e+22
+    ],
+    [
+      2.18160004131864e+23,
+      2.99642309019948e+21,
+      3.49841678316638e+22
+    ],
+    [
+      2.19156083147967e+23,
+      2.03138717081212e+21,
+      3.49531282629015e+22
+    ],
+    [
+      2.22675219845958e+23,
+      3.75735109929592e+21,
+      2.9707743966074e+22
+    ],
+    [
+      2.21219250698359e+23,
+      4.27245090931324e+21,
+      3.06486511262372e+22
+    ],
+    [
+      2.35213424028717e+23,
+      4.26086656032318e+21,
+      1.66657117287345e+22
+    ],
+    [
+      2.31259037043097e+23,
+      2.1025195064424e+21,
+      2.27785462252271e+22
+    ]
+  ],
+  "execution_times": [
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031,
+    7.763655962944031
+  ],
+  "success_mask": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

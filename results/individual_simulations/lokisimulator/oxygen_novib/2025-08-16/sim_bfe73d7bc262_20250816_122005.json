@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-16T12:20:05.195647",
+    "simulator_type": "LoKISimulator",
+    "setup_file": "oxygen_chem_setup_novib.in",
+    "chem_file": "oxygen_novib.chem",
+    "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+    "execution_time_seconds": 466.981926,
+    "simulation_hash": "bfe73d7bc262",
+    "n_simulations": 1,
+    "n_k_varied": 4,
+    "n_species": 11,
+    "k_columns_varied": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "reference_k_values": [
+      7.59593006e-22,
+      2.99827165e-44,
+      4.00183879e-20,
+      8e-18
+    ],
+    "genfiles_module": "other_scripts.genFiles.genFiles_O2_novib",
+    "simulation_type": "complex",
+    "chemistry": "O2_novib",
+    "is_physically_accurate": true,
+    "matlab_engine_used": true
+  },
+  "inputs": {
+    "k_values": [
+      [
+        6e-16,
+        1.3e-15,
+        9.6e-16,
+        1e-15
+      ]
+    ],
+    "k_shape": [
+      1,
+      4
+    ]
+  },
+  "outputs": {
+    "compositions": [
+      [
+        2.00443932717784e+22,
+        7.86783345322125e-07,
+        9.44775869734682,
+        8.0485665265035e+17,
+        7125486318272060.0,
+        4.76956679933474e+21,
+        1.8114323035216e+17,
+        83012376478389.6,
+        714987491331956.0,
+        1.72977274002401e+18,
+        3.73097105109814e+16
+      ],
+      [
+        9.59616387466271e+22,
+        4.03426826309573e-07,
+        11.7590053533385,
+        1.37788664080276e+18,
+        8090816598775860.0,
+        8.04799059262539e+21,
+        6.3682124093599e+16,
+        945102548270.305,
+        1533368946333440.0,
+        1.01439505110667e+19,
+        5.58639465029652e+17
+      ]
+    ],
+    "composition_shape": [
+      2,
+      11
+    ]
+  }
+}

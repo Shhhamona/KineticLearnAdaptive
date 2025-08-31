@@ -108,8 +108,8 @@ def calculate_mse_for_dataset(dataset_train, dataset_test, best_params, subset_s
 if __name__ == "__main__":
     nspecies = 3
     num_pressure_conditions = 2
-    subset_sizes = [i for i in range(200, 2100, 200)]
-    num_seeds = 20  # Number of seeds to use
+    subset_sizes = [i for i in range(200, 2000, 100)]
+    num_seeds = 10  # Number of seeds to use
     print("Subset sizes:", subset_sizes)
     best_params = [
         {'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'},
@@ -131,6 +131,18 @@ if __name__ == "__main__":
         'Log-Uniform Latin Hypercube',
         'Uniform Latin Hypercube',
     ]
+
+    datasets = [
+        'O2_simple_uniform.txt',
+        'O2_simple_latin_log_uniform.txt',
+        'O2_simple_latin.txt',
+    ]
+    labels = [
+        'Uniform',
+        'Log-Uniform Latin Hypercube',
+        'Uniform Latin Hypercube',
+    ]
+
 
     # set figure size
     plt.figure(figsize=(9, 6))
@@ -155,6 +167,8 @@ if __name__ == "__main__":
         plt.errorbar(subset_sizes, mean_total_mse, yerr=std_total_mse, label=labels[idx], marker='o')
 
 
+    print("Mean TOTAL MSE", mean_total_mse )
+
     plt.rcParams.update({'font.size': 16})
     plt.xlabel('Dataset size', fontsize=14)
     plt.ylabel('MSE on test set', fontsize=14)
@@ -165,4 +179,4 @@ if __name__ == "__main__":
     plt.tight_layout() 
     # plt.savefig(os.path.join('images', 'sample_efficiency','SVR_sample_efficiency_seeds.png'))
     # plt.show()
-    plt.savefig(folder_path + 'sample_efficiency.pdf')
+    plt.savefig('sample_efficiency.pdf')

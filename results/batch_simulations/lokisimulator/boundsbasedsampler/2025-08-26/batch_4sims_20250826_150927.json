@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "batch_timestamp": "2025-08-26T15:09:27.758337",
+    "sampler_type": "BoundsBasedSampler",
+    "simulator_type": "LoKISimulator",
+    "simulation_type": "simple",
+    "chemistry_name": "O2_simple",
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "unique_file_combinations": 1,
+    "parallel_workers": 1
+  },
+  "n_simulations": 4,
+  "n_successful": 4,
+  "success_rate": 1.0,
+  "total_time": 58.243125677108765,
+  "parameter_sets": [
+    {
+      "k_values": [
+        3.03553439695123e-16,
+        2.0574228689920094e-15,
+        1.2612638899362163e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 0,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        7.60973037047199e-16,
+        1.2191583329327348e-15,
+        6.847248685461989e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 1,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        1.0313588654869022e-15,
+        2.43965953890024e-15,
+        1.0176106944741156e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 2,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.512734601464494e-16,
+        2.0434227776254966e-15,
+        1.4507524056955372e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 3,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    }
+  ],
+  "compositions": [
+    [
+      2.00296910602758e+22,
+      9.0599100616312e+20,
+      4.67840077733431e+21
+    ],
+    [
+      1.95630519165348e+22,
+      2.71517117788245e+21,
+      3.33580767848799e+21
+    ],
+    [
+      1.85648607277069e+22,
+      2.75796999802143e+21,
+      4.29124711373898e+21
+    ],
+    [
+      1.80248306796383e+22,
+      2.25201348138613e+21,
+      5.3373286516064e+21
+    ],
+    [
+      2.26542341122484e+23,
+      1.33676205733742e+21,
+      2.8261165965096e+22
+    ],
+    [
+      2.32140096491242e+23,
+      4.84437639693066e+21,
+      1.91555563026701e+22
+    ],
+    [
+      2.26185612083273e+23,
+      5.03653300399454e+21,
+      2.49179996965231e+22
+    ],
+    [
+      2.21570648192684e+23,
+      3.42170943642428e+21,
+      3.11480239401829e+22
+    ]
+  ],
+  "execution_times": [
+    14.560454428195953,
+    14.560454428195953,
+    14.560454428195953,
+    14.560454428195953
+  ],
+  "success_mask": [
+    true,
+    true,
+    true,
+    true
+  ]
+}

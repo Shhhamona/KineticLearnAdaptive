@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "batch_timestamp": "2025-08-22T12:38:41.095106",
+    "sampler_type": "BoundsBasedSampler",
+    "simulator_type": "LoKISimulator",
+    "simulation_type": "simple",
+    "chemistry_name": "O2_simple",
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "unique_file_combinations": 1,
+    "parallel_workers": 1
+  },
+  "n_simulations": 2,
+  "n_successful": 2,
+  "success_rate": 1.0,
+  "total_time": 31.948044538497925,
+  "parameter_sets": [
+    {
+      "k_values": [
+        4.183123371622706e-16,
+        2.1685211761147864e-15,
+        7.429892682749016e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 0,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        6.723006369766074e-16,
+        1.788607663024668e-15,
+        1.6695584367586685e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 1,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    }
+  ],
+  "compositions": [
+    [
+      2.10354338059594e+22,
+      1.36897674042846e+21,
+      3.20960562941889e+21
+    ],
+    [
+      1.79798747287221e+22,
+      1.80710038332657e+21,
+      5.82726171468204e+21
+    ],
+    [
+      2.33713053492298e+23,
+      2.51451938888511e+21,
+      1.99124744405109e+22
+    ],
+    [
+      2.1965297979118e+23,
+      2.50409870651576e+21,
+      3.39834583435083e+22
+    ]
+  ],
+  "execution_times": [
+    15.974022269248962,
+    15.974022269248962
+  ],
+  "success_mask": [
+    true,
+    true
+  ]
+}

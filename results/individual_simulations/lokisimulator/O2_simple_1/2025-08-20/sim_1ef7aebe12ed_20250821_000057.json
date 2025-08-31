@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-21T00:00:57.230313",
+    "simulator_type": "LoKISimulator",
+    "setup_file": "setup_O2_simple.in",
+    "chem_file": "O2_simple_1.chem",
+    "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+    "execution_time_seconds": 40.287795,
+    "simulation_hash": "1ef7aebe12ed",
+    "n_simulations": 2,
+    "n_k_varied": 3,
+    "n_species": 3,
+    "k_columns_varied": [
+      0,
+      1,
+      2
+    ],
+    "reference_k_values": [
+      6e-16,
+      1.3e-15,
+      9.6e-16,
+      2.2e-15,
+      7e-22,
+      3e-44,
+      3.2e-45,
+      5.2,
+      53.0
+    ],
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "genfiles_module": "other_scripts.genFiles.genFiles_O2_simple",
+    "simulation_type": "simple",
+    "chemistry": "O2_simple",
+    "is_physically_accurate": false,
+    "matlab_engine_used": true
+  },
+  "inputs": {
+    "k_values": [
+      [
+        9.248042798084387e-16,
+        1.6597959323584616e-15,
+        1.482202369023514e-15
+      ],
+      [
+        4.896264846903473e-16,
+        2.5018564824588343e-15,
+        1.782717218914871e-15
+      ]
+    ],
+    "k_shape": [
+      2,
+      3
+    ]
+  },
+  "outputs": {
+    "compositions": [
+      [
+        1.76404600701535e+22,
+        2.53143398123069e+21,
+        5.44229924439261e+21
+      ],
+      [
+        1.83551124516363e+22,
+        1.20161721437653e+21,
+        6.05753734512415e+21
+      ],
+      [
+        2.20847476216711e+23,
+        3.69239975382913e+21,
+        3.16005258421555e+22
+      ],
+      [
+        2.19038552053698e+23,
+        1.73728642731229e+21,
+        3.53647879111523e+22
+      ]
+    ],
+    "composition_shape": [
+      4,
+      3
+    ]
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "config": {
+    "nspecies": 3,
+    "num_pressure_conditions": 2,
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "svr_params": [
+      {
+        "C": 10,
+        "epsilon": 0.005,
+        "gamma": 2,
+        "kernel": "rbf"
+      },
+      {
+        "C": 20,
+        "epsilon": 0.005,
+        "gamma": 5,
+        "kernel": "rbf"
+      },
+      {
+        "C": 5,
+        "epsilon": 0.005,
+        "gamma": 2,
+        "kernel": "rbf"
+      }
+    ],
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ]
+  },
+  "experiment_type": "iterative_batch",
+  "iteration_results": [
+    {
+      "iteration": 0,
+      "total_samples": 100,
+      "batch_samples_added": 0,
+      "mse_per_output": [
+        1.785642706823359e-05,
+        0.00024410844966251064,
+        2.015899017486162e-05
+      ],
+      "total_mse": 0.00028212386690560585,
+      "mse_type": "initial"
+    },
+    {
+      "iteration": 1,
+      "total_samples": 200,
+      "batch_samples_added": 100,
+      "mse_per_output": [
+        9.384005837947608e-06,
+        9.745619310704631e-05,
+        1.2363408147502752e-05
+      ],
+      "total_mse": 0.00011920360709249667,
+      "mse_type": "retrain"
+    },
+    {
+      "iteration": 2,
+      "total_samples": 300,
+      "batch_samples_added": 100,
+      "mse_per_output": [
+        6.323178186624416e-06,
+        9.221928130928905e-05,
+        1.1377287167204209e-05
+      ],
+      "total_mse": 0.00010991974666311768,
+      "mse_type": "retrain"
+    },
+    {
+      "iteration": 3,
+      "total_samples": 400,
+      "batch_samples_added": 100,
+      "mse_per_output": [
+        7.278152949646832e-06,
+        5.8945329942613506e-05,
+        1.1490492085109953e-05
+      ],
+      "total_mse": 7.771397497737029e-05,
+      "mse_type": "retrain"
+    },
+    {
+      "iteration": 4,
+      "total_samples": 500,
+      "batch_samples_added": 100,
+      "mse_per_output": [
+        7.314263118379121e-06,
+        5.602870106659206e-05,
+        1.1930246069540082e-05
+      ],
+      "total_mse": 7.527321025451127e-05,
+      "mse_type": "retrain"
+    },
+    {
+      "iteration": 5,
+      "total_samples": 600,
+      "batch_samples_added": 100,
+      "mse_per_output": [
+        6.944380611703071e-06,
+        4.724911498152136e-05,
+        8.556353054312455e-06
+      ],
+      "total_mse": 6.274984864753689e-05,
+      "mse_type": "retrain"
+    }
+  ],
+  "summary": {
+    "total_iterations": 5,
+    "initial_mse": 0.00028212386690560585,
+    "final_mse": 6.274984864753689e-05,
+    "overall_change_pct": -77.75805027210548
+  }
+}

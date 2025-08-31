@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "batch_timestamp": "2025-08-18T14:21:58.001919",
+    "sampler_type": "BoundsBasedSampler",
+    "simulator_type": "LoKISimulator",
+    "simulation_type": "simple",
+    "chemistry_name": "O2_simple",
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "unique_file_combinations": 1,
+    "parallel_workers": 1
+  },
+  "n_simulations": 3,
+  "n_successful": 3,
+  "success_rate": 1.0,
+  "total_time": 40.82046818733215,
+  "parameter_sets": [
+    {
+      "k_values": [
+        5.115347362879469e-16,
+        1.0459409005009364e-15,
+        6.450942708457997e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 0,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        8.93968452486748e-16,
+        1.3965869662471666e-15,
+        1.3195445542190984e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 1,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    },
+    {
+      "k_values": [
+        4.934578726884968e-16,
+        1.0885019648161361e-15,
+        8.15003130339666e-16
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 2,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    }
+  ],
+  "compositions": [
+    [
+      2.05644402173073e+22,
+      2.00439150111688e+21,
+      3.04518560739149e+21
+    ],
+    [
+      1.79258488646993e+22,
+      2.6324884365842e+21,
+      5.05581303250203e+21
+    ],
+    [
+      2.02371800878462e+22,
+      1.84125888369284e+21,
+      3.53559297360704e+21
+    ],
+    [
+      2.3451485557689e+23,
+      3.4300589647922e+21,
+      1.81951056076001e+22
+    ],
+    [
+      2.22950497577674e+23,
+      3.84296362900744e+21,
+      2.93468379181967e+22
+    ],
+    [
+      2.32006181066705e+23,
+      2.87505546932303e+21,
+      2.12588323776216e+22
+    ]
+  ],
+  "execution_times": [
+    13.606822729110718,
+    13.606822729110718,
+    13.606822729110718
+  ],
+  "success_mask": [
+    true,
+    true,
+    true
+  ]
+}

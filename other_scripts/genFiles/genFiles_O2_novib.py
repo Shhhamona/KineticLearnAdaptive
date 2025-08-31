@@ -308,7 +308,7 @@ class Simulations():
 
 
     # Public methods
-    def runSimulations(self):
+    def runSimulations(self, parallel_workers=1):
         #------------------Generate the Chemistry + SetUp files--------------------------#
         if self._generateChemFiles:
             self._genChemFiles(self.parameters.kcolumns)
@@ -321,11 +321,19 @@ class Simulations():
             outfile.write(chemFiledata)
             outfile.close()
 
-
         self._genSetupFiles()
         
 
         #--------------------------------------Run the matlab script---------------------#
+        if parallel_workers == 1:
+            # Sequential execution (original behavior)
+            self._run_sequential_simulations()
+        else:
+            # Parallel execution
+            self._run_parallel_simulations(parallel_workers)
+
+    def _run_sequential_simulations(self):
+        """Run simulations sequentially (original behavior)."""
         outfile = open(self.loki_path + "\\loop_config.txt", 'w')
         outfile.write(str(self.nsimulations)) # save nsimul for matlab script
         outfile.write("\n"+ self.outptFolder+'\\'+self.setup_file[:-3]+'_') # save output folder name for matlab script
@@ -340,6 +348,67 @@ class Simulations():
             setup_file_name = self.outptFolder + '\\' + self.setup_file[:-3] + '_' + str(j) + '.in'
             print(f"Running LoKI for setup file: {setup_file_name}")
             eng.loki(setup_file_name, nargout=0)  # run the matlab script for this setup file
+
+        eng.quit()
+
+    def _run_parallel_simulations(self, parallel_workers):
+        """Run simulations in parallel."""
+        from concurrent.futures import ProcessPoolExecutor
+        import time
+        
+        # Split simulation indices among workers
+        simulation_chunks = self._split_simulations(parallel_workers)
+        
+        print(f"🚀 Running {self.nsimulations} simulations with {parallel_workers} parallel workers")
+        start_time = time.time()
+        
+        with ProcessPoolExecutor(max_workers=parallel_workers) as executor:
+            futures = [
+                executor.submit(self._run_simulation_chunk, chunk, chunk_id, 
+                               self.loki_path, self.outptFolder, self.setup_file)
+                for chunk_id, chunk in enumerate(simulation_chunks)
+            ]
+            
+            # Wait for all to complete
+            for future in futures:
+                future.result()
+        
+        total_time = time.time() - start_time
+        print(f"✅ Parallel execution completed in {total_time:.2f}s")
+
+    def _split_simulations(self, parallel_workers):
+        """Split simulation indices among workers to avoid conflicts."""
+        chunks = []
+        chunk_size = self.nsimulations // parallel_workers
+        
+        for worker_id in range(parallel_workers):
+            start_idx = worker_id * chunk_size
+            if worker_id == parallel_workers - 1:  # Last worker gets remaining
+                end_idx = self.nsimulations
+            else:
+                end_idx = start_idx + chunk_size
+            
+            chunks.append(list(range(start_idx, end_idx)))
+        
+        return chunks
+
+    @staticmethod
+    def _run_simulation_chunk(simulation_indices, chunk_id, loki_path, outptFolder, setup_file):
+        """Run a chunk of simulations in a separate process."""
+        import os
+        import matlab.engine
+        
+        os.chdir(loki_path + "\\Code")
+        eng = matlab.engine.start_matlab()
+        s = eng.genpath(loki_path)
+        eng.addpath(s, nargout=0)
+        
+        for j in simulation_indices:
+            setup_file_name = outptFolder + '\\' + setup_file[:-3] + '_' + str(j) + '.in'
+            print(f"Worker {chunk_id}: Running LoKI for setup file: {setup_file_name}")
+            eng.loki(setup_file_name, nargout=0)
+        
+        eng.quit()
 
 
 
@@ -414,5 +483,5 @@ if __name__ == '__main__':
     # simul.fixed_pressure_set(pressures)
 
     # Run simulations
-    simul.runSimulations()
+    simul.runSimulations(parallel_workers=3)  # Use parallel execution with 3 workers!
     simul.writeDataFile(filename='datapoints_O2_novib_pressure_0.txt')

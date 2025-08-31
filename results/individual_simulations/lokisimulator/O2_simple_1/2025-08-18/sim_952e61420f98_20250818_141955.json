@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-18T14:19:55.649179",
+    "simulator_type": "LoKISimulator",
+    "setup_file": "setup_O2_simple.in",
+    "chem_file": "O2_simple_1.chem",
+    "loki_path": "C:\\MyPrograms\\LoKI_v3.1.0-v2",
+    "execution_time_seconds": 38.698874,
+    "simulation_hash": "952e61420f98",
+    "n_simulations": 3,
+    "n_k_varied": 3,
+    "n_species": 3,
+    "k_columns_varied": [
+      0,
+      1,
+      2
+    ],
+    "reference_k_values": [
+      6e-16,
+      1.3e-15,
+      9.6e-16,
+      2.2e-15,
+      7e-22,
+      3e-44,
+      3.2e-45,
+      5.2,
+      53.0
+    ],
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "genfiles_module": "other_scripts.genFiles.genFiles_O2_simple",
+    "simulation_type": "simple",
+    "chemistry": "O2_simple",
+    "is_physically_accurate": false,
+    "matlab_engine_used": true
+  },
+  "inputs": {
+    "k_values": [
+      [
+        3.7950583275660924e-16,
+        6.576991193394332e-16,
+        1.362037536234319e-15
+      ],
+      [
+        9.168238365310176e-16,
+        1.6487749136022644e-15,
+        1.5193276571017915e-15
+      ],
+      [
+        1.1580540115754428e-15,
+        2.2346108752216215e-15,
+        9.003015381657118e-16
+      ]
+    ],
+    "k_shape": [
+      3,
+      3
+    ]
+  },
+  "outputs": {
+    "compositions": [
+      [
+        1.92460005660255e+22,
+        1.35776423644866e+21,
+        5.01036035879894e+21
+      ],
+      [
+        1.75882207391833e+22,
+        2.49830896100267e+21,
+        5.5276745541417e+21
+      ],
+      [
+        1.83702367868849e+22,
+        3.19085239906654e+21,
+        4.05297818531133e+21
+      ],
+      [
+        2.24756901950311e+23,
+        1.63662713943084e+21,
+        2.97467977423125e+22
+      ],
+      [
+        2.20437166449443e+23,
+        3.60873366345077e+21,
+        3.20945269669567e+22
+      ],
+      [
+        2.26945437144654e+23,
+        6.06795935085347e+21,
+        2.31267002034967e+22
+      ]
+    ],
+    "composition_shape": [
+      6,
+      3
+    ]
+  }
+}

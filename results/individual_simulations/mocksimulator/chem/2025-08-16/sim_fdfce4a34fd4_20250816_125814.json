@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-16T12:58:14.623711",
+    "simulator_type": "MockSimulator",
+    "setup_file": "setup2.in",
+    "chem_file": "chem2.chem",
+    "loki_path": "path/to/loki",
+    "execution_time_seconds": 0.1,
+    "simulation_hash": "fdfce4a34fd4",
+    "n_simulations": 4,
+    "n_k_varied": 3,
+    "n_species": 3,
+    "k_columns_varied": [
+      0,
+      1,
+      2
+    ],
+    "reference_k_values": [
+      6e-16,
+      1.3e-15,
+      9.6e-16,
+      2.2e-15,
+      7e-22
+    ],
+    "pressure_conditions_pa": [
+      133.322
+    ],
+    "pressure_conditions_torr": [
+      1.0
+    ],
+    "n_pressure_conditions": 1,
+    "genfiles_module": "mock",
+    "simulation_type": "mock",
+    "chemistry": "mock_chemistry",
+    "is_physically_accurate": false,
+    "matlab_engine_used": false
+  },
+  "inputs": {
+    "k_values": [
+      [
+        5.590460967308216e-16,
+        1.1145442714523854e-15,
+        1.2043879767053842e-15
+      ],
+      [
+        9.243315819867486e-16,
+        2.0221179815933083e-15,
+        1.7531823020072516e-15
+      ],
+      [
+        8.369356437992126e-16,
+        1.7335699581648905e-15,
+        1.5485128939012484e-15
+      ],
+      [
+        3.726158285853898e-16,
+        1.3883923565537424e-15,
+        8.592381981620044e-16
+      ]
+    ],
+    "k_shape": [
+      4,
+      3
+    ]
+  },
+  "outputs": {
+    "compositions": [
+      [
+        50419482.30393314,
+        36704098.586929865,
+        54372844.46384801
+      ],
+      [
+        89796904.74030685,
+        37298715.5640865,
+        37299021.74628741
+      ],
+      [
+        90853714.13170312,
+        60543470.81275397,
+        32619395.82169168
+      ],
+      [
+        50428584.78685882,
+        30495200.31699252,
+        30459967.308153592
+      ]
+    ],
+    "composition_shape": [
+      4,
+      3
+    ]
+  }
+}
