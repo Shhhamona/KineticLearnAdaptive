@@ -1,0 +1,3 @@
+Method,Dataset,Final_MSE_Mean,Final_MSE_Std,Best_MSE_Mean,Best_Subset_Size
+Morris Method,O2_simple_morris.txt,9.097260445903176e-05,4.617612770978118e-06,9.097260445903176e-05,950
+Morris Continuous Again,O2_simple__morris_continous_again2.txt,6.814843655108032e-05,3.568619069831589e-07,6.814843655108032e-05,950

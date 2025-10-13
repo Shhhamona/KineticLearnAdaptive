@@ -182,4 +182,4 @@ def test_both_simulation_types():
 if __name__ == "__main__":
     # Test simple simulation type first (as requested)
     print("🎯 Testing Simple Simulation Type First")
-    test_parallel_loki_batch("simple")
+    test_parallel_loki_batch("complex")

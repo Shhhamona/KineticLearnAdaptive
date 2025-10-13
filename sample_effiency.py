@@ -6,8 +6,10 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.utils import shuffle
 import matplotlib.pyplot as plt
-# import time
+import json
 import os
+from datetime import datetime
+# import time
 
 folder_path = "D:\\Marcelo\\github\\Dissertation\\Images\\"
 
@@ -94,6 +96,7 @@ def calculate_mse_for_dataset(dataset_train, dataset_test, best_params, subset_s
 
             y_pred = model.predict(x_test)
 
+
             mse = mean_squared_error(y_test[:, i], y_pred)
 
             mse_output.append(mse)
@@ -106,9 +109,17 @@ def calculate_mse_for_dataset(dataset_train, dataset_test, best_params, subset_s
 
 
 if __name__ == "__main__":
+    # Create results directory
+    results_dir = 'results/sample_efficiency'
+    os.makedirs(results_dir, exist_ok=True)
+    
+    # Generate timestamp for this experiment
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    
     nspecies = 3
     num_pressure_conditions = 2
     subset_sizes = [i for i in range(200, 2000, 100)]
+    print("Subset sizes:", subset_sizes)
     num_seeds = 10  # Number of seeds to use
     print("Subset sizes:", subset_sizes)
     best_params = [
@@ -136,38 +147,124 @@ if __name__ == "__main__":
         'O2_simple_uniform.txt',
         'O2_simple_latin_log_uniform.txt',
         'O2_simple_latin.txt',
+        'O2_simple_morris.txt',
+        'O2_simple__morris_continous_discret_corrected.txt',
+        'O2_simple__morris_continous_final.txt',
     ]
     labels = [
         'Uniform',
         'Log-Uniform Latin Hypercube',
         'Uniform Latin Hypercube',
+        'Morris Discret (Not Corrected)',
+        'Morris Discret Corrected Grid',
+        'Morris Fixed Grid',
     ]
+
+    datasets = [
+
+        'O2_simple__morris_continous_final.txt',
+        'O2_simple_latin.txt',
+        
+    ]
+    labels = [
+
+        'Morris Discret Continuous',
+        'Uniform Latin Hypercube',
+    ]
+
+    # Store all experimental results
+    experiment_results = {
+        'timestamp': timestamp,
+        'config': {
+            'nspecies': nspecies,
+            'num_pressure_conditions': num_pressure_conditions,
+            'subset_sizes': subset_sizes,
+            'num_seeds': num_seeds,
+            'best_params': best_params,
+            'test_file': 'data/SampleEfficiency/O2_simple_test.txt'
+        },
+        'datasets': datasets,
+        'labels': labels,
+        'results': {}
+    }
 
 
     # set figure size
     plt.figure(figsize=(9, 6))
 
     for idx, dataset in enumerate(datasets):
+        print(f"\n📊 Processing dataset {idx+1}/{len(datasets)}: {dataset}")
         src_file_train = 'data/SampleEfficiency/' + dataset
         src_file_test = 'data/SampleEfficiency/O2_simple_test.txt'
+        #src_file_test = src_file_train
+
+        print("   Loading training data from:", src_file_train)
 
         dataset_train = LoadMultiPressureDatasetNumpy(src_file_train, nspecies, num_pressure_conditions, react_idx=[0, 1, 2])
         dataset_test = LoadMultiPressureDatasetNumpy(src_file_test, nspecies, num_pressure_conditions, react_idx=[0, 1, 2], 
                                                     scaler_input=dataset_train.scaler_input, scaler_output=dataset_train.scaler_output)
 
         total_mse_for_seeds = []
+        mse_per_output_for_seeds = []
         
         for seed in range(num_seeds):
-            _, total_mse_list = calculate_mse_for_dataset(dataset_train, dataset_test, best_params, subset_sizes, seed=seed)
+            print(f"   Seed {seed+1}/{num_seeds}")
+            mse_per_output, total_mse_list = calculate_mse_for_dataset(dataset_train, dataset_test, best_params, subset_sizes, seed=seed)
             total_mse_for_seeds.append(total_mse_list)
+            mse_per_output_for_seeds.append(mse_per_output)
         
         mean_total_mse = np.mean(total_mse_for_seeds, axis=0)
         std_total_mse = np.std(total_mse_for_seeds, axis=0) / np.sqrt(num_seeds)
+        mean_mse_per_output = np.mean(mse_per_output_for_seeds, axis=0)
+        std_mse_per_output = np.std(mse_per_output_for_seeds, axis=0) / np.sqrt(num_seeds)
+
+        # Store results for this dataset
+        experiment_results['results'][labels[idx]] = {
+            'dataset_file': dataset,
+            'total_mse_per_seed': [mse_list.tolist() for mse_list in total_mse_for_seeds],
+            'mse_per_output_per_seed': [[[float(val) for val in output] for output in seed_data] for seed_data in mse_per_output_for_seeds],
+            'mean_total_mse': mean_total_mse.tolist(),
+            'std_total_mse': std_total_mse.tolist(),
+            'mean_mse_per_output': mean_mse_per_output.tolist(),
+            'std_mse_per_output': std_mse_per_output.tolist(),
+            'final_mean_mse': float(mean_total_mse[-1]),  # MSE at largest dataset size
+            'final_std_mse': float(std_total_mse[-1])
+        }
 
         plt.errorbar(subset_sizes, mean_total_mse, yerr=std_total_mse, label=labels[idx], marker='o')
+        print(f"   ✅ Completed {labels[idx]}: Final MSE = {mean_total_mse[-1]:.6e} ± {std_total_mse[-1]:.6e}")
 
+    print("Mean TOTAL MSE", mean_total_mse)
 
-    print("Mean TOTAL MSE", mean_total_mse )
+    # Save experimental results to JSON
+    results_filename = f'sample_efficiency_results_{timestamp}.json'
+    results_path = os.path.join(results_dir, results_filename)
+    
+    print(f"\n💾 Saving results to: {results_path}")
+    with open(results_path, 'w') as f:
+        json.dump(experiment_results, f, indent=2)
+    
+    # Also save a CSV summary for easy analysis
+    import pandas as pd
+    summary_data = []
+    for label, results in experiment_results['results'].items():
+        summary_data.append({
+            'Method': label,
+            'Dataset': results['dataset_file'],
+            'Final_MSE_Mean': results['final_mean_mse'],
+            'Final_MSE_Std': results['final_std_mse'],
+            'Best_MSE_Mean': min(results['mean_total_mse']),
+            'Best_Subset_Size': subset_sizes[np.argmin(results['mean_total_mse'])]
+        })
+    
+    summary_df = pd.DataFrame(summary_data)
+    summary_csv_path = os.path.join(results_dir, f'sample_efficiency_summary_{timestamp}.csv')
+    summary_df.to_csv(summary_csv_path, index=False)
+    print(f"💾 Saved summary to: {summary_csv_path}")
+    
+    # Display summary
+    print(f"\n📋 EXPERIMENT SUMMARY:")
+    print(summary_df.to_string(index=False))
 
     plt.rcParams.update({'font.size': 16})
     plt.xlabel('Dataset size', fontsize=14)
@@ -177,6 +274,18 @@ if __name__ == "__main__":
     # plt.title('Sample efficiency analysis')
     plt.grid(True)
     plt.tight_layout() 
-    # plt.savefig(os.path.join('images', 'sample_efficiency','SVR_sample_efficiency_seeds.png'))
-    # plt.show()
-    plt.savefig('sample_efficiency.pdf')
+    
+    # Save plot with timestamp
+    plot_filename = f'sample_efficiency_{timestamp}.pdf'
+    plot_path = os.path.join(results_dir, plot_filename)
+    plt.savefig(plot_path)
+    print(f"📊 Saved plot to: {plot_path}")
+    
+    # Also save as PNG for easier viewing
+    plot_png_path = os.path.join(results_dir, f'sample_efficiency_{timestamp}.png')
+    plt.savefig(plot_png_path, dpi=300, bbox_inches='tight')
+    print(f"📊 Saved plot to: {plot_png_path}")
+    
+    print(f"\n✅ Experiment completed successfully!")
+    print(f"   Results directory: {results_dir}")
+    print(f"   Timestamp: {timestamp}")

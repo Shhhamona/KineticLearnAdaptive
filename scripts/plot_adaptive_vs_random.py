@@ -55,46 +55,48 @@ def safe_get_total_samples(series: List[Dict[str, Any]]) -> List[int]:
 def plot_results(results_json: str, out_path: str, show: bool = False) -> None:
     data = load_results(results_json)
 
-    adaptive = extract_series(data, 'adaptive_results')
-    random = extract_series(data, 'random_results')
+    # Try both old and new key formats
+    adaptive = extract_series(data, 'adaptive_results_avg') or extract_series(data, 'adaptive_results')
+    random = extract_series(data, 'random_results_avg') or extract_series(data, 'random_results')
 
     if not adaptive and not random:
-        raise ValueError('No adaptive_results or random_results found in JSON')
+        raise ValueError('No adaptive_results_avg/adaptive_results or random_results_avg/random_results found in JSON')
 
-    # Prepare series
-    x_adaptive = safe_get_total_samples(adaptive) if adaptive else []
-    y_adaptive = safe_get_total_mse_list(adaptive) if adaptive else []
+    # Prepare series (skip first element - initial uniform training)
+    x_adaptive = safe_get_total_samples(adaptive[1:]) if adaptive and len(adaptive) > 1 else []
+    y_adaptive = safe_get_total_mse_list(adaptive[1:]) if adaptive and len(adaptive) > 1 else []
 
-    x_random = safe_get_total_samples(random) if random else []
-    y_random = safe_get_total_mse_list(random) if random else []
+    x_random = safe_get_total_samples(random[1:]) if random and len(random) > 1 else []
+    y_random = safe_get_total_mse_list(random[1:]) if random and len(random) > 1 else []
 
     # Begin plotting
     fig = plt.figure(figsize=(12, 8))
 
-    # Plot 1: Overall MSE comparison (log-scale on Y)
+    # Plot 1: Overall MSE comparison (normal scale)
     ax1 = fig.add_subplot(2, 2, 1)
     if x_adaptive and y_adaptive:
         ax1.plot(x_adaptive, y_adaptive, 'b-o', label='Adaptive Zone-Based', linewidth=2)
     if x_random and y_random:
         ax1.plot(x_random, y_random, 'r-s', label='Random Sampling', linewidth=2)
-    ax1.set_yscale('log')
     ax1.set_xlabel('Total training samples')
-    ax1.set_ylabel('Total MSE (log scale)')
-    ax1.set_title('MSE Evolution: Adaptive vs Random (log-scale)')
-    ax1.grid(True, which='both', alpha=0.3)
+    ax1.set_ylabel('Total MSE')
+    ax1.set_title('MSE Evolution: Adaptive vs Random')
+    ax1.grid(True, alpha=0.3)
     ax1.legend()
 
     # Plot 2: Per-zone MSE evolution for adaptive run (if available)
     ax2 = fig.add_subplot(2, 2, 2)
-    if adaptive:
+    if adaptive and len(adaptive) > 1:
         n_zones = None
         zone_mse_matrix = None
-        for i, it in enumerate(adaptive):
+        adaptive_data = adaptive[1:]  # Skip first element (initial uniform)
+        
+        for i, it in enumerate(adaptive_data):
             vals = it.get('zone_overall_mse_scaled')
             if vals:
                 if zone_mse_matrix is None:
                     n_zones = len(vals)
-                    zone_mse_matrix = np.full((len(adaptive), n_zones), np.nan)
+                    zone_mse_matrix = np.full((len(adaptive_data), n_zones), np.nan)
                 for z in range(min(n_zones, len(vals))):
                     try:
                         zone_mse_matrix[i, z] = float(vals[z]) if vals[z] is not None else np.nan
@@ -105,12 +107,11 @@ def plot_results(results_json: str, out_path: str, show: bool = False) -> None:
             cmap = plt.get_cmap('tab10')
             for z in range(zone_mse_matrix.shape[1]):
                 ax2.plot(x_adaptive, zone_mse_matrix[:, z], marker='o', label=f'Zone {z+1}', color=cmap(z % 10))
-            ax2.set_yscale('log')
             ax2.set_xlabel('Total training samples')
-            ax2.set_ylabel('Zone MSE (log scale)')
-            ax2.set_title('Adaptive: Per-Zone MSE Evolution (log-scale)')
+            ax2.set_ylabel('Zone MSE')
+            ax2.set_title('Adaptive: Per-Zone MSE Evolution')
             ax2.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-            ax2.grid(True, which='both', alpha=0.3)
+            ax2.grid(True, alpha=0.3)
         else:
             ax2.text(0.5, 0.5, 'No per-zone data available', ha='center')
     else:
@@ -118,40 +119,159 @@ def plot_results(results_json: str, out_path: str, show: bool = False) -> None:
 
     # Plot 3: Sampling frequency per zone (bar chart)
     ax3 = fig.add_subplot(2, 2, 3)
-    if adaptive and len(adaptive) > 1:
+    
+    # Try to get targeting data from per-seed results first, then from averaged results
+    adaptive_per_seed = data.get('adaptive_per_seed', [])
+    targeting_data_found = False
+    
+    if adaptive_per_seed:
+        # Count targeting across all seeds and iterations
         zone_counts = {}
-        for r in adaptive[1:]:
-            for zone in r.get('target_zones', []):
-                zone_counts[zone] = zone_counts.get(zone, 0) + 1
-        if zone_counts:
+        total_iterations = 0
+        
+        for seed_results in adaptive_per_seed:
+            for r in seed_results[1:]:  # Skip iteration 0 (initial)
+                target_zones = r.get('target_zones', [])
+                if target_zones:
+                    total_iterations += 1
+                    for zone in target_zones:
+                        zone_counts[zone] = zone_counts.get(zone, 0) + 1
+        
+        if zone_counts and total_iterations > 0:
+            targeting_data_found = True
+            # Create bar chart
             zones = sorted(zone_counts.keys())
             counts = [zone_counts[z] for z in zones]
-            ax3.bar(zones, counts, color='lightblue', edgecolor='navy')
+            percentages = [(count / total_iterations) * 100 for count in counts]
+            
+            bars = ax3.bar(zones, percentages, color='lightblue', edgecolor='navy', alpha=0.7)
             ax3.set_xlabel('Zone Number')
-            ax3.set_ylabel('Times Targeted')
-            ax3.set_title('Adaptive: Zone Targeting Frequency')
-        else:
-            ax3.text(0.5, 0.5, 'No targeting info', ha='center')
-    else:
-        ax3.text(0.5, 0.5, 'No adaptive targeting info', ha='center')
+            ax3.set_ylabel('Targeting Frequency (%)')
+            ax3.set_title('Adaptive: Zone Targeting Frequency\n(3 zones targeted per iteration)')
+            ax3.grid(True, axis='y', alpha=0.3)
+            ax3.set_ylim(0, max(percentages) * 1.1 if percentages else 100)
+            
+            # Add percentage labels on bars
+            for bar, pct in zip(bars, percentages):
+                height = bar.get_height()
+                ax3.text(bar.get_x() + bar.get_width()/2., height + max(percentages) * 0.02,
+                        f'{pct:.0f}%', ha='center', va='bottom', fontsize=9)
+            
+            # Add text summary
+            most_targeted = max(zone_counts.items(), key=lambda x: x[1])
+            num_seeds = len(adaptive_per_seed)
+            total_zone_selections = sum(zone_counts.values())
+            ax3.text(0.02, 0.98, f'Most targeted: Zone {most_targeted[0]} ({most_targeted[1]}/{total_iterations} times)\nTotal zone selections: {total_zone_selections}\nAcross {num_seeds} seeds', 
+                    transform=ax3.transAxes, fontsize=8, verticalalignment='top',
+                    bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+    
+    # Fallback to averaged results if per-seed data doesn't have targeting info
+    if not targeting_data_found and adaptive and len(adaptive) > 1:
+        zone_counts = {}
+        total_iterations = 0
+        
+        for r in adaptive[1:]:  # Skip iteration 0 (initial)
+            target_zones = r.get('target_zones', [])
+            if target_zones:
+                total_iterations += 1
+                for zone in target_zones:
+                    zone_counts[zone] = zone_counts.get(zone, 0) + 1
+        
+        if zone_counts and total_iterations > 0:
+            targeting_data_found = True
+            # Create bar chart (same code as above)
+            zones = sorted(zone_counts.keys())
+            counts = [zone_counts[z] for z in zones]
+            percentages = [(count / total_iterations) * 100 for count in counts]
+            
+            bars = ax3.bar(zones, percentages, color='lightblue', edgecolor='navy', alpha=0.7)
+            ax3.set_xlabel('Zone Number')
+            ax3.set_ylabel('Targeting Frequency (%)')
+            ax3.set_title('Adaptive: Zone Targeting Frequency\n(3 zones targeted per iteration)')
+            ax3.grid(True, axis='y', alpha=0.3)
+            ax3.set_ylim(0, max(percentages) * 1.1 if percentages else 100)
+            
+            # Add percentage labels on bars
+            for bar, pct in zip(bars, percentages):
+                height = bar.get_height()
+                ax3.text(bar.get_x() + bar.get_width()/2., height + max(percentages) * 0.02,
+                        f'{pct:.0f}%', ha='center', va='bottom', fontsize=9)
+            
+            # Add text summary
+            most_targeted = max(zone_counts.items(), key=lambda x: x[1])
+            total_zone_selections = sum(zone_counts.values())
+            ax3.text(0.02, 0.98, f'Most targeted: Zone {most_targeted[0]} ({most_targeted[1]}/{total_iterations} times)\nTotal zone selections: {total_zone_selections}', 
+                    transform=ax3.transAxes, fontsize=8, verticalalignment='top',
+                    bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+    
+    if not targeting_data_found:
+        ax3.text(0.5, 0.5, 'No targeting data available\nin JSON results', ha='center', va='center', transform=ax3.transAxes)
 
-    # Plot 4: Relative improvement vs initial
+    # Plot 4: Direct comparison - Adaptive vs Random performance
     ax4 = fig.add_subplot(2, 2, 4)
-    if adaptive and len(adaptive) > 0 and adaptive[0].get('total_mse'):
-        base = float(adaptive[0]['total_mse'])
-        adaptive_mse = [float(r['total_mse']) for r in adaptive]
-        adaptive_improvement = [(adaptive_mse[i] / base - 1) * 100 for i in range(len(adaptive_mse))]
-        ax4.plot(x_adaptive, adaptive_improvement, 'b-o', label='Adaptive', linewidth=2)
-    if random and len(random) > 0 and random[0].get('total_mse'):
-        base_r = float(random[0]['total_mse'])
-        random_mse = [float(r['total_mse']) for r in random]
-        random_improvement = [(random_mse[i] / base_r - 1) * 100 for i in range(len(random_mse))]
-        ax4.plot(x_random, random_improvement, 'r-s', label='Random', linewidth=2)
-    ax4.set_xlabel('Total training samples')
-    ax4.set_ylabel('MSE Change (%)')
-    ax4.set_title('Relative Improvement from Baseline')
-    ax4.grid(True, alpha=0.3)
-    ax4.legend()
+    if adaptive and random and len(adaptive) > 0 and len(random) > 0:
+        # Calculate how much better/worse adaptive is compared to random at each sample size
+        comparison_ratios = []
+        comparison_samples = []
+        comparison_percentages = []
+        
+        # Match sample sizes between adaptive and random
+        for i, adapt_result in enumerate(adaptive):
+            adapt_samples = adapt_result.get('total_samples')
+            adapt_mse = adapt_result.get('total_mse')
+            
+            if adapt_samples and adapt_mse:
+                # Find corresponding random result with same or similar sample size
+                for random_result in random:
+                    random_samples = random_result.get('total_samples')
+                    random_mse = random_result.get('total_mse')
+                    
+                    if random_samples == adapt_samples and random_mse and random_mse > 0:
+                        # Calculate percentage improvement: (random - adaptive) / random * 100
+                        improvement_pct = ((random_mse - adapt_mse) / random_mse) * 100
+                        comparison_ratios.append(adapt_mse / random_mse)
+                        comparison_samples.append(adapt_samples)
+                        comparison_percentages.append(improvement_pct)
+                        break
+        
+        if comparison_percentages:
+            # Plot improvement percentages
+            colors = ['green' if pct > 0 else 'red' for pct in comparison_percentages]
+            bars = ax4.bar(range(len(comparison_percentages)), comparison_percentages, 
+                          color=colors, alpha=0.7, edgecolor='black')
+            
+            # Customize the plot
+            ax4.set_xlabel('Sample Size')
+            ax4.set_ylabel('Improvement over Random (%)')
+            ax4.set_title('Adaptive vs Random: Performance Comparison\n(Positive = Adaptive Better)')
+            ax4.grid(True, axis='y', alpha=0.3)
+            ax4.axhline(y=0, color='black', linestyle='-', linewidth=1)
+            
+            # Set x-axis labels to show actual sample sizes
+            tick_labels = [str(s) for s in comparison_samples]
+            ax4.set_xticks(range(len(comparison_samples)))
+            ax4.set_xticklabels(tick_labels, rotation=45)
+            
+            # Add percentage labels on bars
+            for i, (bar, pct) in enumerate(zip(bars, comparison_percentages)):
+                height = bar.get_height()
+                label_y = height + (max(comparison_percentages) - min(comparison_percentages)) * 0.01
+                if height < 0:
+                    label_y = height - (max(comparison_percentages) - min(comparison_percentages)) * 0.01
+                ax4.text(bar.get_x() + bar.get_width()/2., label_y,
+                        f'{pct:.1f}%', ha='center', va='bottom' if height >= 0 else 'top', 
+                        fontsize=8)
+            
+            # Add summary statistics
+            avg_improvement = np.mean(comparison_percentages)
+            best_improvement = max(comparison_percentages)
+            ax4.text(0.02, 0.02, f'Avg improvement: {avg_improvement:.1f}%\nBest improvement: {best_improvement:.1f}%', 
+                    transform=ax4.transAxes, fontsize=8, verticalalignment='bottom',
+                    bbox=dict(boxstyle='round', facecolor='lightgreen' if avg_improvement > 0 else 'lightcoral', alpha=0.8))
+        else:
+            ax4.text(0.5, 0.5, 'No matching sample sizes\nfor comparison', ha='center', va='center', transform=ax4.transAxes)
+    else:
+        ax4.text(0.5, 0.5, 'Insufficient data\nfor comparison', ha='center', va='center', transform=ax4.transAxes)
 
     plt.tight_layout()
 

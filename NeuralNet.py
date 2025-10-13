@@ -292,7 +292,7 @@ def hyperparameter_random_search(n_samples):
 
 def hyperparameter_grid_search():
     # Define the search space
-    # learning_rates = [0.01, 0.001, 0.0001] 
+    # learning_rates = [0.01, 0.001, ] 
     learning_rates = [0.00001, 0.000001]
     batch_sizes = [16, 32, 64, 128]
     hidden_sizes = [(50,), (100,), (200,), (500,), \

@@ -624,8 +624,11 @@ def evaluate_zones_scaled(current_x_train, current_y_train, new_x, new_y_scaled,
     X_aug = np.vstack([current_x_train, new_x])
     y_scaled_aug = np.vstack([current_y_train, new_y_scaled])
 
-    # Center in scaled-Y space
-    center_y_scaled = np.mean(y_scaled_aug, axis=0)
+    # Center in scaled-Y space - TEST DIFFERENT PERCENTILES
+    center_y_scaled = np.mean(y_scaled_aug, axis=0)  # Original mean approach (50th percentile)
+    # center_y_scaled = np.percentile(y_scaled_aug, 95, axis=0)  # TEST: 95th percentile center (very high!)
+    # center_y_scaled = np.percentile(y_scaled_aug, 95, axis=0)  # TEST: 75th percentile center
+    # center_y_scaled = np.percentile(y_scaled_aug, 25, axis=0)  # TEST: 25th percentile center
 
     # Distances in scaled space
     distances = np.linalg.norm(y_scaled_aug - center_y_scaled.reshape(1, -1), axis=1)

@@ -1,0 +1,4 @@
+Method,Dataset,Final_MSE_Mean,Final_MSE_Std,Best_MSE_Mean,Best_Subset_Size
+Uniform,O2_simple_uniform.txt,3.915001728501227e-05,5.773980409774383e-07,3.915001728501227e-05,1900
+Log-Uniform Latin Hypercube,O2_simple_latin_log_uniform.txt,3.684858523130355e-05,2.1181443919411231e-07,3.684858523130355e-05,1900
+Uniform Latin Hypercube,O2_simple_latin.txt,3.700211046000281e-05,4.74960661429986e-07,3.700211046000281e-05,1900

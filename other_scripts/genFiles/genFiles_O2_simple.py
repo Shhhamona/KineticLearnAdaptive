@@ -59,7 +59,10 @@ class Parameters():
             print('\nError: k is not defined. Please define k fixed values in the chem file or do not call gen k_set methods')
             exit()
 
-        self.k_set =  morris.MorrisSampler(k, p, r, k_range_type, k_range, indexes= kcolumns)
+        # Use the corrected grid-based Morris sampler (proper discrete grid)
+        #self.k_set =  morris.CorrectedGridMorrisSampler(k, p, r, k_range_type, k_range, indexes= kcolumns)
+        self.k_set =  morris.ContinuousMorrisSampler(k, p, r, k_range_type, k_range, indexes= kcolumns)  # TOO continuous!
+        #self.k_set =  morris.MorrisSampler(k, p, r, k_range_type, k_range, indexes= kcolumns)  # Original broken method
         return self.k_set
 
 
@@ -458,18 +461,34 @@ if __name__ == '__main__':
     setup_file = "setup_O2_simple.in"
 
     k_columns = [0,1,2] # if None, changes all columns
-    n_simulations = 1
+
+    #Morris Sampling
+    n_trajectories = 500
+    n_params = len(k_columns)
+    n_simulations = n_trajectories * (n_params + 1) # n trajectories × (n parameters + 1 starting point)
+
+
 
     simul = Simulations(setup_file, chem_file, loki_path, n_simulations)
     simul.set_ChemFile_ON() # turn off/on for fixed/changing values of k's
-    simul.random_kset(kcolumns= k_columns, krange= [0.5,2], pdf_function='uniform') # [0.5,2] range used in the Nsurrogates model
-    # simul.morris_kset(p= 1000, r= 700, k_range_type= "lin", k_range= [1,10], kcolumns= k_columns)
-    # simul.random_pressure_set(pressure= 133.322, pressure_range=[0.1,10]) # 1 Torr = 133.322 Pa
-    # simul.random_radius_set(radius= 4e-3, radius_range=[1,5]) # [4e-3, 2e-2] 
-    # print( simul.parameters.k_set.shape)
+    #simul.random_kset(kcolumns= k_columns, krange= [0.5,2], pdf_function='uniform') # [0.5,2] range used in the Nsurrogates model
+    simul.morris_kset(p= 1000, r= n_trajectories, k_range_type= "lin", k_range= [0.5,2], kcolumns= k_columns)
+    #simul.random_pressure_set(pressure= 133.322, pressure_range=[1,10]) # 1 Torr = 133.322 Pa
+    simul.fixed_pressure_set(pressures= [133.322, 1333.22]) # 1 Torr = 133.322 Pa
+    #simul.random_radius_set(radius= 4e-3, radius_range=[1,5]) # [4e-3, 2e-2] 
+    print( "NUmber of Paramess, Dimension", simul.parameters.k_set.shape)
+
+    # Print the full numpy array without truncation
+    #np.set_printoptions(threshold=np.inf, linewidth=200, suppress=True)
+
+    print("Numebr of points: ", simul.parameters.n_points)
+    print("Numebr of simulations: ", simul.nsimulations)
+
+    # Optionally, save to a text file for inspection
+    np.savetxt("k_set_output.txt", simul.parameters.k_set, fmt="%.6E")
     # Run simulations
     simul.runSimulations()
-    simul.writeDataFile(filename='O2_simple_uniform.txt')
+    simul.writeDataFile(filename='O2_simple__morris_continous_final.txt')
 
     # # path to LoKI
     # loki_path = "C:\\Users\\clock\\Desktop" + '\\LoKI_v3.1.0'

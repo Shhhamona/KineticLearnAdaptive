@@ -1,0 +1,2 @@
+Method,Dataset,Final_MSE_Mean,Final_MSE_Std,Best_MSE_Mean,Best_Subset_Size
+Morris Method,O2_simple_uniform_morris_continous.txt,0.04252891333025734,0.0,0.04252891333025734,700

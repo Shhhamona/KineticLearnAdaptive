@@ -50,17 +50,19 @@ def run_parallel_simulations():
     """
     # Define the complex O2_novib setup files for parallel execution
     setup_files = [
-        "oxygen_novib\\oxygen_chem_setup_novib_0.in",
-        "oxygen_novib\\oxygen_chem_setup_novib_1.in",
-        "oxygen_novib\\oxygen_chem_setup_novib_2.in",
-        "oxygen_novib\\oxygen_chem_setup_novib_3.in"
+        "oxygen_novib\\oxygen_chem_setup_novib.in",
+        "oxygen_novib\\oxygen_chem_setup_novib.in",
+        "oxygen_novib\\oxygen_chem_setup_novib.in",
+        "oxygen_novib\\oxygen_chem_setup_novib.in",
+        "oxygen_novib\\oxygen_chem_setup_novib.in",
+        "oxygen_novib\\oxygen_chem_setup_novib.in"
     ]
     
     print(f"Starting {len(setup_files)} simulations in parallel...")
     start_total_time = time.time()
     
     # Run simulations in parallel using ProcessPoolExecutor
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=5) as executor:
         # Submit all tasks
         future_to_setup = {executor.submit(run_simulation, setup_file): setup_file 
                           for setup_file in setup_files}

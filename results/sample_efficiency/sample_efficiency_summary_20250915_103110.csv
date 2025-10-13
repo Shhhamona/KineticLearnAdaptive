@@ -1,0 +1,6 @@
+Method,Dataset,Final_MSE_Mean,Final_MSE_Std,Best_MSE_Mean,Best_Subset_Size
+Uniform,O2_simple_uniform.txt,3.915001728501227e-05,5.773980409774383e-07,3.915001728501227e-05,1900
+Log-Uniform Latin Hypercube,O2_simple_latin_log_uniform.txt,3.684858523130355e-05,2.1181443919411231e-07,3.684858523130355e-05,1900
+Uniform Latin Hypercube,O2_simple_latin.txt,3.700211046000281e-05,4.74960661429986e-07,3.700211046000281e-05,1900
+Morris Continuous,O2_simple_uniform_morris_continous.txt,0.08892227545589744,0.005095135928620889,0.08892227545589744,1900
+Morris Fixed Grid,O2_simple_uniform_morris_fixed.txt,0.3947014479955903,0.019686369447883663,0.36367233714549996,800

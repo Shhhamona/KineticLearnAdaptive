@@ -71,7 +71,7 @@ if __name__ == '__main__':
         'pressure_conditions_pa': [133.322, 1333.22],  # 1 and 10 Torr
         'initial_samples_from_uniform': 50,
         'n_iterations': 1,# More iterations with smaller batches
-        'n_samples_per_iteration': 4000,#Smaller, more targeted batches
+        'n_samples_per_iteration': 2000,#Smaller, more targeted batches
         'svr_params': [
             {'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'},
             {'C': 20, 'epsilon': 0.005, 'gamma': 5, 'kernel': 'rbf'},
@@ -243,7 +243,8 @@ if __name__ == '__main__':
         #k_true = np.array([9.941885789401E-16, 1.800066252209E-15, 1.380839580124E-15])
         # Use multiplicative_factor=2.0 to mirror the uniform sampling file (approx [0.5*k, 2.0*k])
         k_bounds = make_k_bounds_around(k_true, multiplicative_factor=1.0001)
-        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=2.0)
+        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=1.15)
+        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=1.01)
 
 
         print('   K bounds for sampler:')

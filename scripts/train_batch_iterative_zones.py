@@ -325,7 +325,7 @@ if __name__ == '__main__':
     }
 
     # Use a list for seeds so the training helpers can run multi-seed experiments
-    config['seeds'] = [42, 43, 44, 45, 46] 
+    config['seeds'] = [42, 43, 44, 45, 46, 47, 48, 49, 50] 
     
     print(f"🎯 ITERATIVE BATCH TRAINING EXPERIMENT")
     print(f"Configuration: {config}")
@@ -334,6 +334,7 @@ if __name__ == '__main__':
     #batch_json_path = 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-08-20/batch_500sims_20250820_141641.json'
     batch_json_path = 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-08-27/batch_4000sims_20250827_010028.json'
     src_file_train = 'data/SampleEfficiency/O2_simple_uniform.txt'
+    src_file_train = 'data/SampleEfficiency/O2_simple_latin.txt'
     src_file_test = 'data/SampleEfficiency/O2_simple_test.txt'
     
     nspecies = config['nspecies']
@@ -379,7 +380,7 @@ if __name__ == '__main__':
         batch_k_values=batch_k_values,
         batch_compositions=batch_compositions,
         config=config,
-        n_iterations=10,  # 20 iterations
+        n_iterations=15,  # 20 iterations
         samples_per_iteration=50,  # 10 samples each
         initial_uniform_size=50
     )
@@ -450,25 +451,97 @@ if __name__ == '__main__':
                 row_vals.append(avg_str)
                 print(f'{i:4d} | ' + ' | '.join(row_vals))
 
-            # Plot linear-scale per-zone MSE and average line
-            plt.figure(figsize=(10, 6))
-            x = np.arange(n_iters)
+            # Plot both linear-scale and log-scale per-zone MSE evolution + error contribution
+            fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 6))
+            
+            # Calculate actual sample sizes for x-axis (initial_size + iteration * samples_per_iteration)
+            initial_size = 50  # From the function call
+            samples_per_iter = 50  # From the function call
+            x_sample_sizes = [initial_size + i * samples_per_iter for i in range(n_iters)]
+            
             cmap = plt.get_cmap('tab10')
+            
+            # Plot 1: Linear scale
             for z in range(n_zones):
-                plt.plot(x, zone_mse_matrix[:, z], marker='o', label=f'Zone {z+1}', color=cmap(z % 10))
+                ax1.plot(x_sample_sizes, zone_mse_matrix[:, z], marker='o', label=f'Zone {z+1}', color=cmap(z % 10))
             # Plot average across zones as a bold black line
-            plt.plot(x, avg_per_iter, marker='s', color='k', linewidth=2.0, label='Average')
-            plt.xlabel('Iteration')
-            plt.ylabel('Zone overall MSE (scaled)')
-            plt.title('Per-zone overall MSE evolution (scaled)')
-            plt.legend(loc='upper right')
-            plt.grid(True, which='both', ls='--', lw=0.5)
-            out_plot = os.path.join('results', 'zone_mse_evolution.png')
-            os.makedirs(os.path.dirname(out_plot), exist_ok=True)
+            ax1.plot(x_sample_sizes, avg_per_iter, marker='s', color='k', linewidth=2.0, label='Average')
+            ax1.set_xlabel('Total Training Samples')
+            ax1.set_ylabel('Zone overall MSE (scaled)')
+            ax1.set_title('Per-zone overall MSE evolution (linear scale)')
+            ax1.legend(loc='upper right')
+            ax1.grid(True, which='both', ls='--', lw=0.5)
+            ax1.set_xticks(x_sample_sizes)  # Show all sample sizes on x-axis
+            
+            # Plot 2: Log scale
+            for z in range(n_zones):
+                ax2.plot(x_sample_sizes, zone_mse_matrix[:, z], marker='o', label=f'Zone {z+1}', color=cmap(z % 10))
+            # Plot average across zones as a bold black line
+            ax2.plot(x_sample_sizes, avg_per_iter, marker='s', color='k', linewidth=2.0, label='Average')
+            ax2.set_xlabel('Total Training Samples')
+            ax2.set_ylabel('Zone overall MSE (scaled)')
+            ax2.set_title('Per-zone overall MSE evolution (log scale)')
+            ax2.set_yscale('log')
+            ax2.legend(loc='upper right')
+            ax2.grid(True, which='both', ls='--', lw=0.5)
+            ax2.set_xticks(x_sample_sizes)  # Show all sample sizes on x-axis
+            
+            # Plot 3: Stacked percentage contribution of each zone to total error
+            # Calculate percentage contribution for each iteration
+            zone_percentages = np.zeros((n_iters, n_zones))
+            for i in range(n_iters):
+                total_error = np.nansum(zone_mse_matrix[i, :])
+                if total_error > 0:
+                    for z in range(n_zones):
+                        zone_percentages[i, z] = (zone_mse_matrix[i, z] / total_error) * 100
+            
+            # Create stacked bar chart
+            bottom = np.zeros(n_iters)
+            bar_width = 40  # Set explicit bar width (should be less than the spacing between x values)
+            for z in range(n_zones):
+                ax3.bar(x_sample_sizes, zone_percentages[:, z], bottom=bottom, label=f'Zone {z+1}', 
+                       color=cmap(z % 10), alpha=0.8, width=bar_width)
+                bottom += zone_percentages[:, z]
+            
+            ax3.set_xlabel('Total Training Samples')
+            ax3.set_ylabel('Error Contribution (%)')
+            ax3.set_title('Zone Error Contribution vs Sample Size')
+            ax3.legend(bbox_to_anchor=(1.05, 1), loc='upper left')  # Move legend outside plot area
+            ax3.grid(True, axis='y', ls='--', lw=0.5, alpha=0.7)
+            ax3.set_ylim(0, 100)
+            ax3.set_xticks(x_sample_sizes)  # Show all sample sizes on x-axis
+            
+            # Add percentage labels on bars for zones with >10% contribution
+            for i, sample_size in enumerate(x_sample_sizes):
+                y_pos = 0
+                for z in range(n_zones):
+                    pct = zone_percentages[i, z]
+                    if pct > 10:  # Only label significant contributions
+                        ax3.text(sample_size, y_pos + pct/2, f'{pct:.0f}%', 
+                               ha='center', va='center', fontsize=8, fontweight='bold')
+                    y_pos += pct
+            
             plt.tight_layout()
-            plt.savefig(out_plot)
+            out_plot = os.path.join('results', 'zone_mse_evolution_comprehensive.png')
+            os.makedirs(os.path.dirname(out_plot), exist_ok=True)
+            plt.savefig(out_plot, dpi=300, bbox_inches='tight')
             plt.close()
-            print(f'📉 Zone MSE evolution plot saved to: {out_plot}')
+            print(f'📉 Comprehensive zone MSE analysis plot saved to: {out_plot}')
+            
+            # Print summary of zone contributions
+            print(f"\n📊 Zone Error Contribution Summary:")
+            print(f"{'Zone':<8} {'Avg %':<8} {'Max %':<8} {'Min %':<8}")
+            print(f"{'-'*32}")
+            for z in range(n_zones):
+                avg_pct = np.nanmean(zone_percentages[:, z])
+                max_pct = np.nanmax(zone_percentages[:, z])
+                min_pct = np.nanmin(zone_percentages[:, z])
+                print(f"Zone {z+1:<3} {avg_pct:<8.1f} {max_pct:<8.1f} {min_pct:<8.1f}")
+            
+            # Identify the most problematic zone
+            avg_contributions = np.nanmean(zone_percentages, axis=0)
+            dominant_zone = np.argmax(avg_contributions)
+            print(f"\n🎯 Most problematic zone: Zone {dominant_zone+1} (avg {avg_contributions[dominant_zone]:.1f}% of total error)")
     except Exception as e:
         print('Could not create zone evolution plot:', e)
     print(f"\n✅ ITERATIVE EXPERIMENT COMPLETE!")
