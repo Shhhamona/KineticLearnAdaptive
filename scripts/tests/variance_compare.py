@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """
 Compare variances between a batch JSON and the uniform dataset.
-Saves a small JSON report under results/ and prints a compact summary.
+Prints a compact summary.
 """
 import json
 import os
 import numpy as np
 
-BATCH_FILE = r"c:\Users\Rodolfo Simões\Documents\PlasmaML\KineticLearn\results\batch_simulations\lokisimulator\boundsbasedsampler\2025-08-17\batch_100sims_20250817_230722.json"
-UNIFORM_FILE = r"c:\Users\Rodolfo Simões\Documents\PlasmaML\KineticLearn\data\SampleEfficiency\O2_simple_uniform.txt"
-OUT_DIR = r"c:\Users\Rodolfo Simões\Documents\PlasmaML\KineticLearn\results"
-OUT_JSON = os.path.join(OUT_DIR, "compat_variances_batch_100.json")
+# Use relative paths from project root
+BATCH_FILE = "results/batch_simulations/lokisimulator/boundsbasedsampler/2025-08-17/batch_100sims_20250817_230722.json"
+UNIFORM_FILE = "data/SampleEfficiency/O2_simple_uniform.txt"
 
 
 def load_batch(batch_file=BATCH_FILE):
@@ -76,12 +75,6 @@ def main():
         vcu = stats["composition"][f"s{i}"]["uniform"]["variance"]
         ratios["comp_variance_ratio"][f"s{i}"] = vcb / vcu if vcu > 0 else None
 
-    report = {"stats": stats, "ratios": ratios}
-
-    os.makedirs(OUT_DIR, exist_ok=True)
-    with open(OUT_JSON, "w") as f:
-        json.dump(report, f, indent=2)
-
     # print compact summary
     print("VARIANCE COMPARISON SUMMARY")
     print("Per-k variance ratios (batch / uniform):")
@@ -96,7 +89,6 @@ def main():
     for i in range(3):
         r = ratios["comp_variance_ratio"][f"s{i}"]
         print(f"  s{i}: {r:.3g}")
-    print(f"\nJSON report saved to: {OUT_JSON}")
 
 
 if __name__ == "__main__":

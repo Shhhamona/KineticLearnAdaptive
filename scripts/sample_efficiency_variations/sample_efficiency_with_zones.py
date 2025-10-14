@@ -262,8 +262,13 @@ if __name__ == "__main__":
     subset_sizes = [i for i in range(200, 2100, 200)]
     num_seeds = 1  # Number of seeds to use
     
+    # Create output directory
+    output_dir = 'results/sample_efficiency_zones'
+    os.makedirs(output_dir, exist_ok=True)
+    
     print("🚀 Starting Sample Efficiency with Zone Analysis")
     print("=" * 60)
+    print(f"📂 Output directory: {output_dir}")
     print(f"📊 Subset sizes: {subset_sizes}")
     print(f"🎲 Number of seeds: {num_seeds}")
     print(f"⏱️  Expected runtime: ~{num_seeds * len(subset_sizes) * 5 * 3 / 60:.1f} minutes")
@@ -444,12 +449,12 @@ if __name__ == "__main__":
     plt.tight_layout()
     
     # Save plots
-    output_file = 'sample_efficiency_with_zones.pdf'
+    output_file = os.path.join(output_dir, 'sample_efficiency_with_zones.pdf')
     plt.savefig(output_file, dpi=300, bbox_inches='tight')
     print(f"📊 Plots saved as: {output_file}")
     
     # Save results to CSV
-    csv_file = 'sample_efficiency_with_zones_results.csv'
+    csv_file = os.path.join(output_dir, 'sample_efficiency_with_zones_results.csv')
     save_results_to_csv(all_results, zones, csv_file)
     
     # Print final summary

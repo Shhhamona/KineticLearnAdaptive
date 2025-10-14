@@ -204,6 +204,10 @@ if __name__ == "__main__":
     subset_sizes = [i for i in range(200, 2100, 200)]
     num_seeds = 3
     
+    # Create output directory
+    output_dir = 'results/sample_efficiency_gaussian'
+    os.makedirs(output_dir, exist_ok=True)
+    
     # True K values from O2_simple_1.chem file (first 3 reactions we're analyzing)
     # These are the reference values we want to achieve high accuracy around
     k_true = np.array([6.00E-16, 1.30E-15, 9.60E-16]) * 1e30  # Apply same scaling as dataset
@@ -213,6 +217,7 @@ if __name__ == "__main__":
     
     print("🔬 Gaussian-Weighted Sample Efficiency Analysis")
     print("=" * 60)
+    print(f"📂 Output directory: {output_dir}")
     print(f"📊 True K values (original): {[6.00E-16, 1.30E-15, 9.60E-16]}")
     print(f"📊 True K values (scaled): {k_true}")
     print(f"🎯 Gaussian sigma: {sigma}")
@@ -298,7 +303,7 @@ if __name__ == "__main__":
     plt.tight_layout()
     
     # Save plot
-    output_file = 'sample_efficiency_gaussian.pdf'
+    output_file = os.path.join(output_dir, 'sample_efficiency_gaussian.pdf')
     plt.savefig(output_file)
     print(f"✅ Comparison plot saved as: {output_file}")
     

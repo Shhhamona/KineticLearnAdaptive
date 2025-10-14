@@ -8,9 +8,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-TRAIN_X_FILE = r"c:\Users\Rodolfo Simões\Documents\PlasmaML\KineticLearn\results\training_snapshots\train_600_X.txt"
-TEST_X_FILE = r"c:\Users\Rodolfo Simões\Documents\PlasmaML\KineticLearn\results\training_snapshots\test_X.txt"
-OUT_DIR = r"c:\Users\Rodolfo Simões\Documents\PlasmaML\KineticLearn\results"
+# Use relative paths from project root
+TRAIN_X_FILE = "results/training_snapshots/train_600_X.txt"
+TEST_X_FILE = "results/training_snapshots/test_X.txt"
+OUT_DIR = "results/parameter_distributions"
 
 
 def load_train_x(path=TRAIN_X_FILE, test_path=TEST_X_FILE):

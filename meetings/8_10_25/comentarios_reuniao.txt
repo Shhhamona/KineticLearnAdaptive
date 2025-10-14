@@ -19,5 +19,9 @@ Se a precisao for E8 - Pode dar problemas
 
 4 - Utilizar um TOy model - Isso ja estou a fazer
 
+5 - Utilizar uma rede neuronal - Muito mais facil do que a outra
+
+Melhorar graficos - Textos e explicacoes em geral
+Incluir variancia nos graficos
 
 

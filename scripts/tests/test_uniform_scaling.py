@@ -2,24 +2,32 @@
 """Quick debug script to check uniform dataset scaling"""
 
 import sys
-sys.path.append('.')
+
+sys.path.append(".")
+import numpy as np
+
 from active_learning_methods import load_datasets
 
 # Configuration
 config = {
-    'nspecies': 3,
-    'num_pressure_conditions': 2,
+    "nspecies": 3,
+    "num_pressure_conditions": 2,
 }
 
+
+k_true = np.array([6.00e-16, 1.30e-15, 9.60e-16])
+k_true = k_true
+
+
 # File paths
-src_file_train = 'data/SampleEfficiency/O2_simple_uniform.txt'
-src_file_test = 'data/SampleEfficiency/O2_simple_test.txt'
+src_file_train = "data/SampleEfficiency/O2_simple_uniform.txt"
+src_file_test = "data/SampleEfficiency/O2_simple_test.txt"
 
 print("🔍 QUICK UNIFORM DATASET CHECK")
 
 # Load uniform datasets
 uniform_dataset, test_dataset = load_datasets(
-    src_file_train, src_file_test, config['nspecies'], config['num_pressure_conditions']
+    src_file_train, src_file_test, config["nspecies"], config["num_pressure_conditions"]
 )
 
 # Check what's in the uniform dataset
