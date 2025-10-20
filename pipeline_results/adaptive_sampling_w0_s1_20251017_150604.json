@@ -1,0 +1,166 @@
+{
+  "pipeline_name": "adaptive_sampling_w0_s1",
+  "timestamp": "2025-10-17 15:06:03",
+  "config": {
+    "model_type": "SVRModel",
+    "model_params": "{'params': [{'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'}, {'C': 20, 'epsilon': 0.005, 'gamma': 5, 'kernel': 'rbf'}, {'C': 5, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'}], 'model_name': 'adaptive_sampling_svr'}",
+    "n_iterations": 10,
+    "samples_per_iteration": 100,
+    "initial_window_size": 0,
+    "shrink_rate": 1,
+    "num_seeds": 5,
+    "window_type": "input",
+    "initial_train_samples": 200,
+    "pool_samples": 4000,
+    "test_samples": 1
+  },
+  "data_info": {},
+  "training_info": {},
+  "evaluation": {},
+  "raw_results": {
+    "all_seed_results": [
+      [
+        {
+          "iteration": 0,
+          "seed": 42,
+          "total_samples": 200,
+          "samples_added": 0,
+          "mse_per_output": [
+            2.8060252731398413e-06,
+            3.162013859041625e-07,
+            7.849189773811698e-06
+          ],
+          "total_mse": 1.0971416432855701e-05,
+          "window_size": 0.0,
+          "center_point": [
+            0.8423618662886709,
+            0.5205241542091769,
+            0.7079718270121036,
+            0.944604943331144,
+            0.4244864433022245,
+            0.7164778235585222
+          ],
+          "available_pool_samples": 3800
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 43,
+          "total_samples": 200,
+          "samples_added": 0,
+          "mse_per_output": [
+            1.5877394211035822e-06,
+            1.1702634788182716e-05,
+            2.7442056330185734e-05
+          ],
+          "total_mse": 4.073243053947203e-05,
+          "window_size": 0.0,
+          "center_point": [
+            0.8384294558911292,
+            0.5106581658951105,
+            0.7282407110746705,
+            0.9418372572956606,
+            0.40964852215086117,
+            0.7377970389738223
+          ],
+          "available_pool_samples": 3800
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 44,
+          "total_samples": 200,
+          "samples_added": 0,
+          "mse_per_output": [
+            1.009388158571895e-06,
+            3.6141111616429755e-06,
+            1.0841988882170121e-05
+          ],
+          "total_mse": 1.5465488202384994e-05,
+          "window_size": 0.0,
+          "center_point": [
+            0.8390385980349743,
+            0.5097672348690958,
+            0.7267441296386242,
+            0.9421972840102696,
+            0.4066506563704763,
+            0.7361967666002884
+          ],
+          "available_pool_samples": 3800
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 45,
+          "total_samples": 200,
+          "samples_added": 0,
+          "mse_per_output": [
+            2.629164027399084e-07,
+            5.095091752887244e-05,
+            2.3741542513431075e-05
+          ],
+          "total_mse": 7.495537644504342e-05,
+          "window_size": 0.0,
+          "center_point": [
+            0.8363217301290793,
+            0.4939297690297305,
+            0.7468756437885186,
+            0.9396669765602275,
+            0.38741809704354774,
+            0.7570366638381484
+          ],
+          "available_pool_samples": 3800
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 46,
+          "total_samples": 200,
+          "samples_added": 0,
+          "mse_per_output": [
+            8.013606653178599e-07,
+            2.7985049100503465e-07,
+            2.1946090217364263e-05
+          ],
+          "total_mse": 2.3027301373687157e-05,
+          "window_size": 0.0,
+          "center_point": [
+            0.8396882871573361,
+            0.5169039322854414,
+            0.719654745288294,
+            0.9431831170272151,
+            0.4120234559878472,
+            0.7285820574552914
+          ],
+          "available_pool_samples": 3800
+        }
+      ]
+    ]
+  },
+  "aggregated_results": [
+    {
+      "iteration": 0,
+      "total_samples": 200.0,
+      "samples_added": 0.0,
+      "mean_total_mse": 3.303040259868867e-05,
+      "std_total_mse": 1.0415779930374203e-05,
+      "mean_mse_per_output": [
+        1.2934859841746173e-06,
+        1.3372743071121464e-05,
+        1.836417354339258e-05
+      ],
+      "std_mse_per_output": [
+        3.8777997637621796e-07,
+        8.607058663424769e-06,
+        3.41351622666156e-06
+      ],
+      "window_size": 0.0,
+      "num_seeds": 5
+    }
+  ],
+  "execution_time_seconds": 0.108957
+}

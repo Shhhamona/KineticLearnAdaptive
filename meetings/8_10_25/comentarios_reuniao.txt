@@ -15,7 +15,7 @@ Se a precisao for E4 ' Em princípio tudo bem
 Se a precisao for E8 - Pode dar problemas
 
 
-3 - Utilizar Gaussiana, tringu
+3 - Utilizar Gaussiana ou triangular
 
 4 - Utilizar um TOy model - Isso ja estou a fazer
 
@@ -24,4 +24,5 @@ Se a precisao for E8 - Pode dar problemas
 Melhorar graficos - Textos e explicacoes em geral
 Incluir variancia nos graficos
 
+Focus on low samples for True K calculation. 
 

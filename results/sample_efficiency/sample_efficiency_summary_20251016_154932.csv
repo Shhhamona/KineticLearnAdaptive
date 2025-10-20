@@ -1,0 +1,3 @@
+Method,Dataset,Final_MSE_Mean,Final_MSE_Std,Best_MSE_Mean,Best_Subset_Size
+Morris Discret Continuous,O2_simple__morris_continous_final.txt,4.48777437876909e-05,1.2038598173786536e-06,4.48777437876909e-05,1500
+Uniform Latin Hypercube,O2_simple_latin.txt,4.0593924059882075e-05,9.08192659941645e-07,4.0593924059882075e-05,1500

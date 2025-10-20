@@ -424,7 +424,7 @@ if __name__ == "__main__":
     train_loader = DataLoader(dataset_train, batch_size=16, shuffle=True)  # batch size can be tuned
 
     # Train the model
-    model, loss_history = train_model(model, criterion, optimizer, train_loader, num_epochs=5000, patience=100, val_split=0.1)
+    model, loss_history = train_model(model, criterion, optimizer, train_loader, num_epochs=500, patience=100, val_split=0.1)
 
     end = time.time()
     print(f"Training time: {end - start}s")

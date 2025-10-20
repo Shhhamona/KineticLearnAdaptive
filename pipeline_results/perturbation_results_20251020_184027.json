@@ -1,0 +1,30 @@
+{
+  "pipeline_name": "perturbation_analysis",
+  "timestamp": "2025-10-20 18:40:27",
+  "config": {
+    "relative_error": 0.001,
+    "n_test_samples": 1,
+    "subset_sizes": [
+      50,
+      75,
+      100,
+      150,
+      200,
+      400,
+      600,
+      800,
+      1000,
+      1200,
+      1400,
+      1600,
+      1800,
+      2000
+    ],
+    "num_seeds": 10,
+    "n_outputs": 3
+  },
+  "perturbation_results": [
+    {
+      "n_samples": 50,
+      "test_idx": 0,
+      "y_min": 

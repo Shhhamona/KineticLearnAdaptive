@@ -2,8 +2,8 @@ batch1 = 4000
 batch2 = 1000
 
 iterations = 4              # iterations per batch before switching logic triggers
-samples_per_iteration = 200
-min_available_threshold = 200  # switch to smaller batch when available < this
+samples_per_iteration = 100
+min_available_threshold = 100  # switch to smaller batch when available < this
 
 base_krange = 1.0
 

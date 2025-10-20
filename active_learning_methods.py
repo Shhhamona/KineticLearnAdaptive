@@ -231,7 +231,7 @@ def calculate_mse_for_dataset(dataset_train, dataset_test, best_params, subset_s
     total_mse_list = np.sum(mse_array, axis=0)
     print(f"   DEBUG: total_mse_list = {total_mse_list}")
 
-    return mse_list, total_mse_list
+    return mse_list, total_mse_list 
 
 
 def run_mse_analysis(dataset_train, dataset_test, best_params, subset_sizes, num_seeds):

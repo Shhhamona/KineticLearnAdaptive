@@ -585,7 +585,7 @@ if __name__ == '__main__':
 
     batch_json_path_1 = 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-08-20/batch_4000sims_20250827_010028.json'
     batch_json_path_2 = 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-28/batch_1000sims_20250928_191628.json'
-    batch_json_path_3 = 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_1500sims_20250928_224858.json'
+    batch_json_path_3 = 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-08-27/batch_4000sims_20250827_010028.json'
     src_file_train = 'data/SampleEfficiency/O2_simple_uniform.txt'
     #src_file_train = 'data/SampleEfficiency/O2_simple_latin.txt'
     src_file_test = 'data/SampleEfficiency/O2_simple_test_real_K.txt'
@@ -615,7 +615,7 @@ if __name__ == '__main__':
     
     # Load batch simulation data
     print(f"Loading batch simulation data...")
-    batch_k_values, batch_compositions, n_simulations, n_pressure_conditions = load_batch_data(batch_json_path)
+    batch_k_values, batch_compositions, n_simulations, n_pressure_conditions = load_batch_data(batch_json_path_3)
     print(f"✅ Batch data loaded")
 
     print(f"🔍!!!!!!!!!!!!! batch DATASET DEBUG:")

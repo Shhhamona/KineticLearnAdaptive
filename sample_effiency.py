@@ -118,7 +118,7 @@ if __name__ == "__main__":
     
     nspecies = 3
     num_pressure_conditions = 2
-    subset_sizes = [i for i in range(200, 2000, 100)]
+    subset_sizes = [i for i in range(500, 2500, 500)]
     print("Subset sizes:", subset_sizes)
     num_seeds = 10  # Number of seeds to use
     print("Subset sizes:", subset_sizes)
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     datasets = [
 
         'O2_simple__morris_continous_final.txt',
-        'O2_simple_latin.txt',
+        'O2_simple_uniform.txt',
         
     ]
     labels = [

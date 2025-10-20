@@ -1,0 +1,75 @@
+{
+  "pipeline_name": "o2_simple_full_data",
+  "timestamp": "2025-10-16 16:05:31",
+  "config": {
+    "model_type": "SVRModel",
+    "model_name": "o2_simple_svr",
+    "sampler": "None (full dataset)",
+    "n_samples": 2000,
+    "total_train_samples": 2000,
+    "test_samples": 100
+  },
+  "data_info": {
+    "train_samples": 2000,
+    "test_samples": 100,
+    "n_features": 6,
+    "n_outputs": 3
+  },
+  "training_info": {
+    "history": {
+      "train_mse_per_output": [
+        7.78592936398476e-06,
+        2.483263667805501e-05,
+        8.528608743096557e-06
+      ],
+      "mean_train_mse": 1.3715724928378775e-05
+    },
+    "model_metadata": {
+      "model_type": "SVRModel",
+      "created_at": "2025-10-16T16:05:31.882343",
+      "trained": true,
+      "params": [
+        {
+          "C": 10,
+          "epsilon": 0.005,
+          "gamma": 2,
+          "kernel": "rbf"
+        },
+        {
+          "C": 20,
+          "epsilon": 0.005,
+          "gamma": 5,
+          "kernel": "rbf"
+        },
+        {
+          "C": 5,
+          "epsilon": 0.005,
+          "gamma": 2,
+          "kernel": "rbf"
+        }
+      ],
+      "trained_at": "2025-10-16T16:05:32.221814",
+      "n_samples": 2000,
+      "n_features": 6
+    }
+  },
+  "evaluation": {
+    "train_metrics": {
+      "mse_per_output": [
+        7.78592936398476e-06,
+        2.483263667805501e-05,
+        8.528608743096557e-06
+      ],
+      "mean_mse": 1.3715724928378775e-05
+    },
+    "test_metrics": {
+      "mse_per_output": [
+        8.027401886587763e-06,
+        2.2446104360350285e-05,
+        8.410719935347913e-06
+      ],
+      "mean_mse": 1.2961408727428654e-05
+    }
+  },
+  "execution_time_seconds": 0.406396
+}
