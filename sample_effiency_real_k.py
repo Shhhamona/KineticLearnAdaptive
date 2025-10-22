@@ -148,16 +148,14 @@ if __name__ == "__main__":
         'O2_simple_latin_log_uniform.txt',
         'O2_simple_latin.txt',
         'O2_simple_morris.txt',
-        'O2_simple__morris_continous_discret_corrected.txt',
         'O2_simple__morris_continous_final.txt',
     ]
     labels = [
         'Uniform',
         'Log-Uniform Latin Hypercube',
         'Uniform Latin Hypercube',
-        'Morris Discret (Not Corrected)',
-        'Morris Discret Corrected Grid',
-        'Morris Fixed Continuous',
+        'Morris Discret',
+        'Morris Continuous',
     ]
 
 

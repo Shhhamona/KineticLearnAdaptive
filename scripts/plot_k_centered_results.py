@@ -53,6 +53,7 @@ def load_k_centered_results(result_files):
                 'box_size': box_size,
                 'shrink_rate': shrink_rate,
                 'averaged_results': data['averaged_results'],
+                'individual_seed_results': data.get('individual_seed_results', []),
                 'summary': data['summary'],
                 'file_path': file_path
             }
@@ -72,10 +73,6 @@ def create_k_centered_plots(results_by_config):
     plt.style.use('default')
     sns.set_palette("husl")
     
-    # Create two subplots
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
-    fig.suptitle('K-Centered Adaptive Learning: Test MSE Performance', fontsize=16, fontweight='bold')
-    
     # Separate configs by fixed parameter
     shrink100_configs = []
     box100_configs = []
@@ -86,66 +83,124 @@ def create_k_centered_plots(results_by_config):
         if data['box_size'] == 100:
             box100_configs.append((config, data))
     
-    # Plot 1: Different Box Sizes (Shrink Rate = 100)
+    # Sort configs by box size and shrink rate for proper ordering
+    shrink100_configs.sort(key=lambda x: x[1]['box_size'])
+    box100_configs.sort(key=lambda x: x[1]['shrink_rate'], reverse=True)
+    
+    # ========== PLOT 1: Different Box Sizes (Shrink Rate = 100) ==========
+    fig1, ax1 = plt.subplots(figsize=(10, 6))
     colors1 = plt.cm.tab10(np.linspace(0, 1, len(shrink100_configs)))
     
-    for i, (config, data) in enumerate(sorted(shrink100_configs)):
+    for i, (config, data) in enumerate(shrink100_configs):
         # Skip first point (iteration 0) and final point with 1 sample added
         filtered_results = [r for r in data['averaged_results'] if r['iteration'] > 0 and r['batch_samples_added'] != 1]
         samples = [r['total_samples'] for r in filtered_results]
         test_mse = [r['test_total_mse'] for r in filtered_results]
         
-        # Convert box size to K_true range description with box size
+        # Calculate error bars from individual seed results if available
+        error_bars = None
+        if data['individual_seed_results']:
+            error_bars = []
+            for result in filtered_results:
+                iter_num = result['iteration']
+                # Get test_total_mse for this iteration from all seeds
+                seed_mses = []
+                for seed_run in data['individual_seed_results']:
+                    for seed_result in seed_run:
+                        if seed_result['iteration'] == iter_num:
+                            seed_mses.append(seed_result['test_total_mse'])
+                            break
+                # Calculate standard error of the mean
+                if len(seed_mses) > 1:
+                    error_bars.append(np.std(seed_mses) / np.sqrt(len(seed_mses)))
+                else:
+                    error_bars.append(0)
+        
+        # Convert box size to K range description
         if data['box_size'] == 50:
-            box_label = "0.75×K_true to 1.33×K_true (Box Size 50%)"
+            box_label = "K ∈ [K/1.33, K×1.33]"
         elif data['box_size'] == 75:
-            box_label = "0.625×K_true to 1.6×K_true (Box Size 75%)"
+            box_label = "K ∈ [K/1.6, K×1.6]"
         elif data['box_size'] == 90:
-            box_label = "0.55×K_true to 1.8×K_true (Box Size 90%)"
+            box_label = "K ∈ [K/1.8, K×1.8]"
         elif data['box_size'] == 100:
-            box_label = "0.5×K_true to 2×K_true (Box Size 100%)"
+            box_label = "K ∈ [K/2, K×2]"
         else:
             box_label = f"Box {data['box_size']}%"
         
-        ax1.plot(samples, test_mse, 'o-', color=colors1[i], 
-                label=box_label, 
-                linewidth=2, markersize=6)
+        if error_bars:
+            ax1.errorbar(samples, test_mse, yerr=error_bars, fmt='o-', color=colors1[i], 
+                        label=box_label, linewidth=2, markersize=6, capsize=4, capthick=1.5)
+        else:
+            ax1.plot(samples, test_mse, 'o-', color=colors1[i], 
+                    label=box_label, linewidth=2, markersize=6)
     
-    ax1.set_xlabel('Total Training Samples')
-    ax1.set_ylabel('Test MSE')
-    ax1.set_title('Different Box Sizes (No Shrinking)')
-    ax1.legend(loc='upper right')
+    ax1.set_xlabel('Total Training Samples', fontsize=12)
+    ax1.set_ylabel('Test MSE', fontsize=12)
+    ax1.set_title('K-Centered Adaptive Learning: Different Box Sizes (No Shrinking)', 
+                  fontsize=14, fontweight='bold')
+    ax1.legend(loc='upper right', fontsize=10)
     ax1.grid(True, alpha=0.3)
     
-    # Plot 2: Different Shrink Rates (Box Size = 100)
+    # Save plot 1
+    output_file1 = 'results/k_centered_results/k_centered_box_sizes_comparison.png'
+    os.makedirs(os.path.dirname(output_file1), exist_ok=True)
+    plt.savefig(output_file1, dpi=300, bbox_inches='tight')
+    print(f"📊 Box sizes comparison plot saved: {output_file1}")
+    plt.show()
+    
+    # ========== PLOT 2: Different Shrink Rates (Box Size = 100) ==========
+    fig2, ax2 = plt.subplots(figsize=(10, 6))
     colors2 = plt.cm.tab10(np.linspace(0, 1, len(box100_configs)))
     
-    for i, (config, data) in enumerate(sorted(box100_configs)):
+    for i, (config, data) in enumerate(box100_configs):
         # Skip first point (iteration 0) and final point with 1 sample added
         filtered_results = [r for r in data['averaged_results'] if r['iteration'] > 0 and r['batch_samples_added'] != 1]
         samples = [r['total_samples'] for r in filtered_results]
         test_mse = [r['test_total_mse'] for r in filtered_results]
+        
+        # Calculate error bars from individual seed results if available
+        error_bars = None
+        if data['individual_seed_results']:
+            error_bars = []
+            for result in filtered_results:
+                iter_num = result['iteration']
+                # Get test_total_mse for this iteration from all seeds
+                seed_mses = []
+                for seed_run in data['individual_seed_results']:
+                    for seed_result in seed_run:
+                        if seed_result['iteration'] == iter_num:
+                            seed_mses.append(seed_result['test_total_mse'])
+                            break
+                # Calculate standard error of the mean
+                if len(seed_mses) > 1:
+                    error_bars.append(np.std(seed_mses) / np.sqrt(len(seed_mses)))
+                else:
+                    error_bars.append(0)
         
         # Convert shrink rate to actual shrinking percentage (inverted)
         actual_shrink = 100 - data['shrink_rate']
         shrink_label = f"{actual_shrink}% Shrinking"
         
-        ax2.plot(samples, test_mse, 'o-', color=colors2[i], 
-                label=shrink_label, 
-                linewidth=2, markersize=6)
+        if error_bars:
+            ax2.errorbar(samples, test_mse, yerr=error_bars, fmt='o-', color=colors2[i], 
+                        label=shrink_label, linewidth=2, markersize=6, capsize=4, capthick=1.5)
+        else:
+            ax2.plot(samples, test_mse, 'o-', color=colors2[i], 
+                    label=shrink_label, linewidth=2, markersize=6)
     
-    ax2.set_xlabel('Total Training Samples')
-    ax2.set_ylabel('Test MSE')
-    ax2.set_title('Different Shrink Rates (0.5×K_true to 2×K_true)')
-    ax2.legend(loc='upper right')
+    ax2.set_xlabel('Total Training Samples', fontsize=12)
+    ax2.set_ylabel('Test MSE', fontsize=12)
+    ax2.set_title('K-Centered Adaptive Learning: Different Shrink Rates (K ∈ [K/2, K×2])', 
+                  fontsize=14, fontweight='bold')
+    ax2.legend(loc='upper right', fontsize=10)
     ax2.grid(True, alpha=0.3)
     
-    # Save the plot
-    output_file = 'results/k_centered_results/k_centered_performance_comparison.png'
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    plt.savefig(output_file, dpi=300, bbox_inches='tight')
-    print(f"📊 Performance comparison plot saved: {output_file}")
-    
+    # Save plot 2
+    output_file2 = 'results/k_centered_results/k_centered_shrink_rates_comparison.png'
+    os.makedirs(os.path.dirname(output_file2), exist_ok=True)
+    plt.savefig(output_file2, dpi=300, bbox_inches='tight')
+    print(f"📊 Shrink rates comparison plot saved: {output_file2}")
     plt.show()
 
 def print_results_table(results_by_config):
