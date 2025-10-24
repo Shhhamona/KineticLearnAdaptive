@@ -51,7 +51,7 @@ def main():
     print("\n📂 Loading datasets...")
     #train_file = Path("data/SampleEfficiency/O2_simple_uniform.txt")
     train_file = Path("data/SampleEfficiency/O2_simple_latin.txt")
-    #test_file = Path("data/SampleEfficiency/O2_simple_test.txt")
+    train_file = Path("results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_2500sims_20250929_031845.json")
     test_file = Path("data/SampleEfficiency/O2_simple_test_real_K.txt")
     
     if not train_file.exists():

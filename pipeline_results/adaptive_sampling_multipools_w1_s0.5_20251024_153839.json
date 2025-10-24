@@ -1,0 +1,715 @@
+{
+  "pipeline_name": "adaptive_sampling_multipools_w1_s0.5",
+  "timestamp": "2025-10-24 15:37:01",
+  "config": {
+    "model_type": "SVRModel",
+    "model_params": "{'params': [{'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'}, {'C': 20, 'epsilon': 0.005, 'gamma': 5, 'kernel': 'rbf'}, {'C': 5, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'}], 'model_name': 'adaptive_sampling_svr'}",
+    "n_iterations": 11,
+    "samples_per_iteration": 100,
+    "initial_window_size": 1,
+    "shrink_rate": 0.5,
+    "num_seeds": 5,
+    "window_type": "input",
+    "replace_mode": false,
+    "initial_train_samples": 0,
+    "num_pool_datasets": 5,
+    "pool_samples": [
+      4000,
+      1000,
+      2500,
+      2000,
+      1500
+    ],
+    "test_samples": 1
+  },
+  "data_info": {},
+  "training_info": {},
+  "evaluation": {},
+  "raw_results": {
+    "all_seed_results": [
+      [
+        {
+          "iteration": 1,
+          "seed": 42,
+          "total_samples": 100,
+          "samples_added": 100,
+          "mse_per_output": [
+            3.564754447313774e-06,
+            2.6193546277532607e-05,
+            2.5758671793817847e-05
+          ],
+          "total_mse": 5.551697251866423e-05,
+          "window_size": 1.0,
+          "center_point": [
+            0.8528312166274986,
+            0.5726296662511622,
+            0.6998691063165928,
+            0.9465090030058185,
+            0.45410228777892236,
+            0.7061927820785996
+          ],
+          "available_pool_samples": 3900,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 2,
+          "seed": 42,
+          "total_samples": 200,
+          "samples_added": 100,
+          "mse_per_output": [
+            1.409089984459165e-06,
+            2.3619217602856516e-07,
+            2.647295485595296e-05
+          ],
+          "total_mse": 2.811823701644069e-05,
+          "window_size": 0.5,
+          "center_point": [
+            0.8440559535136467,
+            0.5919662427410657,
+            0.7171127075328821,
+            0.9437551900103108,
+            0.45716834831608644,
+            0.7231280354944297
+          ],
+          "available_pool_samples": 3800,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 3,
+          "seed": 42,
+          "total_samples": 300,
+          "samples_added": 100,
+          "mse_per_output": [
+            9.119751249293902e-07,
+            1.725820712776799e-07,
+            2.637575673754227e-05
+          ],
+          "total_mse": 2.746031393374934e-05,
+          "window_size": 0.25,
+          "center_point": [
+            0.8385840909941593,
+            0.6006655446454127,
+            0.7300449699764691,
+            0.941722078779325,
+            0.4571157534498976,
+            0.7361764289479272
+          ],
+          "available_pool_samples": 3700,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 4,
+          "seed": 42,
+          "total_samples": 400,
+          "samples_added": 100,
+          "mse_per_output": [
+            9.097639111176276e-07,
+            9.258694496133261e-08,
+            2.64664296476165e-05
+          ],
+          "total_mse": 2.746878050369546e-05,
+          "window_size": 0.125,
+          "center_point": [
+            0.837927318160402,
+            0.603748211616002,
+            0.7302730266198352,
+            0.9416490228665456,
+            0.4570750166845091,
+            0.7366541813935751
+          ],
+          "available_pool_samples": 3600,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 5,
+          "seed": 42,
+          "total_samples": 411,
+          "samples_added": 11,
+          "mse_per_output": [
+            9.768166847417523e-07,
+            2.723274901962946e-09,
+            2.64664296476165e-05
+          ],
+          "total_mse": 2.7445969607260213e-05,
+          "window_size": 0.0625,
+          "center_point": [
+            0.8378545249290226,
+            0.6036111870455504,
+            0.7306091057140085,
+            0.9415891300317548,
+            0.4570371074086399,
+            0.7370471166994627
+          ],
+          "available_pool_samples": 3589,
+          "current_pool_idx": 0
+        }
+      ],
+      [
+        {
+          "iteration": 1,
+          "seed": 43,
+          "total_samples": 100,
+          "samples_added": 100,
+          "mse_per_output": [
+            1.0205158788014897e-05,
+            2.9692019656726696e-06,
+            2.7050095882740567e-05
+          ],
+          "total_mse": 4.022445663642813e-05,
+          "window_size": 1.0,
+          "center_point": [
+            0.848172114114777,
+            0.5620232263076557,
+            0.7225760563043033,
+            0.9434054855438468,
+            0.43509798886497864,
+            0.7305667734637131
+          ],
+          "available_pool_samples": 3900,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 2,
+          "seed": 43,
+          "total_samples": 200,
+          "samples_added": 100,
+          "mse_per_output": [
+            5.983033531340454e-06,
+            3.673513953523796e-06,
+            2.6041834553368513e-05
+          ],
+          "total_mse": 3.5698382038232764e-05,
+          "window_size": 0.5,
+          "center_point": [
+            0.8401511472016207,
+            0.5810219030024635,
+            0.7374779195558036,
+            0.9410578951995738,
+            0.4388922361885186,
+            0.7447259950692207
+          ],
+          "available_pool_samples": 3800,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 3,
+          "seed": 43,
+          "total_samples": 300,
+          "samples_added": 100,
+          "mse_per_output": [
+            5.5741872390485705e-06,
+            2.072018508081405e-06,
+            2.679226338862152e-05
+          ],
+          "total_mse": 3.44384691357515e-05,
+          "window_size": 0.25,
+          "center_point": [
+            0.8360361105627913,
+            0.5880688117454808,
+            0.746875710408092,
+            0.9396671081338887,
+            0.436999240945717,
+            0.7540891701435025
+          ],
+          "available_pool_samples": 3700,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 4,
+          "seed": 43,
+          "total_samples": 400,
+          "samples_added": 100,
+          "mse_per_output": [
+            6.614587592822248e-06,
+            4.47403383263387e-07,
+            2.679226338862152e-05
+          ],
+          "total_mse": 3.385425436470716e-05,
+          "window_size": 0.125,
+          "center_point": [
+            0.8349693569300861,
+            0.5902781484771873,
+            0.7490630650448823,
+            0.9393013354227706,
+            0.43687191470540243,
+            0.7564642558128848
+          ],
+          "available_pool_samples": 3600,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 5,
+          "seed": 43,
+          "total_samples": 412,
+          "samples_added": 12,
+          "mse_per_output": [
+            6.614587592823391e-06,
+            7.044946523914703e-07,
+            2.679226338862152e-05
+          ],
+          "total_mse": 3.4111345633836384e-05,
+          "window_size": 0.0625,
+          "center_point": [
+            0.8350138523940602,
+            0.5901743373943161,
+            0.7489792924774076,
+            0.9393030865867753,
+            0.43696922071407507,
+            0.756430093050323
+          ],
+          "available_pool_samples": 3588,
+          "current_pool_idx": 0
+        }
+      ],
+      [
+        {
+          "iteration": 1,
+          "seed": 44,
+          "total_samples": 100,
+          "samples_added": 100,
+          "mse_per_output": [
+            7.85167470077172e-06,
+            4.733175336213194e-05,
+            3.5815989546148115e-05
+          ],
+          "total_mse": 9.099941760905178e-05,
+          "window_size": 1.0,
+          "center_point": [
+            0.8490767146757566,
+            0.5596497622508504,
+            0.7210449671952862,
+            0.9438648558199693,
+            0.4300408418545995,
+            0.7288118535254309
+          ],
+          "available_pool_samples": 3900,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 2,
+          "seed": 44,
+          "total_samples": 200,
+          "samples_added": 100,
+          "mse_per_output": [
+            5.416397609184298e-06,
+            4.645179715195033e-06,
+            3.075266218077597e-05
+          ],
+          "total_mse": 4.08142395051553e-05,
+          "window_size": 0.5,
+          "center_point": [
+            0.8371236889830446,
+            0.579591646231781,
+            0.7486869621816358,
+            0.9395978143512366,
+            0.4309619345155664,
+            0.7559551321430156
+          ],
+          "available_pool_samples": 3800,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 3,
+          "seed": 44,
+          "total_samples": 300,
+          "samples_added": 100,
+          "mse_per_output": [
+            4.862395627890293e-06,
+            6.791035096266266e-06,
+            2.6855215757261727e-05
+          ],
+          "total_mse": 3.850864648141829e-05,
+          "window_size": 0.25,
+          "center_point": [
+            0.8318738965953152,
+            0.58576997638053,
+            0.7625022809553819,
+            0.9374420475297285,
+            0.4315037448568176,
+            0.7696502210461452
+          ],
+          "available_pool_samples": 3700,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 4,
+          "seed": 44,
+          "total_samples": 400,
+          "samples_added": 100,
+          "mse_per_output": [
+            4.302815055144069e-06,
+            5.205132531722131e-06,
+            2.6855215757261727e-05
+          ],
+          "total_mse": 3.636316334412793e-05,
+          "window_size": 0.125,
+          "center_point": [
+            0.8308114974940867,
+            0.5880999126314442,
+            0.764596580392394,
+            0.9370818699730266,
+            0.4316149185018995,
+            0.7719332883039332
+          ],
+          "available_pool_samples": 3600,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 5,
+          "seed": 44,
+          "total_samples": 407,
+          "samples_added": 7,
+          "mse_per_output": [
+            4.302815055144069e-06,
+            5.8815263421879824e-06,
+            2.6855215757261727e-05
+          ],
+          "total_mse": 3.703955715459378e-05,
+          "window_size": 0.0625,
+          "center_point": [
+            0.8309191931586308,
+            0.5880216970022982,
+            0.7642816032866231,
+            0.9371171621283264,
+            0.43182931426890114,
+            0.7716565010286793
+          ],
+          "available_pool_samples": 3593,
+          "current_pool_idx": 0
+        }
+      ],
+      [
+        {
+          "iteration": 1,
+          "seed": 45,
+          "total_samples": 100,
+          "samples_added": 100,
+          "mse_per_output": [
+            3.479528211038476e-06,
+            3.939842863969318e-05,
+            2.9201355983375553e-05
+          ],
+          "total_mse": 7.207931283410721e-05,
+          "window_size": 1.0,
+          "center_point": [
+            0.8505224644530303,
+            0.5543246203272937,
+            0.7195928577528703,
+            0.9442275674250734,
+            0.42538034729630375,
+            0.7275834392371042
+          ],
+          "available_pool_samples": 3900,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 2,
+          "seed": 45,
+          "total_samples": 200,
+          "samples_added": 100,
+          "mse_per_output": [
+            7.634220853514054e-07,
+            2.6705858172295412e-05,
+            2.7183747758864797e-05
+          ],
+          "total_mse": 5.4653028016511616e-05,
+          "window_size": 0.5,
+          "center_point": [
+            0.8387361297233177,
+            0.5723436056937204,
+            0.7479173996193452,
+            0.9396683556239583,
+            0.4304809618232784,
+            0.7556161403340286
+          ],
+          "available_pool_samples": 3800,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 3,
+          "seed": 45,
+          "total_samples": 300,
+          "samples_added": 100,
+          "mse_per_output": [
+            5.715997955215909e-07,
+            1.3094077019536818e-05,
+            2.4278890772870996e-05
+          ],
+          "total_mse": 3.79445675879294e-05,
+          "window_size": 0.25,
+          "center_point": [
+            0.8339386062280613,
+            0.5798141818162672,
+            0.7593578752824263,
+            0.9379472093823802,
+            0.42913015199638466,
+            0.766969995916042
+          ],
+          "available_pool_samples": 3700,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 4,
+          "seed": 45,
+          "total_samples": 400,
+          "samples_added": 100,
+          "mse_per_output": [
+            3.484191981632169e-07,
+            1.2205913293140024e-05,
+            2.4060281700677714e-05
+          ],
+          "total_mse": 3.661461419198096e-05,
+          "window_size": 0.125,
+          "center_point": [
+            0.8325702199930073,
+            0.5823173370145539,
+            0.7623787675713374,
+            0.9374740817766236,
+            0.4285140033671215,
+            0.7701485382786624
+          ],
+          "available_pool_samples": 3600,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 5,
+          "seed": 45,
+          "total_samples": 414,
+          "samples_added": 14,
+          "mse_per_output": [
+            6.044406518791865e-07,
+            1.2286120016869106e-05,
+            2.4060281700677714e-05
+          ],
+          "total_mse": 3.695084236942601e-05,
+          "window_size": 0.0625,
+          "center_point": [
+            0.8326150429008458,
+            0.5822996593368277,
+            0.7622379454626662,
+            0.9374798040837327,
+            0.42873786290093313,
+            0.7700591114853681
+          ],
+          "available_pool_samples": 3586,
+          "current_pool_idx": 0
+        }
+      ],
+      [
+        {
+          "iteration": 1,
+          "seed": 46,
+          "total_samples": 100,
+          "samples_added": 100,
+          "mse_per_output": [
+            1.8453369962115763e-05,
+            6.919231517644093e-06,
+            2.7019274739465553e-05
+          ],
+          "total_mse": 5.239187621922541e-05,
+          "window_size": 1.0,
+          "center_point": [
+            0.851272461175399,
+            0.5687971509577836,
+            0.7076496251887825,
+            0.9458078453282152,
+            0.43592944951078894,
+            0.714966883089349
+          ],
+          "available_pool_samples": 3900,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 2,
+          "seed": 46,
+          "total_samples": 200,
+          "samples_added": 100,
+          "mse_per_output": [
+            6.757620000000294e-06,
+            7.661645267309439e-07,
+            2.516587319164231e-05
+          ],
+          "total_mse": 3.268965771837355e-05,
+          "window_size": 0.5,
+          "center_point": [
+            0.839375298539142,
+            0.5802121707583923,
+            0.7406382212686887,
+            0.9407758404309216,
+            0.43387457031494847,
+            0.7477158914657217
+          ],
+          "available_pool_samples": 3800,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 3,
+          "seed": 46,
+          "total_samples": 300,
+          "samples_added": 100,
+          "mse_per_output": [
+            3.944989005134327e-06,
+            8.017112136415697e-08,
+            2.6567198168383726e-05
+          ],
+          "total_mse": 3.059235829488221e-05,
+          "window_size": 0.25,
+          "center_point": [
+            0.834532356739883,
+            0.5883570131058619,
+            0.7517950992574586,
+            0.9390253267313172,
+            0.43434169821496105,
+            0.7588300135312638
+          ],
+          "available_pool_samples": 3700,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 4,
+          "seed": 46,
+          "total_samples": 400,
+          "samples_added": 100,
+          "mse_per_output": [
+            3.185025547248654e-06,
+            1.575259803051479e-08,
+            2.560286393999229e-05
+          ],
+          "total_mse": 2.880364208527146e-05,
+          "window_size": 0.125,
+          "center_point": [
+            0.8338615348188746,
+            0.5900495310075661,
+            0.7529734853621538,
+            0.9388025153907458,
+            0.43432643088334194,
+            0.7602620385068848
+          ],
+          "available_pool_samples": 3600,
+          "current_pool_idx": 0
+        },
+        {
+          "iteration": 5,
+          "seed": 46,
+          "total_samples": 415,
+          "samples_added": 15,
+          "mse_per_output": [
+            3.016317983928313e-06,
+            4.9893553058632186e-08,
+            2.560286393999229e-05
+          ],
+          "total_mse": 2.8669075476979233e-05,
+          "window_size": 0.0625,
+          "center_point": [
+            0.833894845426052,
+            0.5901505189425957,
+            0.7527947130424677,
+            0.9388245095985787,
+            0.43431125664909,
+            0.7601245530713504
+          ],
+          "available_pool_samples": 3585,
+          "current_pool_idx": 0
+        }
+      ]
+    ]
+  },
+  "aggregated_results": [
+    {
+      "iteration": 0,
+      "total_samples": 100.0,
+      "samples_added": 100.0,
+      "mean_total_mse": 6.224240716349536e-05,
+      "std_total_mse": 7.876001369722204e-06,
+      "mean_mse_per_output": [
+        8.710897221850926e-06,
+        2.4562432352534897e-05,
+        2.8969077589109528e-05
+      ],
+      "std_mse_per_output": [
+        2.463630355770587e-06,
+        7.79425283641062e-06,
+        1.6090380220763175e-06
+      ],
+      "window_size": 1.0,
+      "num_seeds": 5
+    },
+    {
+      "iteration": 1,
+      "total_samples": 200.0,
+      "samples_added": 100.0,
+      "mean_total_mse": 3.839470885894278e-05,
+      "std_total_mse": 4.0773066146546315e-06,
+      "mean_mse_per_output": [
+        4.065912642067123e-06,
+        7.205381708754749e-06,
+        2.7123414508120913e-05
+      ],
+      "std_mse_per_output": [
+        1.1083248830992602e-06,
+        4.424162867950054e-06,
+        8.625534124669361e-07
+      ],
+      "window_size": 0.5,
+      "num_seeds": 5
+    },
+    {
+      "iteration": 2,
+      "total_samples": 300.0,
+      "samples_added": 100.0,
+      "mean_total_mse": 3.378887108674615e-05,
+      "std_total_mse": 1.899856841750638e-06,
+      "mean_mse_per_output": [
+        3.1730293585048345e-06,
+        4.441976763305265e-06,
+        2.6173864964936042e-05
+      ],
+      "std_mse_per_output": [
+        9.185911228352164e-07,
+        2.220330565671895e-06,
+        4.3049060375309467e-07
+      ],
+      "window_size": 0.25,
+      "num_seeds": 5
+    },
+    {
+      "iteration": 3,
+      "total_samples": 400.0,
+      "samples_added": 100.0,
+      "mean_total_mse": 3.26208908979566e-05,
+      "std_total_mse": 1.7040099091768293e-06,
+      "mean_mse_per_output": [
+        3.0721222608991636e-06,
+        3.5933577502234782e-06,
+        2.5955410886833954e-05
+      ],
+      "std_mse_per_output": [
+        1.0231473899801315e-06,
+        2.114006761210249e-06,
+        4.6848330046711244e-07
+      ],
+      "window_size": 0.125,
+      "num_seeds": 5
+    },
+    {
+      "iteration": 4,
+      "total_samples": 411.8,
+      "samples_added": 11.8,
+      "mean_total_mse": 3.284335804841912e-05,
+      "std_total_mse": 1.8181720916759589e-06,
+      "mean_mse_per_output": [
+        3.1029955937033425e-06,
+        3.7849515678818307e-06,
+        2.5955410886833954e-05
+      ],
+      "std_mse_per_output": [
+        9.907930493619577e-07,
+        2.139257953822478e-06,
+        4.6848330046711244e-07
+      ],
+      "window_size": 0.0625,
+      "num_seeds": 5
+    }
+  ],
+  "execution_time_seconds": 97.879615
+}

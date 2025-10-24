@@ -37,7 +37,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
         ```python
         pipeline = AdaptiveSamplingPipeline(
             initial_dataset=initial_train,
-            pool_dataset=large_pool,
+            pool_datasets=[pool1, pool2, pool3],  # Multiple pool datasets
             test_dataset=test_data,
             model_class=SVRModel,
             model_params={'params': [...]},
@@ -54,7 +54,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
     def __init__(
         self,
         initial_dataset: MultiPressureDataset,
-        pool_dataset: MultiPressureDataset,
+        pool_datasets: List[MultiPressureDataset],  # Changed from pool_dataset to pool_datasets
         test_dataset: MultiPressureDataset,
         model_class: type,
         model_params: Dict[str, Any],
@@ -64,6 +64,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
         shrink_rate: float = 0.8,
         num_seeds: int = 5,
         window_type: str = 'output',  # 'output' or 'input'
+        replace_mode: bool = False,  # NEW: If True, replace dataset instead of accumulating
         pipeline_name: str = "adaptive_sampling",
         results_dir: str = "pipeline_results"
     ):
@@ -72,7 +73,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
         
         Args:
             initial_dataset: Initial training dataset (small)
-            pool_dataset: Large pool dataset to sample from
+            pool_datasets: List of pool datasets to sample from sequentially
             test_dataset: Test dataset for evaluation
             model_class: Model class (e.g., SVRModel, NeuralNetModel)
             model_params: Parameters to pass to model constructor
@@ -82,13 +83,14 @@ class AdaptiveSamplingPipeline(BasePipeline):
             shrink_rate: Factor to shrink window each iteration (0.8 = 20% reduction)
             num_seeds: Number of seeds for robustness
             window_type: 'output' (sample based on y) or 'input' (sample based on x)
+            replace_mode: If True, replace training data each iteration instead of accumulating
             pipeline_name: Name for this pipeline
             results_dir: Directory to save results
         """
         super().__init__(pipeline_name, results_dir)
         
         self.initial_dataset = initial_dataset
-        self.pool_dataset = pool_dataset
+        self.pool_datasets = pool_datasets  # Now a list of datasets
         self.test_dataset = test_dataset
         self.model_class = model_class
         self.model_params = model_params
@@ -98,8 +100,10 @@ class AdaptiveSamplingPipeline(BasePipeline):
         self.shrink_rate = shrink_rate
         self.num_seeds = num_seeds
         self.window_type = window_type
+        self.replace_mode = replace_mode  # NEW: Store replace mode flag
         
         # Store configuration
+        total_pool_samples = sum(len(pool_ds) for pool_ds in pool_datasets)
         self.results['config'] = {
             'model_type': model_class.__name__,
             'model_params': str(model_params),
@@ -109,8 +113,11 @@ class AdaptiveSamplingPipeline(BasePipeline):
             'shrink_rate': shrink_rate,
             'num_seeds': num_seeds,
             'window_type': window_type,
+            'replace_mode': replace_mode,  # NEW: Include in config
             'initial_train_samples': len(initial_dataset),
-            'pool_samples': len(pool_dataset),
+            'num_pool_datasets': len(pool_datasets),
+            'pool_samples_per_dataset': [len(pool_ds) for pool_ds in pool_datasets],
+            'total_pool_samples': total_pool_samples,
             'test_samples': len(test_dataset)
         }
     
@@ -158,23 +165,31 @@ class AdaptiveSamplingPipeline(BasePipeline):
         print(f"Seed {seed}")
         print(f"{'='*70}")
         
-        # Shuffle pool dataset with this seed using SequentialSampler with shuffle=True
+        # Shuffle ALL pool datasets with this seed
         shuffle_sampler = SequentialSampler(sampler_name=f"shuffle_seed_{seed}")
-        shuffled_pool = shuffle_sampler.sample(
-            self.pool_dataset,
-            n_samples=len(self.pool_dataset),
-            shuffle=True,
-            seed=seed
-        )
+        shuffled_pools = []
         
-        pool_x, pool_y = shuffled_pool.get_data()
+        print(f"  Shuffling {len(self.pool_datasets)} pool datasets with seed {seed}...")
+        for pool_idx, pool_ds in enumerate(self.pool_datasets):
+            shuffled_pool = shuffle_sampler.sample(
+                pool_ds,
+                n_samples=len(pool_ds),
+                shuffle=True,
+                seed=seed + pool_idx  # Different seed for each pool to ensure different shuffles
+            )
+            shuffled_pools.append(shuffled_pool)
+            print(f"    Pool {pool_idx + 1}: {len(shuffled_pool)} samples")
+        
+        # Track which pool we're currently using
+        current_pool_idx = 0
+        pool_x, pool_y = shuffled_pools[current_pool_idx].get_data()
         
         # Start with initial training data from the SHUFFLED pool
         # This ensures each seed gets a different initial training set
         initial_size = len(self.initial_dataset)
         
         seed_results = []
-        used_indices = set()
+        used_indices = set()  # Indices used in current pool
         
         # Check if we have initial training data
         if initial_size > 0:
@@ -210,7 +225,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
             total_mse = np.sum(mse_per_output)
             
             # Calculate center point
-            center = self._calculate_center_point(current_train_dataset)
+            center = self._calculate_center_point(self.test_dataset)
             
             seed_results.append({
                 'iteration': 0,
@@ -221,7 +236,9 @@ class AdaptiveSamplingPipeline(BasePipeline):
                 'total_mse': float(total_mse),
                 'window_size': float(self.initial_window_size),
                 'center_point': [float(c) for c in center.flatten()],
-                'available_pool_samples': len(pool_x) - len(used_indices)
+                'available_pool_samples': len(pool_x) - len(used_indices),
+                'current_pool_idx': current_pool_idx,
+                'num_pools': len(shuffled_pools)
             })
             
             print(f"    Test MSE: {total_mse:.6e}")
@@ -241,6 +258,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
             window_size = self.initial_window_size * (self.shrink_rate ** (iteration - 1))
             
             print(f"    Window size: {window_size:.4f}")
+            print(f"    Currently using Pool {current_pool_idx + 1}/{len(shuffled_pools)}")
             print(f"    Sampling from pool...")
             
             # Create window sampler with current center and window size
@@ -248,42 +266,82 @@ class AdaptiveSamplingPipeline(BasePipeline):
                 center_point=center,
                 window_size=window_size,
                 window_type=self.window_type,
-                sampler_name=f"window_iter_{iteration}_seed_{seed}"
+                sampler_name=f"window_iter_{iteration}_seed_{seed}_pool_{current_pool_idx}"
             )
             
-            # Sample from shuffled pool within window, excluding already used indices
-            try:
-                sampled_subset = window_sampler.sample(
-                    shuffled_pool,
-                    n_samples=self.samples_per_iteration,
-                    shuffle=False,  # Already shuffled
-                    seed=None,
-                    exclude_indices=used_indices
-                )
-                
-                new_x, new_y = sampled_subset.get_data()
-                
-                # Update used indices - find which indices were selected
-                # This is a bit hacky but necessary to track usage
-                for idx in range(len(pool_x)):
-                    if idx in used_indices:
-                        continue
-                    # Check if this sample matches any of the new samples
-                    for new_sample_idx in range(len(new_x)):
-                        if np.allclose(pool_x[idx], new_x[new_sample_idx]):
-                            used_indices.add(idx)
-                            break
-                
-                samples_added = len(new_x)
-                print(f"    Samples added: {samples_added}")
-                
-            except ValueError as e:
-                print(f"    ⚠️  {str(e)}")
+            # Try to sample from current pool
+            samples_added = 0
+            new_x = None
+            new_y = None
+            
+            # Keep trying pools until we get samples or run out of pools
+            while samples_added == 0 and current_pool_idx < len(shuffled_pools):
+                try:
+                    # Get current pool data
+                    current_shuffled_pool = shuffled_pools[current_pool_idx]
+                    
+                    sampled_subset = window_sampler.sample(
+                        current_shuffled_pool,
+                        n_samples=self.samples_per_iteration,
+                        shuffle=False,  # Already shuffled
+                        seed=None,
+                        exclude_indices=used_indices
+                    )
+                    
+                    new_x, new_y = sampled_subset.get_data()
+                    
+                    # Update used indices - find which indices were selected
+                    # This is a bit hacky but necessary to track usage
+                    for idx in range(len(pool_x)):
+                        if idx in used_indices:
+                            continue
+                        # Check if this sample matches any of the new samples
+                        for new_sample_idx in range(len(new_x)):
+                            if np.allclose(pool_x[idx], new_x[new_sample_idx]):
+                                used_indices.add(idx)
+                                break
+                    
+                    samples_added = len(new_x)
+                    print(f"    Samples added from Pool {current_pool_idx + 1}: {samples_added}")
+                    
+                except ValueError as e:
+                    # Current pool exhausted or no samples in window
+                    print(f"    ⚠️  Pool {current_pool_idx + 1} exhausted or no samples in window: {str(e)}")
+                    
+                    # Move to next pool if available
+                    if current_pool_idx + 1 < len(shuffled_pools):
+                        current_pool_idx += 1
+                        used_indices = set()  # Reset used indices for new pool
+                        pool_x, pool_y = shuffled_pools[current_pool_idx].get_data()
+                        print(f"    🔄 Switching to Pool {current_pool_idx + 1} ({len(pool_x)} samples)")
+                        
+                        # Update window sampler name for new pool
+                        window_sampler = WindowSampler(
+                            center_point=center,
+                            window_size=window_size,
+                            window_type=self.window_type,
+                            sampler_name=f"window_iter_{iteration}_seed_{seed}_pool_{current_pool_idx}"
+                        )
+                    else:
+                        # No more pools available
+                        print(f"    ❌ All pools exhausted. Stopping iterations.")
+                        break
+            
+            # Check if we got any samples
+            if samples_added == 0:
+                print(f"    ❌ No samples could be added. Stopping iterations.")
                 break
             
             # Add new samples to training set
-            current_x_train = np.vstack([current_x_train, new_x])
-            current_y_train = np.vstack([current_y_train, new_y])
+            # NEW: Replace mode - use only new samples instead of accumulating
+            if self.replace_mode:
+                print(f"    🔄 REPLACE MODE: Using only new samples (not accumulating)")
+                current_x_train = new_x.copy()
+                current_y_train = new_y.copy()
+            else:
+                # Original behavior: accumulate samples
+                current_x_train = np.vstack([current_x_train, new_x])
+                current_y_train = np.vstack([current_y_train, new_y])
             
             # Update training dataset
             current_train_dataset = MultiPressureDataset(
@@ -296,7 +354,7 @@ class AdaptiveSamplingPipeline(BasePipeline):
             )
             
             # Recalculate center
-            center = self._calculate_center_point(current_train_dataset)
+            center = self._calculate_center_point(self.test_dataset)
             
             # Retrain model
             model = self.model_class(**self.model_params)
@@ -322,7 +380,9 @@ class AdaptiveSamplingPipeline(BasePipeline):
                 'total_mse': float(total_mse),
                 'window_size': float(window_size),
                 'center_point': [float(c) for c in center.flatten()],
-                'available_pool_samples': len(pool_x) - len(used_indices)
+                'available_pool_samples': len(pool_x) - len(used_indices),
+                'current_pool_idx': current_pool_idx,  # Track which pool we're using
+                'num_pools': len(shuffled_pools)
             })
         
         return seed_results
@@ -356,7 +416,10 @@ class AdaptiveSamplingPipeline(BasePipeline):
         print(f"Window type: {self.window_type}")
         print(f"Number of seeds: {self.num_seeds}")
         print(f"Initial training: {len(self.initial_dataset)} samples")
-        print(f"Pool dataset: {len(self.pool_dataset)} samples")
+        print(f"Number of pool datasets: {len(self.pool_datasets)}")
+        for idx, pool_ds in enumerate(self.pool_datasets):
+            print(f"  Pool {idx + 1}: {len(pool_ds)} samples")
+        print(f"Total pool samples: {sum(len(pool_ds) for pool_ds in self.pool_datasets)}")
         
         # Record start time
         start_time = datetime.now()
