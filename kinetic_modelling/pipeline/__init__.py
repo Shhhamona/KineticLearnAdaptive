@@ -10,11 +10,13 @@ from .standard import StandardPipeline
 from .subset import StandardSubsetPipeline
 from .batch_training import BatchTrainingPipeline
 from .adaptive_sampling import AdaptiveSamplingPipeline
+from .adaptive_batch_sampling import AdaptiveBatchSamplingPipeline
 
 __all__ = [
     'BasePipeline',
     'StandardPipeline',
     'StandardSubsetPipeline',
     'BatchTrainingPipeline',
-    'AdaptiveSamplingPipeline'
+    'AdaptiveSamplingPipeline',
+    'AdaptiveBatchSamplingPipeline'
 ]

@@ -71,7 +71,7 @@ if __name__ == '__main__':
         'pressure_conditions_pa': [133.322, 1333.22],  # 1 and 10 Torr
         'initial_samples_from_uniform': 50,
         'n_iterations': 1,# More iterations with smaller batches
-        'n_samples_per_iteration': 2000,#Smaller, more targeted batches
+        'n_samples_per_iteration': 500,#Smaller, more targeted batches
         'svr_params': [
             {'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'},
             {'C': 20, 'epsilon': 0.005, 'gamma': 5, 'kernel': 'rbf'},
@@ -183,7 +183,7 @@ if __name__ == '__main__':
     print('\n🔬 SCALING CHECK: Using k_true =', k_true)
     scaler_output = getattr(dataset_train, 'scaler_output', None)
     scaled_center = get_scaled_k_center(k_true, scaler_output)
-    bounds = make_k_bounds_around(k_true, multiplicative_factor=1.00001)
+    bounds = make_k_bounds_around(k_true, multiplicative_factor=1.0005)
 
     print('   Raw bounds (multiplicative factor 2.0):')
     for i, (lo, hi) in enumerate(bounds):

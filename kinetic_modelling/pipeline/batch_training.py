@@ -360,7 +360,7 @@ class BatchTrainingPipeline(BasePipeline):
         
         return self.results
     
-    def save_and_return(self, save_results: bool = True) -> Dict[str, Any]:
+    def save_and_return(self, save_results: bool = True, filename: str = None) -> Dict[str, Any]:
         """
         Run pipeline and optionally save results.
         
@@ -373,7 +373,7 @@ class BatchTrainingPipeline(BasePipeline):
         results = self.run()
         
         if save_results:
-            filepath = self.save_results()
+            filepath = self.save_results(filename=filename)
             print(f"✓ Results saved to: {filepath}\n")
         
         return results

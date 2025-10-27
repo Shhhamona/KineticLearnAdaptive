@@ -35,7 +35,8 @@ from .pipeline import (
     StandardPipeline,
     StandardSubsetPipeline,
     BatchTrainingPipeline,
-    AdaptiveSamplingPipeline
+    AdaptiveSamplingPipeline,
+    AdaptiveBatchSamplingPipeline
 )
 
 __version__ = "0.1.0"
@@ -55,5 +56,6 @@ __all__ = [
     "StandardPipeline",
     "StandardSubsetPipeline",
     "BatchTrainingPipeline",
-    "AdaptiveSamplingPipeline"
+    "AdaptiveSamplingPipeline",
+    "AdaptiveBatchSamplingPipeline"
 ]
