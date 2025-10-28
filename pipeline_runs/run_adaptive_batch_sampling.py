@@ -43,9 +43,9 @@ def main():
     
     # Adaptive batch sampling settings
     n_iterations = 6  # Number of iterations (one per pool file)
-    samples_per_iteration = 32  # Samples to grab from each pool
-    n_epochs = 50  # Train for 10 epochs at each iteration
-    batch_size = 32  # Batch size for NN training
+    samples_per_iteration = 64*3  # Samples to grab from each pool
+    n_epochs = 25  # Train for 50 epochs at each iteration
+    batch_size = 64  # Batch size for NN training
     initial_window_size = 1.0  # ±100% around center
     shrink_rate = 0.10  # 50% reduction each iteration
     num_seeds = 5

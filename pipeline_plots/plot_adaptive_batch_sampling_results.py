@@ -56,6 +56,8 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
     window_type = config['window_type']
     initial_window = config['initial_window_size']
     shrink_rate = config['shrink_rate']
+    num_pool_datasets = config['num_pool_datasets']
+    samples_per_iteration = config['samples_per_iteration']
     
     print(f"\nConfiguration:")
     print(f"  Epochs per iteration: {n_epochs}")
@@ -63,6 +65,8 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
     print(f"  Window type: {window_type}")
     print(f"  Initial window: {initial_window}")
     print(f"  Shrink rate: {shrink_rate}")
+    print(f"  Number of pool files: {num_pool_datasets}")
+    print(f"  Samples per iteration: {samples_per_iteration}")
     
     # Extract aggregated results
     agg_results = results['aggregated_results']
@@ -123,6 +127,11 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
     # Create figure with 2 subplots - matching batch_training_results style
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
     
+    # Create main title for the entire figure with dataset info
+    dataset_info = f"{num_pool_datasets} pool files × {samples_per_iteration} samples/file"
+    fig.suptitle(f'Neural Network Training - Adaptive Batch Sampling\nUniform Sampling with Varying K Range (Training Data: {dataset_info})', 
+                 fontsize=15, fontweight='bold', y=1.00)
+    
     # ============================================================
     # Plot 1: Total MSE vs Training Samples
     # ============================================================
@@ -130,9 +139,9 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
                  marker='o', linewidth=2, markersize=6, capsize=5, 
                  label='Adaptive Batch Sampling', alpha=0.8, color='#2E86AB')
     
-    ax1.set_xlabel('Number of Training Samples Processed', fontsize=13)
+    ax1.set_xlabel(f'Training Samples (Total Epochs = {n_epochs}, Batch Size = {batch_size})', fontsize=13)
     ax1.set_ylabel('Total MSE (Sum across outputs)', fontsize=13)
-    ax1.set_title('Adaptive Batch Sampling: Learning Curve', fontsize=14, fontweight='bold')
+    ax1.set_title('Learning Curve', fontsize=14, fontweight='bold')
     ax1.set_yscale('log')
     ax1.legend(loc='best', fontsize=11)
     ax1.grid(True, alpha=0.3, which='both')
@@ -149,15 +158,15 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
                      marker='o', linewidth=2, markersize=6, capsize=5,
                      label=output_labels[i], alpha=0.8, color=colors[i % len(colors)])
     
-    ax2.set_xlabel('Number of Training Samples Processed', fontsize=13)
+    ax2.set_xlabel(f'Training Samples (Total Epochs = {n_epochs}, Batch Size = {batch_size})', fontsize=13)
     ax2.set_ylabel('MSE per Output', fontsize=13)
     ax2.set_title('MSE per K Value', fontsize=14, fontweight='bold')
     ax2.set_yscale('log')
     ax2.legend(loc='best', fontsize=11)
     ax2.grid(True, alpha=0.3, which='both')
     
-    plt.tight_layout()
-    
+    plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust for suptitle
+
     # Save plots
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     
@@ -203,7 +212,7 @@ def main():
     
     # Path to the adaptive batch sampling results file
     # Update this path to your actual results file
-    result_file = 'pipeline_results/adaptive_batch_sampling_w1.0_s0.1_e50_20251027_171242.json'
+    result_file = 'pipeline_results/adaptive_batch_sampling_w1.0_s0.1_e25_20251028_185800.json'
     
     if not Path(result_file).exists():
         print(f"⚠️  Result file not found: {result_file}")

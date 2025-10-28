@@ -81,6 +81,7 @@ def plot_mse_vs_samples(results_files, labels=None, output_dir='pipeline_results
         agg = results['aggregated_results']
         sample_counts = extract_sample_counts(results)
         total_samples = results['config']['total_train_samples']
+        batch_size = results['config']['batch_size']  # Get batch size from config
         
         mean_total_mse = np.array(agg['mean_total_mse'])
         std_total_mse = np.array(agg['std_total_mse'])
@@ -90,7 +91,8 @@ def plot_mse_vs_samples(results_files, labels=None, output_dir='pipeline_results
             'sample_counts': sample_counts,
             'mean_total_mse': mean_total_mse,
             'std_total_mse': std_total_mse,
-            'total_samples': total_samples
+            'total_samples': total_samples,
+            'batch_size': batch_size
         })
         
         # Plot MSE with error bars (log scale)
@@ -105,14 +107,21 @@ def plot_mse_vs_samples(results_files, labels=None, output_dir='pipeline_results
         improvement = initial_mse / final_mse
         
         print(f"   Dataset: {total_samples} samples")
+        print(f"   Batch size: {batch_size}")
         print(f"   Initial MSE: {initial_mse:.6e} ± {initial_std:.6e}")
         print(f"   Final MSE:   {final_mse:.6e} ± {final_std:.6e}")
         print(f"   Improvement: {improvement:.2f}x")
     
+    # Get batch size for x-axis label (assuming all use same batch size)
+    batch_size_label = all_results[0]['batch_size'] if all_results else 64
+    num_epochs = results['config']['num_epochs'] if 'num_epochs' in results['config'] else 1
+    train_dataset_size = all_results[0]['total_samples'] if all_results else 2000
+    
     # Configure plot
-    ax.set_xlabel('Number of Training Samples Processed', fontsize=13)
+    ax.set_xlabel(f'Training Samples (Total Epochs = {num_epochs}, Batch Size = {batch_size_label})', fontsize=13)
     ax.set_ylabel('Total MSE (Sum across outputs)', fontsize=13)
-    ax.set_title('Learning Curves: MSE vs Training Samples', fontsize=14, fontweight='bold')
+    ax.set_title(f'Neural Network Training - Uniform Sampling with Varying K Range\nLearning Curves (Training Dataset Size = {train_dataset_size})', 
+                 fontsize=14, fontweight='bold')
     ax.set_yscale('log')
     ax.legend(loc='best', fontsize=11)
     ax.grid(True, alpha=0.3, which='both')
@@ -222,6 +231,8 @@ def plot_per_output_mse(results_files, labels=None, output_dir='pipeline_results
     # Load first file to get number of outputs
     first_results = load_pipeline_results(results_files[0])
     n_outputs = len(first_results['aggregated_results']['mean_mse_per_output'][0])
+    batch_size = first_results['config']['batch_size']
+    num_epochs = first_results['config']['num_epochs'] if 'num_epochs' in first_results['config'] else 1
     
     # Create subplots
     fig, axes = plt.subplots(1, n_outputs, figsize=(18, 5))
@@ -253,7 +264,7 @@ def plot_per_output_mse(results_files, labels=None, output_dir='pipeline_results
     for output_idx in range(n_outputs):
         ax = axes[output_idx] if n_outputs > 1 else axes
         
-        ax.set_xlabel('Training Samples Processed', fontsize=11)
+        ax.set_xlabel(f'Training Samples (Total Epochs = {num_epochs}, Batch Size = {batch_size})', fontsize=11)
         ax.set_ylabel('MSE', fontsize=11)
         ax.set_title(f'K{output_idx+1} Prediction Error', fontsize=12, fontweight='bold')
         ax.set_yscale('log')
@@ -289,11 +300,6 @@ def main():
         'NN_batch_Uniform Latin Hypercube_',
         'NN_batch_Morris Discret_',
         'NN_batch_Morris Continuous_',
-        'Uniform Sampling-K_factor_2',
-        'Uniform Sampling-K_factor_1.15',
-        'Uniform Sampling-K_factor_1.005',
-        'Uniform Sampling-K_factor_1.0005',
-        'Uniform Sampling-K_factor_1.00005',
     ]
     
     labels = [
@@ -302,11 +308,6 @@ def main():
         'Uniform Latin Hypercube',
         'Morris Discrete',
         'Morris Continuous',
-        'K ∈ [K_true/2, K_true×2]',
-        'K ∈ [K_true/1.15, K_true×1.15]',
-        'K ∈ [K_true/1.005, K_true×1.005]',
-        'K ∈ [K_true/1.0005, K_true×1.0005]',
-        'K ∈ [K_true/1.00005, K_true×1.00005]',
     ]
 
     # Define label prefixes to search for
@@ -341,6 +342,20 @@ def main():
         'K ∈ [K_true/1.00005, K_true×1.00005]',
     ]
     
+        # Define label prefixes to search for
+    label_prefixes = [
+        'NN_batch_Uniform_',
+        'NN_batch_Log-Uniform Latin Hypercube_',
+        'NN_batch_Uniform Latin Hypercube_',
+        'NN_batch_Morris Continuous_',
+    ]
+    
+    labels = [
+        'Uniform Sampling',
+        'Log-Uniform Latin Hypercube',
+        'Uniform Latin Hypercube',
+        'Morris Continuous',
+    ]
     
     # Find the latest file for each label prefix
     results_files = []
