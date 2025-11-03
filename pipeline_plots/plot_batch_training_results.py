@@ -342,21 +342,6 @@ def main():
         'K ∈ [K_true/1.00005, K_true×1.00005]',
     ]
     
-        # Define label prefixes to search for
-    label_prefixes = [
-        'NN_batch_Uniform_',
-        'NN_batch_Log-Uniform Latin Hypercube_',
-        'NN_batch_Uniform Latin Hypercube_',
-        'NN_batch_Morris Continuous_',
-    ]
-    
-    labels = [
-        'Uniform Sampling',
-        'Log-Uniform Latin Hypercube',
-        'Uniform Latin Hypercube',
-        'Morris Continuous',
-    ]
-    
     # Find the latest file for each label prefix
     results_files = []
     for prefix in label_prefixes:

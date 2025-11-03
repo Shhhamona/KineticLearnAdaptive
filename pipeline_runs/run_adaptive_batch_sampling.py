@@ -43,11 +43,11 @@ def main():
     
     # Adaptive batch sampling settings
     n_iterations = 6  # Number of iterations (one per pool file)
-    samples_per_iteration = 64*3  # Samples to grab from each pool
-    n_epochs = 25  # Train for 50 epochs at each iteration
-    batch_size = 64  # Batch size for NN training
+    samples_per_iteration = 64*5  # Samples to grab from each pool
+    n_epochs = 200  # Train for 50 epochs at each iteration
+    batch_size = 16  # Batch size for NN training
     initial_window_size = 1.0  # ±100% around center
-    shrink_rate = 0.10  # 50% reduction each iteration
+    shrink_rate = 0.20  # 50% reduction each iteration
     num_seeds = 5
     
     # Neural Network hyperparameters
@@ -195,7 +195,7 @@ def main():
         initial_window_size=initial_window_size,
         shrink_rate=shrink_rate,
         num_seeds=num_seeds,
-        window_type='input',  # Sample based on input (K values)
+        window_type='output',  # Sample based on input (K values)
         pipeline_name=f"adaptive_batch_sampling_w{initial_window_size}_s{shrink_rate}_e{n_epochs}",
         results_dir="pipeline_results"
     )

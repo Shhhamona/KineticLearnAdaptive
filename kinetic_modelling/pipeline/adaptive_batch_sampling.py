@@ -76,6 +76,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         shrink_rate: float = 0.8,
         num_seeds: int = 5,
         window_type: str = 'output',
+        use_model_prediction: bool = True,
         pipeline_name: str = "adaptive_batch_sampling",
         results_dir: str = "pipeline_results"
     ):
@@ -95,6 +96,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             shrink_rate: Factor to shrink window each iteration (0.8 = 20% reduction)
             num_seeds: Number of seeds for robustness
             window_type: 'output' (sample based on y) or 'input' (sample based on x)
+            use_model_prediction: If True, use model's prediction as center; if False, use test dataset average
             pipeline_name: Name for this pipeline
             results_dir: Directory to save results
         """
@@ -112,6 +114,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         self.shrink_rate = shrink_rate
         self.num_seeds = num_seeds
         self.window_type = window_type
+        self.use_model_prediction = use_model_prediction
         
         # Store configuration
         total_pool_samples = sum(len(pool_ds) for pool_ds in pool_datasets)
@@ -126,30 +129,52 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             'shrink_rate': shrink_rate,
             'num_seeds': num_seeds,
             'window_type': window_type,
+            'use_model_prediction': use_model_prediction,
             'num_pool_datasets': len(pool_datasets),
             'pool_samples_per_dataset': [len(pool_ds) for pool_ds in pool_datasets],
             'total_pool_samples': total_pool_samples,
             'test_samples': len(test_dataset)
         }
     
-    def _calculate_center_point(self, dataset: MultiPressureDataset) -> np.ndarray:
+    def _calculate_center_point(
+        self, 
+        dataset: MultiPressureDataset,
+        model: Optional[BaseModel] = None
+    ) -> np.ndarray:
         """
-        Calculate the center (average) point of the dataset.
+        Calculate the center point for window sampling.
+        
+        If use_model_prediction is True:
+            - With model: center = mean(model.predict(X_test)) - use predicted K values
+            - Without model: center = mean(Y_test) - use true K values from test dataset
+            
+        If use_model_prediction is False:
+            - For window_type='output': center = mean(Y_test)
+            - For window_type='input': center = mean(X_test)
         
         Args:
             dataset: Dataset to calculate center from
+            model: Optional model for predictions (used if use_model_prediction=True)
             
         Returns:
-            center: Average point (1, n_features)
+            center: Center point (1, n_features)
         """
         x_data, y_data = dataset.get_data()
         
-        if self.window_type == 'output':
-            # Use average of output (y) values
-            center = np.mean(y_data, axis=0, keepdims=True)
-        else:  # 'input'
-            # Use average of input (x) values
-            center = np.mean(x_data, axis=0, keepdims=True)
+        if self.use_model_prediction:
+            if model is not None:
+                # Use model's prediction as center (predicted K values)
+                y_pred = model.predict(x_data)
+                center = np.mean(y_pred, axis=0, keepdims=True)
+            else:
+                # No model yet, use actual K values from test dataset
+                center = np.mean(y_data, axis=0, keepdims=True)
+        else:
+            # Original behavior based on window_type
+            if self.window_type == 'output':
+                center = np.mean(y_data, axis=0, keepdims=True)
+            else:  # 'input'
+                center = np.mean(x_data, axis=0, keepdims=True)
         
         return center
     
@@ -247,10 +272,6 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         print(f"Seed {seed}")
         print(f"{'='*70}")
         
-        # Calculate center point from TEST dataset (stays constant)
-        center = self._calculate_center_point(self.test_dataset)
-        print(f"  Center point calculated from test dataset: {center.flatten()[:3]}... (showing first 3 values)")
-        
         # Create a new model for this seed
         print(f"  Initializing Neural Network model...")
         model = self.model_class(**self.model_params)
@@ -259,6 +280,12 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         
         # Iteration 0: Evaluate untrained model
         print(f"\n  Iteration 0 - Untrained Model")
+        
+        # Calculate initial center point (always use test dataset for iteration 0)
+        # This is because untrained model predictions are random
+        center = self._calculate_center_point(self.test_dataset, model=None)
+        print(f"  Initial center from test dataset: {center.flatten()}")
+        
         y_pred = model.predict(x_test)
         mse_per_output = []
         for i in range(n_outputs):
@@ -288,6 +315,19 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         
         for iteration in range(1, self.n_iterations + 1):
             print(f"\n  Iteration {iteration}")
+            
+            # Recalculate center point
+            # For iteration 1, use test dataset center (using first pool with broad range)
+            # For iteration 2+, use model predictions if enabled
+            if iteration == 1:
+                center = self._calculate_center_point(self.test_dataset, model=None)
+                print(f"    Center from test dataset: {center.flatten()}")
+            else:
+                center = self._calculate_center_point(self.test_dataset, model)
+                if self.use_model_prediction:
+                    print(f"    Updated center from model prediction: {center.flatten()}")
+                else:
+                    print(f"    Center from test dataset: {center.flatten()}")
             
             # Calculate adaptive window size
             window_size = self.initial_window_size * (self.shrink_rate ** (iteration - 1))

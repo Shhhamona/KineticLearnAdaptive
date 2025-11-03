@@ -25,6 +25,8 @@ Error:
 ### Neural Network and Training Configuration
 
 - hidden_layers: [64, 32]
+- Relu Activation
+- Adam Optimizer
 - learning_rate: 0.001
 - n_epochs: 25
 - batch_size: 64

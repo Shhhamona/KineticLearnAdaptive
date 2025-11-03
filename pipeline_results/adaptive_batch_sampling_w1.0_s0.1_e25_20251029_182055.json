@@ -1,0 +1,184 @@
+{
+  "pipeline_name": "adaptive_batch_sampling_w1.0_s0.1_e25",
+  "timestamp": "2025-10-29 18:20:54",
+  "config": {
+    "model_type": "NeuralNetModel",
+    "model_params": "{'input_size': 6, 'output_size': 3, 'hidden_sizes': (64, 32), 'activation': 'tanh', 'learning_rate': 0.001, 'model_name': 'adaptive_batch_sampling_nn'}",
+    "n_iterations": 6,
+    "samples_per_iteration": 192,
+    "n_epochs": 25,
+    "batch_size": 64,
+    "initial_window_size": 1.0,
+    "shrink_rate": 0.1,
+    "num_seeds": 5,
+    "window_type": "input",
+    "use_model_prediction": true,
+    "num_pool_datasets": 6,
+    "pool_samples_per_dataset": [
+      4000,
+      1000,
+      2500,
+      2000,
+      1500,
+      2000
+    ],
+    "total_pool_samples": 13000,
+    "test_samples": 1
+  },
+  "data_info": {},
+  "training_info": {},
+  "evaluation": {},
+  "raw_results": {
+    "all_seed_results": [
+      [
+        {
+          "iteration": 0,
+          "seed": 42,
+          "total_samples_seen": 0,
+          "samples_added": 0,
+          "mse_per_output": [
+            0.43211428829818355,
+            0.19399141019776395,
+            0.3821693012642087
+          ],
+          "total_mse": 1.008274999760156,
+          "window_size": 1.0,
+          "center_point": [
+            0.8926872844141779,
+            0.4871539775299126,
+            0.6200189926408166,
+            0.9605704170945706,
+            0.3585519590141263,
+            0.6385259581672154
+          ],
+          "pool_idx": null,
+          "avg_train_loss": null
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 43,
+          "total_samples_seen": 0,
+          "samples_added": 0,
+          "mse_per_output": [
+            0.35080396645223405,
+            0.4775377166336915,
+            0.5021956783835458
+          ],
+          "total_mse": 1.3305373614694713,
+          "window_size": 1.0,
+          "center_point": [
+            0.8926872844141779,
+            0.4871539775299126,
+            0.6200189926408166,
+            0.9605704170945706,
+            0.3585519590141263,
+            0.6385259581672154
+          ],
+          "pool_idx": null,
+          "avg_train_loss": null
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 44,
+          "total_samples_seen": 0,
+          "samples_added": 0,
+          "mse_per_output": [
+            0.18927509887323826,
+            0.17299562361605322,
+            0.21042280665998053
+          ],
+          "total_mse": 0.5726935291492721,
+          "window_size": 1.0,
+          "center_point": [
+            0.8926872844141779,
+            0.4871539775299126,
+            0.6200189926408166,
+            0.9605704170945706,
+            0.3585519590141263,
+            0.6385259581672154
+          ],
+          "pool_idx": null,
+          "avg_train_loss": null
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 45,
+          "total_samples_seen": 0,
+          "samples_added": 0,
+          "mse_per_output": [
+            0.26609717616990314,
+            0.12072429067288037,
+            0.2704933956262968
+          ],
+          "total_mse": 0.6573148624690803,
+          "window_size": 1.0,
+          "center_point": [
+            0.8926872844141779,
+            0.4871539775299126,
+            0.6200189926408166,
+            0.9605704170945706,
+            0.3585519590141263,
+            0.6385259581672154
+          ],
+          "pool_idx": null,
+          "avg_train_loss": null
+        }
+      ],
+      [
+        {
+          "iteration": 0,
+          "seed": 46,
+          "total_samples_seen": 0,
+          "samples_added": 0,
+          "mse_per_output": [
+            0.46167192209520325,
+            0.1340029051962858,
+            0.4924109886943866
+          ],
+          "total_mse": 1.0880858159858757,
+          "window_size": 1.0,
+          "center_point": [
+            0.8926872844141779,
+            0.4871539775299126,
+            0.6200189926408166,
+            0.9605704170945706,
+            0.3585519590141263,
+            0.6385259581672154
+          ],
+          "pool_idx": null,
+          "avg_train_loss": null
+        }
+      ]
+    ]
+  },
+  "aggregated_results": [
+    {
+      "iteration": 0,
+      "total_samples_seen": 0.0,
+      "samples_added": 0.0,
+      "training_samples": 0,
+      "mean_total_mse": 0.9313813137667711,
+      "std_total_mse": 0.12546933281718617,
+      "mean_mse_per_output": [
+        0.3399924903777524,
+        0.21985038926333494,
+        0.37153843412568366
+      ],
+      "std_mse_per_output": [
+        0.04542485986060293,
+        0.058809043009339784,
+        0.05213937110481848
+      ],
+      "mean_train_loss": null,
+      "window_size": 1.0,
+      "num_seeds": 5
+    }
+  ],
+  "execution_time_seconds": 0.827932
+}

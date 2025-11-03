@@ -116,6 +116,11 @@ class WindowSampler(BaseSampler):
         # Shuffle first if requested
         if shuffle:
             x_data, y_data = self._shuffle_dataset(x_data, y_data, seed)
+
+        print("self.window_type", self.window_type)
+
+        print("x_data", x_data)
+        print("y_data", y_data)
         
         # Determine which data to check against bounds
         if self.window_type == 'output':
