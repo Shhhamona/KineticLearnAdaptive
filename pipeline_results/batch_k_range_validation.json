@@ -1,0 +1,1077 @@
+[
+  {
+    "batch_idx": 1,
+    "label": "Window Batch 1 (4000 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/2, K_true\u00d72]",
+    "actual_factor": 2.5055601973180712,
+    "n_samples": 4000,
+    "per_reaction": [
+      {
+        "k_min": 0.2500957626761271,
+        "k_max": 0.9997254966161465,
+        "k_mean": 0.6263512564699162,
+        "k_median": 0.6308807429402989,
+        "k_std": 0.21853971478206122,
+        "lower_factor": 2.5044456961913357,
+        "upper_factor": 1.5961099882684815,
+        "overall_factor": 2.5044456961913357,
+        "n_samples": 4000
+      },
+      {
+        "k_min": 0.250215659752112,
+        "k_max": 1.000549585179277,
+        "k_mean": 0.6248372731063818,
+        "k_median": 0.6240615542924578,
+        "k_std": 0.21859171794413726,
+        "lower_factor": 2.497194914680426,
+        "upper_factor": 1.6012962546312888,
+        "overall_factor": 2.497194914680426,
+        "n_samples": 4000
+      },
+      {
+        "k_min": 0.2503849548123416,
+        "k_max": 1.0000351750816612,
+        "k_mean": 0.6273545767850869,
+        "k_median": 0.6290181517755133,
+        "k_std": 0.216553462765182,
+        "lower_factor": 2.5055601973180712,
+        "upper_factor": 1.594050975456968,
+        "overall_factor": 2.5055601973180712,
+        "n_samples": 4000
+      }
+    ]
+  },
+  {
+    "batch_idx": 2,
+    "label": "Window Batch 2 (3000 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.5, K_true\u00d71.5]",
+    "actual_factor": 1.63400474733676,
+    "n_samples": 3000,
+    "per_reaction": [
+      {
+        "k_min": 0.3334478446843807,
+        "k_max": 0.7498975244590441,
+        "k_mean": 0.5436161280210398,
+        "k_median": 0.549686765522683,
+        "k_std": 0.12097424705277814,
+        "lower_factor": 1.630288324507211,
+        "upper_factor": 1.3794615093355371,
+        "overall_factor": 1.630288324507211,
+        "n_samples": 3000
+      },
+      {
+        "k_min": 0.3336041768983862,
+        "k_max": 0.7503351568098326,
+        "k_mean": 0.5451108087833353,
+        "k_median": 0.5499294006411393,
+        "k_std": 0.12193419328758544,
+        "lower_factor": 1.63400474733676,
+        "upper_factor": 1.3764818908738017,
+        "overall_factor": 1.63400474733676,
+        "n_samples": 3000
+      },
+      {
+        "k_min": 0.3333904020292921,
+        "k_max": 0.750004778552766,
+        "k_mean": 0.5376053566265953,
+        "k_median": 0.5367017856624654,
+        "k_std": 0.12182922936001922,
+        "lower_factor": 1.6125399932160032,
+        "upper_factor": 1.3950842738229954,
+        "overall_factor": 1.6125399932160032,
+        "n_samples": 3000
+      }
+    ]
+  },
+  {
+    "batch_idx": 3,
+    "label": "Window Batch 3 (1000 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.15, K_true\u00d71.15]",
+    "actual_factor": 1.1594364660043583,
+    "n_samples": 1000,
+    "per_reaction": [
+      {
+        "k_min": 0.4350936553239268,
+        "k_max": 0.5748818302258729,
+        "k_mean": 0.503924836147821,
+        "k_median": 0.5036384843870002,
+        "k_std": 0.04018849596762372,
+        "lower_factor": 1.1581985395136352,
+        "upper_factor": 1.140808686113731,
+        "overall_factor": 1.1581985395136352,
+        "n_samples": 1000
+      },
+      {
+        "k_min": 0.43520969971708356,
+        "k_max": 0.5752040795206715,
+        "k_mean": 0.5027511068763252,
+        "k_median": 0.5018584141380127,
+        "k_std": 0.03965014221558705,
+        "lower_factor": 1.1551927891385423,
+        "upper_factor": 1.14411300473212,
+        "overall_factor": 1.1551927891385423,
+        "n_samples": 1000
+      },
+      {
+        "k_min": 0.4350614960864135,
+        "k_max": 0.5750330457739682,
+        "k_mean": 0.5044261635170002,
+        "k_median": 0.5035029575630463,
+        "k_std": 0.04104963947946609,
+        "lower_factor": 1.1594364660043583,
+        "upper_factor": 1.1399746630204053,
+        "overall_factor": 1.1594364660043583,
+        "n_samples": 1000
+      }
+    ]
+  },
+  {
+    "batch_idx": 4,
+    "label": "Window Batch 4 (2500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.15, K_true\u00d71.15]",
+    "actual_factor": 1.1637958929372645,
+    "n_samples": 2500,
+    "per_reaction": [
+      {
+        "k_min": 0.4348236107772218,
+        "k_max": 0.5749837048737257,
+        "k_mean": 0.5053172181093051,
+        "k_median": 0.5055488963069388,
+        "k_std": 0.040321231186596605,
+        "lower_factor": 1.1621200081708536,
+        "upper_factor": 1.1378668374394303,
+        "overall_factor": 1.1621200081708536,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.4350961618329805,
+        "k_max": 0.5752878246263914,
+        "k_mean": 0.505395660617137,
+        "k_median": 0.5081129504190207,
+        "k_std": 0.040938415812059745,
+        "lower_factor": 1.1615723257313915,
+        "upper_factor": 1.138291974893313,
+        "overall_factor": 1.1615723257313915,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.4348371822431989,
+        "k_max": 0.5749962133140811,
+        "k_mean": 0.5060617267910477,
+        "k_median": 0.5075141183078669,
+        "k_std": 0.040978923573690394,
+        "lower_factor": 1.1637958929372645,
+        "upper_factor": 1.1362175459506672,
+        "overall_factor": 1.1637958929372645,
+        "n_samples": 2500
+      }
+    ]
+  },
+  {
+    "batch_idx": 5,
+    "label": "Window Batch 5 (2500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.05, K_true\u00d71.05]",
+    "actual_factor": 1.0520605929150402,
+    "n_samples": 2500,
+    "per_reaction": [
+      {
+        "k_min": 0.47620723257712305,
+        "k_max": 0.5249968112899335,
+        "k_mean": 0.5007459818256113,
+        "k_median": 0.5008266287581946,
+        "k_std": 0.014035777411945605,
+        "lower_factor": 1.0515295601784336,
+        "upper_factor": 1.048429404018199,
+        "overall_factor": 1.0515295601784336,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.4765127241859187,
+        "k_max": 0.525313291928328,
+        "k_mean": 0.500983904456668,
+        "k_median": 0.5019297901278295,
+        "k_std": 0.014250618719369671,
+        "lower_factor": 1.0513547257579663,
+        "upper_factor": 1.048563211822236,
+        "overall_factor": 1.0513547257579663,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.4762371368164139,
+        "k_max": 0.5250263454911432,
+        "k_mean": 0.5010303245272375,
+        "k_median": 0.5015359004594488,
+        "k_std": 0.01426471942782947,
+        "lower_factor": 1.0520605929150402,
+        "upper_factor": 1.047893350540305,
+        "overall_factor": 1.0520605929150402,
+        "n_samples": 2500
+      }
+    ]
+  },
+  {
+    "batch_idx": 6,
+    "label": "Window Batch 6 (2500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.025, K_true\u00d71.025]",
+    "actual_factor": 1.025713020727384,
+    "n_samples": 2500,
+    "per_reaction": [
+      {
+        "k_min": 0.48781524343380034,
+        "k_max": 0.5125002741864744,
+        "k_mean": 0.5002305951505399,
+        "k_median": 0.5002713983725281,
+        "k_std": 0.007101385299738056,
+        "lower_factor": 1.0254509302115,
+        "upper_factor": 1.0245280459749608,
+        "overall_factor": 1.0254509302115,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.48812987285188586,
+        "k_max": 0.5128204634913379,
+        "k_mean": 0.5005110381227199,
+        "k_median": 0.5009896078807943,
+        "k_std": 0.0072100840100082254,
+        "lower_factor": 1.025364489983982,
+        "upper_factor": 1.0245937140862813,
+        "overall_factor": 1.025364489983982,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.4878495099661411,
+        "k_max": 0.5125343534984774,
+        "k_mean": 0.5003935945277446,
+        "k_median": 0.5006493900841669,
+        "k_std": 0.007217218247096336,
+        "lower_factor": 1.025713020727384,
+        "upper_factor": 1.0242624188309024,
+        "overall_factor": 1.025713020727384,
+        "n_samples": 2500
+      }
+    ]
+  },
+  {
+    "batch_idx": 7,
+    "label": "Window Batch 7 (500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.01, K_true\u00d71.01]",
+    "actual_factor": 1.0105208543651127,
+    "n_samples": 500,
+    "per_reaction": [
+      {
+        "k_min": 0.49508704340764675,
+        "k_max": 0.5050037595692578,
+        "k_mean": 0.5000762389229396,
+        "k_median": 0.500255639932401,
+        "k_std": 0.0029462268396394683,
+        "lower_factor": 1.010077410794176,
+        "upper_factor": 1.0098535388462588,
+        "overall_factor": 1.010077410794176,
+        "n_samples": 500
+      },
+      {
+        "k_min": 0.4953992538341215,
+        "k_max": 0.5053212386741867,
+        "k_mean": 0.5000601783638285,
+        "k_median": 0.5000421726798325,
+        "k_std": 0.0028550683423319684,
+        "lower_factor": 1.009408420569135,
+        "upper_factor": 1.0105208543651127,
+        "overall_factor": 1.0105208543651127,
+        "n_samples": 500
+      },
+      {
+        "k_min": 0.49511979394182354,
+        "k_max": 0.5050042498269011,
+        "k_mean": 0.4999434920909265,
+        "k_median": 0.4998835329105836,
+        "k_std": 0.0030123327495328394,
+        "lower_factor": 1.0097424869862297,
+        "upper_factor": 1.0101226594925936,
+        "overall_factor": 1.0101226594925936,
+        "n_samples": 500
+      }
+    ]
+  },
+  {
+    "batch_idx": 8,
+    "label": "Window Batch 8 (2000 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.01, K_true\u00d71.01]",
+    "actual_factor": 1.0102981116639331,
+    "n_samples": 2000,
+    "per_reaction": [
+      {
+        "k_min": 0.495056096675023,
+        "k_max": 0.5050032716325737,
+        "k_mean": 0.4998557017995879,
+        "k_median": 0.49985094521372897,
+        "k_std": 0.0028835931344808243,
+        "lower_factor": 1.0096950732589716,
+        "upper_factor": 1.0102981116639331,
+        "overall_factor": 1.0102981116639331,
+        "n_samples": 2000
+      },
+      {
+        "k_min": 0.49537693814659234,
+        "k_max": 0.5053298159791069,
+        "k_mean": 0.5003776643835933,
+        "k_median": 0.5003937950633899,
+        "k_std": 0.0028595213452878116,
+        "lower_factor": 1.0100947901525468,
+        "upper_factor": 1.0098968278322615,
+        "overall_factor": 1.0100947901525468,
+        "n_samples": 2000
+      },
+      {
+        "k_min": 0.4950970515892649,
+        "k_max": 0.5050314944308517,
+        "k_mean": 0.5000721106544455,
+        "k_median": 0.500272336407666,
+        "k_std": 0.002899068310928593,
+        "lower_factor": 1.0100486541966076,
+        "upper_factor": 1.009917337261452,
+        "overall_factor": 1.0100486541966076,
+        "n_samples": 2000
+      }
+    ]
+  },
+  {
+    "batch_idx": 9,
+    "label": "Window Batch 9 (2500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.01, K_true\u00d71.01]",
+    "actual_factor": 1.01020906055836,
+    "n_samples": 2500,
+    "per_reaction": [
+      {
+        "k_min": 0.49505596368424204,
+        "k_max": 0.5050023926505194,
+        "k_mean": 0.5000585263781744,
+        "k_median": 0.500074967368391,
+        "k_std": 0.0028613869333891594,
+        "lower_factor": 1.0101050448048396,
+        "upper_factor": 1.009886575293801,
+        "overall_factor": 1.0101050448048396,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.49537627312430105,
+        "k_max": 0.505324942355922,
+        "k_mean": 0.5003650609496009,
+        "k_median": 0.5005578927978487,
+        "k_std": 0.0029051852989354877,
+        "lower_factor": 1.0100707040202712,
+        "upper_factor": 1.0099125254607269,
+        "overall_factor": 1.0100707040202712,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.49509290860748056,
+        "k_max": 0.5050392621363883,
+        "k_mean": 0.5001473420934689,
+        "k_median": 0.5002504107247108,
+        "k_std": 0.002908059922959089,
+        "lower_factor": 1.01020906055836,
+        "upper_factor": 1.0097809577922443,
+        "overall_factor": 1.01020906055836,
+        "n_samples": 2500
+      }
+    ]
+  },
+  {
+    "batch_idx": 10,
+    "label": "Window Batch 10 (2525 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.01, K_true\u00d71.01]",
+    "actual_factor": 1.0101389489869992,
+    "n_samples": 2525,
+    "per_reaction": [
+      {
+        "k_min": 0.49505596368424204,
+        "k_max": 0.5050023926505194,
+        "k_mean": 0.5000550173303479,
+        "k_median": 0.5000799891502192,
+        "k_std": 0.0028642484478100813,
+        "lower_factor": 1.0100979566207071,
+        "upper_factor": 1.0098936619946024,
+        "overall_factor": 1.0100979566207071,
+        "n_samples": 2525
+      },
+      {
+        "k_min": 0.49537627312430105,
+        "k_max": 0.505324942355922,
+        "k_mean": 0.5003836472559808,
+        "k_median": 0.50058101712161,
+        "k_std": 0.002892814356678168,
+        "lower_factor": 1.0101082235935497,
+        "upper_factor": 1.0098750131564818,
+        "overall_factor": 1.0101082235935497,
+        "n_samples": 2525
+      },
+      {
+        "k_min": 0.49509290860748056,
+        "k_max": 0.5050392621363883,
+        "k_mean": 0.5001126303516769,
+        "k_median": 0.5001841158099423,
+        "k_std": 0.0029087430221779774,
+        "lower_factor": 1.0101389489869992,
+        "upper_factor": 1.0098510445162063,
+        "overall_factor": 1.0101389489869992,
+        "n_samples": 2525
+      }
+    ]
+  },
+  {
+    "batch_idx": 11,
+    "label": "Window Batch 11 (2550 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0075, K_true\u00d71.0075]",
+    "actual_factor": 1.0076207175840475,
+    "n_samples": 2550,
+    "per_reaction": [
+      {
+        "k_min": 0.4962837177826697,
+        "k_max": 0.5037527488227422,
+        "k_mean": 0.5000178951477094,
+        "k_median": 0.500040003812873,
+        "k_std": 0.0021548129218653986,
+        "lower_factor": 1.0075242794217056,
+        "upper_factor": 1.0074694400166009,
+        "overall_factor": 1.0075242794217056,
+        "n_samples": 2550
+      },
+      {
+        "k_min": 0.49660498888915494,
+        "k_max": 0.504075702202478,
+        "k_mean": 0.5003894752603082,
+        "k_median": 0.5005370040702979,
+        "k_std": 0.002173013973043819,
+        "lower_factor": 1.0076207175840475,
+        "upper_factor": 1.0073667155774053,
+        "overall_factor": 1.0076207175840475,
+        "n_samples": 2550
+      },
+      {
+        "k_min": 0.4963211137410821,
+        "k_max": 0.5037900881332805,
+        "k_mean": 0.5000793304296592,
+        "k_median": 0.5001378724355798,
+        "k_std": 0.002179014493678667,
+        "lower_factor": 1.0075721475160488,
+        "upper_factor": 1.0074203380900248,
+        "overall_factor": 1.0075721475160488,
+        "n_samples": 2550
+      }
+    ]
+  },
+  {
+    "batch_idx": 12,
+    "label": "Window Batch 12 (2575 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0075, K_true\u00d71.0075]",
+    "actual_factor": 1.0076006416841101,
+    "n_samples": 2575,
+    "per_reaction": [
+      {
+        "k_min": 0.4962837177826697,
+        "k_max": 0.5037527488227422,
+        "k_mean": 0.5000190493650438,
+        "k_median": 0.500050813658471,
+        "k_std": 0.0021539710351055744,
+        "lower_factor": 1.0075266051424436,
+        "upper_factor": 1.0074671144278198,
+        "overall_factor": 1.0075266051424436,
+        "n_samples": 2575
+      },
+      {
+        "k_min": 0.49660498888915494,
+        "k_max": 0.504075702202478,
+        "k_mean": 0.500379505468243,
+        "k_median": 0.500513365916059,
+        "k_std": 0.0021878114138747465,
+        "lower_factor": 1.0076006416841101,
+        "upper_factor": 1.007386786816491,
+        "overall_factor": 1.0076006416841101,
+        "n_samples": 2575
+      },
+      {
+        "k_min": 0.4963211137410821,
+        "k_max": 0.5037900881332805,
+        "k_mean": 0.5000713442048007,
+        "k_median": 0.5001205884979064,
+        "k_std": 0.0021624913404488105,
+        "lower_factor": 1.0075560566735733,
+        "upper_factor": 1.0074364267650515,
+        "overall_factor": 1.0075560566735733,
+        "n_samples": 2575
+      }
+    ]
+  },
+  {
+    "batch_idx": 13,
+    "label": "Window Batch 13 (2000 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.005, K_true\u00d71.005]",
+    "actual_factor": 1.0051611018011841,
+    "n_samples": 2000,
+    "per_reaction": [
+      {
+        "k_min": 0.4975176484415088,
+        "k_max": 0.5025035464756633,
+        "k_mean": 0.4999233909621147,
+        "k_median": 0.49992100678246726,
+        "k_std": 0.0014453652822901057,
+        "lower_factor": 1.0048354918225353,
+        "upper_factor": 1.0051611018011841,
+        "overall_factor": 1.0051611018011841,
+        "n_samples": 2000
+      },
+      {
+        "k_min": 0.49784015225847905,
+        "k_max": 0.5028289087879543,
+        "k_mean": 0.5003467042414097,
+        "k_median": 0.5003547895445265,
+        "k_std": 0.0014332995966126868,
+        "lower_factor": 1.005034852997613,
+        "upper_factor": 1.0049609691150219,
+        "overall_factor": 1.005034852997613,
+        "n_samples": 2000
+      },
+      {
+        "k_min": 0.4975575067444666,
+        "k_max": 0.5025370229634598,
+        "k_mean": 0.5000511933759717,
+        "k_median": 0.5001515540505983,
+        "k_std": 0.0014531220224860148,
+        "lower_factor": 1.0050118561125152,
+        "upper_factor": 1.0049711501950542,
+        "overall_factor": 1.0050118561125152,
+        "n_samples": 2000
+      }
+    ]
+  },
+  {
+    "batch_idx": 14,
+    "label": "Window Batch 14 (2600 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0025, K_true\u00d71.0025]",
+    "actual_factor": 1.0025315497229725,
+    "n_samples": 2600,
+    "per_reaction": [
+      {
+        "k_min": 0.49875760139080066,
+        "k_max": 0.5012534638794819,
+        "k_mean": 0.5000006098672538,
+        "k_median": 0.500007887171522,
+        "k_std": 0.0007191458908583323,
+        "lower_factor": 1.002492209588359,
+        "upper_factor": 1.0025057049681614,
+        "overall_factor": 1.0025057049681614,
+        "n_samples": 2600
+      },
+      {
+        "k_min": 0.49908080897242546,
+        "k_max": 0.5015772336120309,
+        "k_mean": 0.5003442568561205,
+        "k_median": 0.5003929343651534,
+        "k_std": 0.0007335589301869138,
+        "lower_factor": 1.0025315497229725,
+        "upper_factor": 1.002464256837198,
+        "overall_factor": 1.0025315497229725,
+        "n_samples": 2600
+      },
+      {
+        "k_min": 0.4987959034830664,
+        "k_max": 0.50129174704221,
+        "k_mean": 0.5000445393014812,
+        "k_median": 0.5000611948183473,
+        "k_std": 0.0007188500818886507,
+        "lower_factor": 1.0025033000666117,
+        "upper_factor": 1.002494193302203,
+        "overall_factor": 1.0025033000666117,
+        "n_samples": 2600
+      }
+    ]
+  },
+  {
+    "batch_idx": 15,
+    "label": "Window Batch 15 (2550 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0025, K_true\u00d71.0025]",
+    "actual_factor": 1.002533917464506,
+    "n_samples": 2550,
+    "per_reaction": [
+      {
+        "k_min": 0.49875760139080066,
+        "k_max": 0.5012534638794819,
+        "k_mean": 0.5000054196367661,
+        "k_median": 0.5000128075011037,
+        "k_std": 0.0007200554814881538,
+        "lower_factor": 1.0025018530895287,
+        "upper_factor": 1.002496061429939,
+        "overall_factor": 1.0025018530895287,
+        "n_samples": 2550
+      },
+      {
+        "k_min": 0.49908080897242546,
+        "k_max": 0.5015772336120309,
+        "k_mean": 0.5003454385504805,
+        "k_median": 0.500394736996407,
+        "k_std": 0.0007261375717415159,
+        "lower_factor": 1.002533917464506,
+        "upper_factor": 1.0024618892601858,
+        "overall_factor": 1.002533917464506,
+        "n_samples": 2550
+      },
+      {
+        "k_min": 0.4987959034830664,
+        "k_max": 0.50129174704221,
+        "k_mean": 0.5000517547450347,
+        "k_median": 0.5000713172285491,
+        "k_std": 0.0007281427146154434,
+        "lower_factor": 1.0025177657899729,
+        "upper_factor": 1.002479727918978,
+        "overall_factor": 1.0025177657899729,
+        "n_samples": 2550
+      }
+    ]
+  },
+  {
+    "batch_idx": 16,
+    "label": "Window Batch 16 (2575 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0025, K_true\u00d71.0025]",
+    "actual_factor": 1.002527242151728,
+    "n_samples": 2575,
+    "per_reaction": [
+      {
+        "k_min": 0.49875760139080066,
+        "k_max": 0.5012534638794819,
+        "k_mean": 0.5000058053317422,
+        "k_median": 0.5000164197351393,
+        "k_std": 0.0007197741553599999,
+        "lower_factor": 1.002502626401003,
+        "upper_factor": 1.0024952881235287,
+        "overall_factor": 1.002502626401003,
+        "n_samples": 2575
+      },
+      {
+        "k_min": 0.49908080897242546,
+        "k_max": 0.5015772336120309,
+        "k_mean": 0.500342107029979,
+        "k_median": 0.500386838035732,
+        "k_std": 0.0007310823065137032,
+        "lower_factor": 1.002527242151728,
+        "upper_factor": 1.0024685641378126,
+        "overall_factor": 1.002527242151728,
+        "n_samples": 2575
+      },
+      {
+        "k_min": 0.4987959034830664,
+        "k_max": 0.50129174704221,
+        "k_mean": 0.5000490860562926,
+        "k_median": 0.5000655416023045,
+        "k_std": 0.0007226213132288548,
+        "lower_factor": 1.0025124155280252,
+        "upper_factor": 1.002485078006477,
+        "overall_factor": 1.0025124155280252,
+        "n_samples": 2575
+      }
+    ]
+  },
+  {
+    "batch_idx": 17,
+    "label": "Window Batch 17 (2600 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.001, K_true\u00d71.001]",
+    "actual_factor": 1.0010118619864339,
+    "n_samples": 2600,
+    "per_reaction": [
+      {
+        "k_min": 0.4995045870356786,
+        "k_max": 0.5005036791080407,
+        "k_mean": 0.5000021624911914,
+        "k_median": 0.5000050755911862,
+        "k_std": 0.0002878736155083762,
+        "lower_factor": 1.0009961379102956,
+        "upper_factor": 1.0010030288956162,
+        "overall_factor": 1.0010030288956162,
+        "n_samples": 2600
+      },
+      {
+        "k_min": 0.49982837900756205,
+        "k_max": 0.5008276961085604,
+        "k_mean": 0.5003341363440207,
+        "k_median": 0.5003536219180849,
+        "k_std": 0.0002936431454392588,
+        "lower_factor": 1.0010118619864339,
+        "upper_factor": 1.0009864603046,
+        "overall_factor": 1.0010118619864339,
+        "n_samples": 2600
+      },
+      {
+        "k_min": 0.49954316203411075,
+        "k_max": 0.5005422465289918,
+        "k_mean": 0.500042990110819,
+        "k_median": 0.5000496573029971,
+        "k_std": 0.00028775520337712823,
+        "lower_factor": 1.0010005703504636,
+        "upper_factor": 1.0009984269913716,
+        "overall_factor": 1.0010005703504636,
+        "n_samples": 2600
+      }
+    ]
+  },
+  {
+    "batch_idx": 18,
+    "label": "Window Batch 18 (2500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.001, K_true\u00d71.001]",
+    "actual_factor": 1.0010163371364869,
+    "n_samples": 2500,
+    "per_reaction": [
+      {
+        "k_min": 0.4995045870356786,
+        "k_max": 0.5005036791080407,
+        "k_mean": 0.500007081020801,
+        "k_median": 0.5000087324741058,
+        "k_std": 0.0002874186314306716,
+        "lower_factor": 1.0010059847259951,
+        "upper_factor": 1.000993182108993,
+        "overall_factor": 1.0010059847259951,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.49982837900756205,
+        "k_max": 0.5008276961085604,
+        "k_mean": 0.5003294893441314,
+        "k_median": 0.5003488587853184,
+        "k_std": 0.00029181805960214034,
+        "lower_factor": 1.001002564795469,
+        "upper_factor": 1.0009957573459884,
+        "overall_factor": 1.001002564795469,
+        "n_samples": 2500
+      },
+      {
+        "k_min": 0.49954316203411075,
+        "k_max": 0.5005422465289918,
+        "k_mean": 0.5000508663009641,
+        "k_median": 0.5000612192681178,
+        "k_std": 0.00029210680786371764,
+        "lower_factor": 1.0010163371364869,
+        "upper_factor": 1.0009826604874472,
+        "overall_factor": 1.0010163371364869,
+        "n_samples": 2500
+      }
+    ]
+  },
+  {
+    "batch_idx": 19,
+    "label": "Window Batch 19 (2525 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.001, K_true\u00d71.001]",
+    "actual_factor": 1.001009357356784,
+    "n_samples": 2525,
+    "per_reaction": [
+      {
+        "k_min": 0.4995045870356786,
+        "k_max": 0.5005036791080407,
+        "k_mean": 0.5000067285463725,
+        "k_median": 0.5000092368986014,
+        "k_std": 0.0002877060628678825,
+        "lower_factor": 1.0010052790779638,
+        "upper_factor": 1.0009938877484967,
+        "overall_factor": 1.0010052790779638,
+        "n_samples": 2525
+      },
+      {
+        "k_min": 0.49982837900756205,
+        "k_max": 0.5008276961085604,
+        "k_mean": 0.5003313562886822,
+        "k_median": 0.5003511815615255,
+        "k_std": 0.00029057543168222615,
+        "lower_factor": 1.0010062999666383,
+        "upper_factor": 1.000992022214158,
+        "overall_factor": 1.0010062999666383,
+        "n_samples": 2525
+      },
+      {
+        "k_min": 0.49954316203411075,
+        "k_max": 0.5005422465289918,
+        "k_mean": 0.500047379599741,
+        "k_median": 0.5000545601220053,
+        "k_std": 0.00029217542334536873,
+        "lower_factor": 1.001009357356784,
+        "upper_factor": 1.0009896400809999,
+        "overall_factor": 1.001009357356784,
+        "n_samples": 2525
+      }
+    ]
+  },
+  {
+    "batch_idx": 20,
+    "label": "Window Batch 20 (1500 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0005, K_true\u00d71.0005]",
+    "actual_factor": 1.000524670493913,
+    "n_samples": 1500,
+    "per_reaction": [
+      {
+        "k_min": 0.4997544730547945,
+        "k_max": 0.5002537679342163,
+        "k_mean": 0.4999990688198297,
+        "k_median": 0.49999349352329026,
+        "k_std": 0.000145397989839984,
+        "lower_factor": 1.000489431867493,
+        "upper_factor": 1.000509399177458,
+        "overall_factor": 1.000509399177458,
+        "n_samples": 1500
+      },
+      {
+        "k_min": 0.5000781073446837,
+        "k_max": 0.5005781396091818,
+        "k_mean": 0.5003156387558834,
+        "k_median": 0.5003155184256437,
+        "k_std": 0.00014488680781560878,
+        "lower_factor": 1.0004749886221993,
+        "upper_factor": 1.000524670493913,
+        "overall_factor": 1.000524670493913,
+        "n_samples": 1500
+      },
+      {
+        "k_min": 0.4997929557829431,
+        "k_max": 0.5002925275085329,
+        "k_mean": 0.5000408023057565,
+        "k_median": 0.5000436656610918,
+        "k_std": 0.00014345644131587718,
+        "lower_factor": 1.0004958983914154,
+        "upper_factor": 1.0005034093250305,
+        "overall_factor": 1.0005034093250305,
+        "n_samples": 1500
+      }
+    ]
+  },
+  {
+    "batch_idx": 21,
+    "label": "Window Batch 21 (2700 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.00025, K_true\u00d71.00025]",
+    "actual_factor": 1.000251273263402,
+    "n_samples": 2700,
+    "per_reaction": [
+      {
+        "k_min": 0.4998789202335987,
+        "k_max": 0.5001287868463634,
+        "k_mean": 0.5000045264411916,
+        "k_median": 0.5000056986387683,
+        "k_std": 7.23151818577834e-05,
+        "lower_factor": 1.000251273263402,
+        "upper_factor": 1.0002485185605343,
+        "overall_factor": 1.000251273263402,
+        "n_samples": 2700
+      },
+      {
+        "k_min": 0.5002030050016569,
+        "k_max": 0.5004529931360548,
+        "k_mean": 0.5003286305271767,
+        "k_median": 0.5003337961043153,
+        "k_std": 7.307083993232466e-05,
+        "lower_factor": 1.0002511490819999,
+        "upper_factor": 1.0002485618477341,
+        "overall_factor": 1.0002511490819999,
+        "n_samples": 2700
+      },
+      {
+        "k_min": 0.49991763187095345,
+        "k_max": 0.500166986343127,
+        "k_mean": 0.5000422558955815,
+        "k_median": 0.5000427870823452,
+        "k_std": 7.208554752547449e-05,
+        "lower_factor": 1.0002492891162122,
+        "upper_factor": 1.0002494398144854,
+        "overall_factor": 1.0002494398144854,
+        "n_samples": 2700
+      }
+    ]
+  },
+  {
+    "batch_idx": 22,
+    "label": "Window Batch 22 (2700 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.0001, K_true\u00d71.0001]",
+    "actual_factor": 1.0001005017762081,
+    "n_samples": 2700,
+    "per_reaction": [
+      {
+        "k_min": 0.4999538542645573,
+        "k_max": 0.5000538084039752,
+        "k_mean": 0.5000041005149329,
+        "k_median": 0.5000045694291215,
+        "k_std": 2.8928241710512247e-05,
+        "lower_factor": 1.0001005017762081,
+        "upper_factor": 1.0000994149627793,
+        "overall_factor": 1.0001005017762081,
+        "n_samples": 2700
+      },
+      {
+        "k_min": 0.5002779976400494,
+        "k_max": 0.5003780003917655,
+        "k_mean": 0.5003282516181753,
+        "k_median": 0.5003303180039632,
+        "k_std": 2.923052760499226e-05,
+        "lower_factor": 1.0001004521053554,
+        "upper_factor": 1.0000994322695735,
+        "overall_factor": 1.0001004521053554,
+        "n_samples": 2700
+      },
+      {
+        "k_min": 0.49999259324459916,
+        "k_max": 0.50009234251242,
+        "k_mean": 0.5000424465923301,
+        "k_median": 0.5000426590829676,
+        "k_std": 2.883638109012656e-05,
+        "lower_factor": 1.00009970817249,
+        "upper_factor": 1.0000997833692518,
+        "overall_factor": 1.0000997833692518,
+        "n_samples": 2700
+      }
+    ]
+  },
+  {
+    "batch_idx": 23,
+    "label": "Window Batch 23 (2000 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.00005, K_true\u00d71.00005]",
+    "actual_factor": 1.0000517301974012,
+    "n_samples": 2000,
+    "per_reaction": [
+      {
+        "k_min": 0.49997883793981795,
+        "k_max": 0.5000288200072485,
+        "k_mean": 0.5000029547556978,
+        "k_median": 0.500002930855043,
+        "k_std": 1.4489334620619538e-05,
+        "lower_factor": 1.000048235673292,
+        "upper_factor": 1.0000517301974012,
+        "overall_factor": 1.0000517301974012,
+        "n_samples": 2000
+      },
+      {
+        "k_min": 0.5003030035280204,
+        "k_max": 0.500353014250972,
+        "k_mean": 0.5003281309272113,
+        "k_median": 0.5003282119798447,
+        "k_std": 1.4368379897721554e-05,
+        "lower_factor": 1.0000502243620641,
+        "upper_factor": 1.0000497340089884,
+        "overall_factor": 1.0000502243620641,
+        "n_samples": 2000
+      },
+      {
+        "k_min": 0.5000176061843963,
+        "k_max": 0.500067524276127,
+        "k_mean": 0.5000426046124653,
+        "k_median": 0.50004361069682,
+        "k_std": 1.4567093513570759e-05,
+        "lower_factor": 1.0000499950956923,
+        "upper_factor": 1.0000498350809148,
+        "overall_factor": 1.0000499950956923,
+        "n_samples": 2000
+      }
+    ]
+  },
+  {
+    "batch_idx": 24,
+    "label": "Window Batch 24 (2750 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.000025, K_true\u00d71.000025]",
+    "actual_factor": 1.0000253156784615,
+    "n_samples": 2750,
+    "per_reaction": [
+      {
+        "k_min": 0.49999132971217153,
+        "k_max": 0.5000163191840258,
+        "k_mean": 0.5000038723212368,
+        "k_median": 0.500003952741403,
+        "k_std": 7.249311962342462e-06,
+        "lower_factor": 1.00002508565313,
+        "upper_factor": 1.0000248935327865,
+        "overall_factor": 1.00002508565313,
+        "n_samples": 2750
+      },
+      {
+        "k_min": 0.5003155004765416,
+        "k_max": 0.5003405040227958,
+        "k_mean": 0.500328166302881,
+        "k_median": 0.5003286262589852,
+        "k_std": 7.316704880039726e-06,
+        "lower_factor": 1.0000253156784615,
+        "upper_factor": 1.0000246592551565,
+        "overall_factor": 1.0000253156784615,
+        "n_samples": 2750
+      },
+      {
+        "k_min": 0.5000300896899175,
+        "k_max": 0.5000550206174561,
+        "k_mean": 0.5000424702764884,
+        "k_median": 0.5000425120731596,
+        "k_std": 7.212203107517289e-06,
+        "lower_factor": 1.0000247596831195,
+        "upper_factor": 1.0000250985500507,
+        "overall_factor": 1.0000250985500507,
+        "n_samples": 2750
+      }
+    ]
+  },
+  {
+    "batch_idx": 25,
+    "label": "Window Batch 25 (2750 samples) - Uniform Sampling",
+    "status": "OK",
+    "expected_range": "K \u2208 [K_true/1.00001, K_true\u00d71.00001]",
+    "actual_factor": 1.0000101261954766,
+    "n_samples": 2750,
+    "per_reaction": [
+      {
+        "k_min": 0.49999882547642693,
+        "k_max": 0.5000088213401355,
+        "k_mean": 0.50000384255768,
+        "k_median": 0.5000038747259878,
+        "k_std": 2.899746532400419e-06,
+        "lower_factor": 1.000010034186077,
+        "upper_factor": 1.0000099574883865,
+        "overall_factor": 1.000010034186077,
+        "n_samples": 2750
+      },
+      {
+        "k_min": 0.5003230032557453,
+        "k_max": 0.500333004749256,
+        "k_mean": 0.5003280696242777,
+        "k_median": 0.5003282536080993,
+        "k_std": 2.9267039016663442e-06,
+        "lower_factor": 1.0000101261954766,
+        "upper_factor": 1.0000098637779449,
+        "overall_factor": 1.0000101261954766,
+        "n_samples": 2750
+      },
+      {
+        "k_min": 0.5000375837942884,
+        "k_max": 0.500047556240095,
+        "k_mean": 0.5000425360660576,
+        "k_median": 0.5000425527848515,
+        "k_std": 2.884902879146347e-06,
+        "lower_factor": 1.0000099037990937,
+        "upper_factor": 1.0000100394939935,
+        "overall_factor": 1.0000100394939935,
+        "n_samples": 2750
+      }
+    ]
+  }
+]

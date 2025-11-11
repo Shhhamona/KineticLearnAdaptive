@@ -39,16 +39,16 @@ def main():
     # Configuration
     nspecies = 3
     num_pressure_conditions = 2
-    react_idx = [0, 1, 2]
+    react_idx = [2]
     
     # Adaptive batch sampling settings
-    n_iterations = 6  # Number of iterations (one per pool file)
-    samples_per_iteration = 64*5  # Samples to grab from each pool
-    n_epochs = 200  # Train for 50 epochs at each iteration
+    n_iterations = 40  # Number of iterations (one per pool file)
+    samples_per_iteration = int(4000/n_iterations)  # Samples to grab from each pool
+    n_epochs = 50  # Train for 50 epochs at each iteration
     batch_size = 16  # Batch size for NN training
     initial_window_size = 1.0  # ±100% around center
-    shrink_rate = 0.20  # 50% reduction each iteration
-    num_seeds = 5
+    shrink_rate = 1  # 70% reduction each iteration
+    num_seeds = 15
     
     # Neural Network hyperparameters
     nn_params = {
@@ -95,18 +95,23 @@ def main():
             'k_range': 'K ∈ [K_true/1.15, K_true×1.15]'
         },
         {
+            'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-10-27/batch_500sims_20251027_154921.json',
+            'label': 'Window Batch 4 (500 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_true/1.01, K_true×1.01]'
+        },
+        {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_2000sims_20250929_205429.json',
-            'label': 'Window Batch 4 (2000 samples) - Uniform Sampling',
+            'label': 'Window Batch 5 (2000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.005, K_true×1.005]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-28/batch_1500sims_20250928_224858.json',
-            'label': 'Window Batch 5 (1500 samples) - Uniform Sampling',
+            'label': 'Window Batch 6 (1500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0005, K_true×1.0005]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_2000sims_20250929_125706.json',
-            'label': 'Window Batch 6 (2000 samples) - Uniform Sampling',
+            'label': 'Window Batch 7 (2000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.00005, K_true×1.00005] '
         }
     ]

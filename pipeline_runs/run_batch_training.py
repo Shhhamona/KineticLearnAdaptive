@@ -174,7 +174,7 @@ def main(train_dataset_path, train_label):
 
 if __name__ == "__main__":
 
-    sampling_strats = False
+    sampling_strats = False 
     
     if sampling_strats:
         train_datasets = [

@@ -287,6 +287,99 @@ def plot_per_output_mse(results_files, labels=None, output_dir='pipeline_results
     plt.show()
 
 
+def plot_prediction_variance(results_files, labels=None, output_dir='pipeline_results/plots'):
+    """
+    Create plots showing prediction variance over time (convergence indicator).
+    
+    Args:
+        results_files: List of paths to JSON result files
+        labels: List of labels for each result file (optional)
+        output_dir: Directory to save plots
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    if labels is None:
+        labels = [f"Method {i+1}" for i in range(len(results_files))]
+    
+    # Load first file to get number of outputs
+    first_results = load_pipeline_results(results_files[0])
+    
+    # Check if variance data exists
+    if 'mean_prediction_variance_per_output' not in first_results['aggregated_results']:
+        print("⚠️  Prediction variance data not found in results. Skipping variance plot.")
+        return
+    
+    n_outputs = len(first_results['aggregated_results']['mean_prediction_variance_per_output'][0])
+    batch_size = first_results['config']['batch_size']
+    num_epochs = first_results['config']['num_epochs'] if 'num_epochs' in first_results['config'] else 1
+    
+    # Create subplots for each output
+    fig, axes = plt.subplots(1, n_outputs, figsize=(18, 5))
+    if n_outputs == 1:
+        axes = [axes]
+    
+    for idx, (result_file, label) in enumerate(zip(results_files, labels)):
+        result_path = Path(result_file)
+        if not result_path.exists():
+            continue
+            
+        results = load_pipeline_results(result_path)
+        
+        # Check if variance data exists for this file
+        if 'mean_prediction_variance_per_output' not in results['aggregated_results']:
+            continue
+        
+        # Extract data
+        sample_counts = extract_sample_counts(results)
+        mean_variance = np.array(results['aggregated_results']['mean_prediction_variance_per_output'])
+        std_variance = np.array(results['aggregated_results']['std_prediction_variance_per_output'])
+        
+        # Plot each output
+        for output_idx in range(n_outputs):
+            ax = axes[output_idx]
+            
+            variance = mean_variance[:, output_idx]
+            variance_std = std_variance[:, output_idx]
+            
+            # Filter out NaN values (from early batches)
+            valid_mask = ~np.isnan(variance)
+            valid_samples = sample_counts[valid_mask]
+            valid_variance = variance[valid_mask]
+            valid_std = variance_std[valid_mask]
+            
+            ax.errorbar(valid_samples, valid_variance, yerr=valid_std,
+                       label=label, marker='o', linewidth=2, markersize=5, 
+                       capsize=4, alpha=0.8)
+    
+    # Configure subplots
+    for output_idx in range(n_outputs):
+        ax = axes[output_idx]
+        
+        ax.set_xlabel(f'Training Samples (Total Epochs = {num_epochs}, Batch Size = {batch_size})', fontsize=11)
+        ax.set_ylabel('Prediction Variance (moving window)', fontsize=11)
+        ax.set_title(f'K{output_idx+1} Convergence', fontsize=12, fontweight='bold')
+        ax.set_yscale('log')
+        ax.legend(loc='best', fontsize=8)
+        ax.grid(True, alpha=0.3, which='both', linestyle='--')
+    
+    plt.suptitle('Model Convergence - Prediction Variance Over Last 5 Batches', 
+                 fontsize=14, fontweight='bold', y=1.02)
+    plt.tight_layout()
+    
+    # Save plot
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    plot_path = output_dir / f'batch_training_variance_{timestamp}.pdf'
+    plt.savefig(plot_path, bbox_inches='tight')
+    print(f"📊 Saved variance plot to: {plot_path}")
+    
+    plot_png_path = output_dir / f'batch_training_variance_{timestamp}.png'
+    plt.savefig(plot_png_path, dpi=300, bbox_inches='tight')
+    print(f"📊 Saved PNG to: {plot_png_path}")
+    
+    plt.show()
+
+
 def main():
     """Main function to plot batch training results."""
     
@@ -378,6 +471,11 @@ def main():
     print("PLOT 3: Per-Output Learning Curves")
     print("="*70)
     plot_per_output_mse(results_files, existing_labels)
+    
+    print("\n" + "="*70)
+    print("PLOT 4: Model Convergence - Prediction Variance")
+    print("="*70)
+    plot_prediction_variance(results_files, existing_labels)
     
     print("\n" + "="*70)
     print("✅ All plots generated successfully!")

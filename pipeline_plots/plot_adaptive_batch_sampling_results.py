@@ -116,6 +116,18 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
     
     n_outputs = mean_mse_per_output.shape[1]
     
+    # Extract prediction variance if available
+    has_variance = 'mean_prediction_variance_per_output' in agg_results[0]
+    if has_variance:
+        mean_prediction_variance_per_output = []
+        std_prediction_variance_per_output = []
+        for result in agg_results:
+            mean_prediction_variance_per_output.append(result['mean_prediction_variance_per_output'])
+            std_prediction_variance_per_output.append(result['std_prediction_variance_per_output'])
+        
+        mean_prediction_variance_per_output = np.array(mean_prediction_variance_per_output)
+        std_prediction_variance_per_output = np.array(std_prediction_variance_per_output)
+    
     print(f"\nResults Summary:")
     print(f"  Number of iterations: {len(iterations)}")
     print(f"  Number of outputs: {n_outputs}")
@@ -123,9 +135,17 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
     print(f"  Final MSE: {mean_total_mse[-1]:.6e} ± {std_total_mse[-1]:.6e}")
     print(f"  Improvement: {mean_total_mse[0] / mean_total_mse[-1]:.2f}x")
     print(f"  Total training samples: {training_samples[-1]:.0f}")
+    if has_variance:
+        print(f"  Prediction variance tracking: Yes (window size = 5 iterations)")
     
-    # Create figure with 2 subplots - matching batch_training_results style
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+    # Create figure with 2 or 3 subplots depending on variance availability
+    if has_variance:
+        fig = plt.figure(figsize=(20, 6))
+        ax1 = plt.subplot(1, 3, 1)
+        ax2 = plt.subplot(1, 3, 2)
+        ax3 = plt.subplot(1, 3, 3)
+    else:
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
     
     # Create main title for the entire figure with dataset info
     dataset_info = f"{num_pool_datasets} pool files × {samples_per_iteration} samples/file"
@@ -164,6 +184,30 @@ def plot_adaptive_batch_sampling_results(result_file, output_dir='pipeline_resul
     ax2.set_yscale('log')
     ax2.legend(loc='best', fontsize=11)
     ax2.grid(True, alpha=0.3, which='both')
+    
+    # ============================================================
+    # Plot 3: Prediction Variance per Output (if available)
+    # ============================================================
+    if has_variance:
+        for i in range(n_outputs):
+            # Filter out NaN values
+            valid_mask = ~np.isnan(mean_prediction_variance_per_output[:, i])
+            valid_iterations = training_samples[valid_mask]
+            valid_variance = mean_prediction_variance_per_output[valid_mask, i]
+            valid_std = std_prediction_variance_per_output[valid_mask, i]
+            
+            if len(valid_iterations) > 0:
+                ax3.errorbar(valid_iterations, valid_variance, 
+                            yerr=valid_std,
+                            marker='o', linewidth=2, markersize=6, capsize=5,
+                            label=output_labels[i], alpha=0.8, color=colors[i % len(colors)])
+        
+        ax3.set_xlabel(f'Training Samples (Total Epochs = {n_epochs}, Batch Size = {batch_size})', fontsize=13)
+        ax3.set_ylabel('Variance of Mean Predictions (Last 5 Iterations)', fontsize=13)
+        ax3.set_title('Prediction Variance (Convergence Indicator)', fontsize=14, fontweight='bold')
+        ax3.set_yscale('log')
+        ax3.legend(loc='best', fontsize=11)
+        ax3.grid(True, alpha=0.3, which='both')
     
     plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust for suptitle
 
@@ -213,6 +257,7 @@ def main():
     # Path to the adaptive batch sampling results file
     # Update this path to your actual results file
     result_file = 'pipeline_results/adaptive_batch_sampling_w1.0_s0.1_e25_20251028_185800.json'
+    result_file = 'pipeline_results/adaptive_batch_sampling_w1.0_s0.5_e100_20251106_172628.json'
     
     if not Path(result_file).exists():
         print(f"⚠️  Result file not found: {result_file}")

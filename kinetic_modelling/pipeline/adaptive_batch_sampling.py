@@ -216,20 +216,35 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         self,
         model: BaseModel,
         train_loader: DataLoader,
-        n_epochs: int
-    ) -> List[float]:
+        n_epochs: int,
+        x_test: np.ndarray = None,
+        eval_frequency: int = 10
+    ) -> tuple:
         """
-        Train model for specified number of epochs.
+        Train model for specified number of epochs with optional variance tracking.
         
         Args:
             model: Model to train (must have train_single_batch method)
             train_loader: DataLoader for training
             n_epochs: Number of epochs to train
+            x_test: Optional test input for prediction variance tracking
+            eval_frequency: How often to evaluate predictions (every N epochs)
             
         Returns:
-            List of average training losses per epoch
+            Tuple of (epoch_losses, prediction_variance) where variance is per output or None
         """
         epoch_losses = []
+        
+        # Variance tracking setup (same as batch_training.py)
+        prediction_window_size = 5  # Track variance over last 5 evaluations
+        recent_predictions = []  # Stores mean predictions from recent evaluations
+        prediction_variance = None
+        n_outputs = None
+        
+        if x_test is not None:
+            # Get number of outputs from a test prediction
+            y_pred_test = model.predict(x_test)
+            n_outputs = y_pred_test.shape[1]
         
         for epoch in range(n_epochs):
             batch_losses = []
@@ -246,8 +261,23 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             # Average loss for this epoch
             avg_epoch_loss = np.mean(batch_losses)
             epoch_losses.append(avg_epoch_loss)
+            
+            # Evaluate predictions for variance tracking
+            if x_test is not None and (epoch + 1) % eval_frequency == 0:
+                y_pred = model.predict(x_test)
+                mean_prediction = np.mean(y_pred, axis=0)  # Mean per output
+                recent_predictions.append(mean_prediction)
+                
+                # Keep only the last prediction_window_size predictions
+                if len(recent_predictions) > prediction_window_size:
+                    recent_predictions = recent_predictions[-prediction_window_size:]
+                
+                # Calculate variance if we have enough predictions
+                if len(recent_predictions) >= prediction_window_size:
+                    recent_preds_array = np.array(recent_predictions[-prediction_window_size:])
+                    prediction_variance = np.var(recent_preds_array, axis=0)
         
-        return epoch_losses
+        return epoch_losses, prediction_variance
     
     def _run_single_seed(
         self,
@@ -293,6 +323,9 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             mse_per_output.append(mse)
         total_mse = np.sum(mse_per_output)
         
+        # No training yet, so no variance to report
+        prediction_variance = np.full(n_outputs, np.nan)
+        
         seed_results.append({
             'iteration': 0,
             'seed': seed,
@@ -303,7 +336,8 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             'window_size': float(self.initial_window_size),
             'center_point': [float(c) for c in center.flatten()],
             'pool_idx': None,
-            'avg_train_loss': None
+            'avg_train_loss': None,
+            'prediction_variance': [float(v) for v in prediction_variance]
         })
         
         print(f"    Test MSE (untrained): {total_mse:.6e}")
@@ -434,7 +468,9 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             
             # Train the model for n_epochs (continuing from previous weights)
             print(f"    Training for {self.n_epochs} epochs with batch size {self.batch_size}...")
-            epoch_losses = self._train_for_epochs(model, train_loader, self.n_epochs)
+            epoch_losses, prediction_variance = self._train_for_epochs(
+                model, train_loader, self.n_epochs, x_test=x_test, eval_frequency=10
+            )
             avg_train_loss = np.mean(epoch_losses)
             
             print(f"    Average training loss: {avg_train_loss:.6e}")
@@ -449,6 +485,12 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             
             print(f"    Test MSE: {total_mse:.6e}")
             
+            # Variance is calculated during training (or None if not enough evaluations)
+            if prediction_variance is None:
+                prediction_variance = np.full(n_outputs, np.nan)
+            else:
+                print(f"    Prediction variance (last 5 evals): {prediction_variance}")
+            
             seed_results.append({
                 'iteration': iteration,
                 'seed': seed,
@@ -460,7 +502,8 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                 'center_point': [float(c) for c in center.flatten()],
                 'pool_idx': current_pool_idx,
                 'avg_train_loss': float(avg_train_loss),
-                'epoch_losses': [float(loss) for loss in epoch_losses]
+                'epoch_losses': [float(loss) for loss in epoch_losses],
+                'prediction_variance': [float(v) for v in prediction_variance]
             })
         
         return seed_results
@@ -551,6 +594,11 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             if iter_results[0]['avg_train_loss'] is not None:
                 avg_train_loss = float(np.mean([r['avg_train_loss'] for r in iter_results]))
             
+            # Average prediction variance per output (handle NaN values)
+            prediction_variance_array = np.array([r['prediction_variance'] for r in iter_results])
+            avg_prediction_variance = np.nanmean(prediction_variance_array, axis=0)
+            std_prediction_variance = np.nanstd(prediction_variance_array, axis=0)
+            
             # Calculate total training samples (samples * epochs)
             # For iteration 0 (untrained), training samples = 0
             # For other iterations, training samples = samples_added * n_epochs
@@ -567,7 +615,9 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                 'std_mse_per_output': std_mse_per_output.tolist(),
                 'mean_train_loss': avg_train_loss,
                 'window_size': float(iter_results[0]['window_size']),
-                'num_seeds': len(iter_results)
+                'num_seeds': len(iter_results),
+                'mean_prediction_variance_per_output': avg_prediction_variance.tolist(),
+                'std_prediction_variance_per_output': std_prediction_variance.tolist()
             })
         
         # Store results

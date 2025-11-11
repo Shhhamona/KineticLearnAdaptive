@@ -155,8 +155,14 @@ class BatchTrainingPipeline(BasePipeline):
             'batch_numbers': [],
             'train_loss': [],
             'total_mse': [],
-            'mse_per_output': []
+            'mse_per_output': [],
+            'mean_predictions_per_output': [],  # Store mean predictions for variance calculation
+            'prediction_variance_per_output': []  # Variance of predictions over last N batches
         }
+        
+        # Window for tracking prediction stability (reduced to 5 for faster convergence detection)
+        prediction_window_size = 5
+        recent_predictions = []  # Store recent mean predictions
         
         batch_number = 0
         
@@ -181,11 +187,32 @@ class BatchTrainingPipeline(BasePipeline):
                     
                     total_mse = np.sum(mse_per_output)
                     
+                    # Calculate mean prediction per output (convergence point)
+                    mean_pred_per_output = np.mean(y_pred, axis=0)  # Shape: (n_outputs,)
+                    
+                    # Add to recent predictions window
+                    recent_predictions.append(mean_pred_per_output)
+                    if len(recent_predictions) > prediction_window_size:
+                        recent_predictions.pop(0)  # Remove oldest
+                    
+                    # Calculate variance of mean predictions over recent batches
+                    # This measures how much the model's predictions are changing
+                    if len(recent_predictions) >= 2:
+                        # Shape: (window_size, n_outputs)
+                        recent_preds_array = np.array(recent_predictions)
+                        # Variance across batches for each output
+                        pred_variance_per_output = np.var(recent_preds_array, axis=0).tolist()
+                    else:
+                        # Not enough history yet
+                        pred_variance_per_output = [np.nan] * n_outputs
+                    
                     # Store metrics
                     batch_metrics['batch_numbers'].append(batch_number)
                     batch_metrics['train_loss'].append(train_loss)
                     batch_metrics['total_mse'].append(total_mse)
                     batch_metrics['mse_per_output'].append(mse_per_output)
+                    batch_metrics['mean_predictions_per_output'].append(mean_pred_per_output.tolist())
+                    batch_metrics['prediction_variance_per_output'].append(pred_variance_per_output)
                 
                 batch_number += 1
         
@@ -291,6 +318,8 @@ class BatchTrainingPipeline(BasePipeline):
         
         # Shape: (num_seeds, num_batches, n_outputs)
         mse_per_output_array = np.array([seed_results['mse_per_output'] for seed_results in all_seeds_results])
+        mean_predictions_array = np.array([seed_results['mean_predictions_per_output'] for seed_results in all_seeds_results])
+        prediction_variance_array = np.array([seed_results['prediction_variance_per_output'] for seed_results in all_seeds_results])
         
         # Compute mean and std across seeds
         mean_train_loss = np.mean(train_loss_array, axis=0)
@@ -302,11 +331,16 @@ class BatchTrainingPipeline(BasePipeline):
         mean_mse_per_output = np.mean(mse_per_output_array, axis=0)
         std_mse_per_output = np.std(mse_per_output_array, axis=0) / np.sqrt(self.num_seeds)
         
+        # Aggregate prediction variance (ignore NaN values in early batches)
+        mean_pred_variance = np.nanmean(prediction_variance_array, axis=0)
+        std_pred_variance = np.nanstd(prediction_variance_array, axis=0) / np.sqrt(self.num_seeds)
+        
         # Store results
         self.results['raw_results'] = {
             'train_loss_per_seed': train_loss_array.tolist(),
             'total_mse_per_seed': total_mse_array.tolist(),
-            'mse_per_output_per_seed': mse_per_output_array.tolist()
+            'mse_per_output_per_seed': mse_per_output_array.tolist(),
+            'prediction_variance_per_seed': prediction_variance_array.tolist()
         }
         
         self.results['aggregated_results'] = {
@@ -317,6 +351,8 @@ class BatchTrainingPipeline(BasePipeline):
             'std_total_mse': std_total_mse.tolist(),
             'mean_mse_per_output': mean_mse_per_output.tolist(),
             'std_mse_per_output': std_mse_per_output.tolist(),
+            'mean_prediction_variance_per_output': mean_pred_variance.tolist(),
+            'std_prediction_variance_per_output': std_pred_variance.tolist(),
             'initial_mean_mse': float(mean_total_mse[0]),
             'initial_std_mse': float(std_total_mse[0]),
             'final_mean_mse': float(mean_total_mse[-1]),

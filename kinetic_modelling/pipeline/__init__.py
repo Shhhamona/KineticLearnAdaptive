@@ -10,7 +10,7 @@ from .standard import StandardPipeline
 from .subset import StandardSubsetPipeline
 from .batch_training import BatchTrainingPipeline
 from .adaptive_sampling import AdaptiveSamplingPipeline
-from .adaptive_batch_sampling import AdaptiveBatchSamplingPipeline
+from .adaptive_batch_sampling_corrected import AdaptiveBatchSamplingPipeline
 
 __all__ = [
     'BasePipeline',

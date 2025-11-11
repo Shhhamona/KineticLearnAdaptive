@@ -9,6 +9,8 @@ It intentionally keeps the adaptive sampling loop out for now.
 from active_learning_methods import load_datasets, train_initial_models, run_mse_analysis, apply_training_scalers, retrain_models_with_new_data
 import numpy as np
 from sklearn.utils import shuffle
+import argparse
+
 from adaptive_sampling.src.batch_simulator import BatchSimulator
 from adaptive_sampling.src.sampling_strategies import BoundsBasedSampler
 from adaptive_sampling.src.base_simulator import MockSimulator, LoKISimulator
@@ -64,14 +66,41 @@ def make_k_bounds_around(k_true: np.ndarray, rel_width: float = 0.2, multiplicat
 
 
 if __name__ == '__main__':
+    # Parse CLI overrides for quick experiments
+    parser = argparse.ArgumentParser(description='Active learning training runner')
+    parser.add_argument('--n-samples-per-iteration', type=int, default=3000,
+                        help='Number of samples to generate per adaptive iteration')
+    parser.add_argument('--k-mult-factor', type=float, default=1.5,
+                        help='Multiplicative factor for k-bounds (e.g. 2.0 => [k/2, k*2])')
+    parser.add_argument('--loki-version', type=str, default='v2',
+                        help='LoKI version to use: v2, v3, or custom path. Maps to predefined installation directories.')
+    args = parser.parse_args()
+
+    # Map LoKI version to installation path
+    LOKI_PATHS = {
+        'v2': 'C:\\MyPrograms\\LoKI_v3.1.0-v2',
+        'v3': 'C:\\MyPrograms\\LoKI_v3.1.0-v3',
+        'v4': 'C:\\MyPrograms\\LoKI_v3.1.0-v4',
+        'v5': 'C:\\MyPrograms\\LoKI_v3.1.0-v5',
+    }
+    
+    # If version is in the dictionary, use the mapped path; otherwise treat it as a custom path
+    if args.loki_version in LOKI_PATHS:
+        loki_path = LOKI_PATHS[args.loki_version]
+    else:
+        # Assume it's a custom path provided directly
+        loki_path = args.loki_version
+
     # Configuration (same as baseline)
     config = {
         'nspecies': 3,
         'num_pressure_conditions': 2,
         'pressure_conditions_pa': [133.322, 1333.22],  # 1 and 10 Torr
         'initial_samples_from_uniform': 50,
-        'n_iterations': 1,# More iterations with smaller batches
-        'n_samples_per_iteration': 500,#Smaller, more targeted batches
+        'n_iterations': 1,  # More iterations with smaller batches
+        'n_samples_per_iteration': args.n_samples_per_iteration,  # Smaller, more targeted batches
+        'k_multiplicative_factor': args.k_mult_factor,
+        'loki_path': loki_path,
         'svr_params': [
             {'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'},
             {'C': 20, 'epsilon': 0.005, 'gamma': 5, 'kernel': 'rbf'},
@@ -241,11 +270,9 @@ if __name__ == '__main__':
         # Use raw k_true (physical units) for sampler bounds
         k_true = np.array([6.00E-16, 1.30E-15, 9.60E-16])
         #k_true = np.array([9.941885789401E-16, 1.800066252209E-15, 1.380839580124E-15])
-        # Use multiplicative_factor=2.0 to mirror the uniform sampling file (approx [0.5*k, 2.0*k])
-        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=1.0001)
-        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=1.15)
-        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=1.01)
-
+        # Use multiplicative factor from config/CLI to build k bounds
+        k_mult = config.get('k_multiplicative_factor', 1.5)
+        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=k_mult)
 
         print('   K bounds for sampler:')
         for i, (lo, hi) in enumerate(k_bounds):
@@ -256,7 +283,7 @@ if __name__ == '__main__':
 
         # Try to create a real LoKI simulator; fall back to MockSimulator if unavailable
         try:
-            loki_path = 'C:\\MyPrograms\\LoKI_v3.1.0-v2'  # adapt if your LoKI is elsewhere
+            loki_path = config.get('loki_path', 'C:\\MyPrograms\\LoKI_v3.1.0-v2')  # adapt if your LoKI is elsewhere
             k_columns = [0, 1, 2]
             loki_sim = LoKISimulator(setup_file='setup_O2_simple.in', chem_file='O2_simple_1.chem',
                                     loki_path=loki_path, k_columns=k_columns,

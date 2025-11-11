@@ -1,0 +1,199 @@
+{
+  "pipeline_name": "sample_efficiency_600samples_1iters",
+  "timestamp": "2025-11-07 17:24:06",
+  "config": {
+    "model_type": "NeuralNetModel",
+    "model_params": "{'input_size': 6, 'output_size': 3, 'hidden_sizes': (64, 32), 'activation': 'tanh', 'learning_rate': 0.001, 'model_name': 'adaptive_batch_sampling_nn'}",
+    "n_iterations": 1,
+    "samples_per_iteration": 600,
+    "n_epochs": 50,
+    "batch_size": 16,
+    "initial_window_size": 1.0,
+    "shrink_rate": 0.3,
+    "num_seeds": 1,
+    "window_type": "output",
+    "use_model_prediction": true,
+    "num_pool_datasets": 1,
+    "pool_samples_per_dataset": [
+      4000
+    ],
+    "total_pool_samples": 4000,
+    "test_samples": 1
+  },
+  "data_info": {},
+  "training_info": {},
+  "evaluation": {},
+  "raw_results": {
+    "all_seed_results": [
+      [
+        {
+          "iteration": 0,
+          "seed": 42,
+          "total_samples_seen": 0,
+          "samples_added": 0,
+          "mse_per_output": [
+            0.45035472812334926,
+            0.07975378184668837,
+            0.05964144857182224
+          ],
+          "total_mse": 0.58974995854186,
+          "window_size": 1.0,
+          "center_point": [
+            0.5000038227775604,
+            0.5003280052336098,
+            0.500042579988823
+          ],
+          "pool_idx": null,
+          "avg_train_loss": null,
+          "prediction_variance": [
+            NaN,
+            NaN,
+            NaN
+          ]
+        },
+        {
+          "iteration": 1,
+          "seed": 42,
+          "total_samples_seen": 600,
+          "samples_added": 600,
+          "mse_per_output": [
+            5.521477588161985e-05,
+            1.9345963715847276e-05,
+            1.5679641433713405e-05
+          ],
+          "total_mse": 9.024038103118053e-05,
+          "window_size": 1.0,
+          "center_point": [
+            0.5000038227775604,
+            0.5003280052336098,
+            0.500042579988823
+          ],
+          "pool_idx": 0,
+          "avg_train_loss": 0.011090729994466529,
+          "epoch_losses": [
+            0.08185555565317995,
+            0.0298941864779121,
+            0.02222127575231226,
+            0.018445989288585752,
+            0.016696920446855456,
+            0.015570639142472493,
+            0.015320029379309793,
+            0.015001075391314532,
+            0.014767233037242764,
+            0.014217567630112171,
+            0.014505051591090466,
+            0.01375212493401609,
+            0.013282966861305269,
+            0.013112966902554035,
+            0.013181954034064946,
+            0.012795786263029041,
+            0.011846663895994425,
+            0.011433930773484079,
+            0.010881325707917935,
+            0.011183479641515174,
+            0.01016302650647336,
+            0.009757900647328873,
+            0.00968440250787688,
+            0.009117253902858417,
+            0.008878122708809218,
+            0.009331659291331706,
+            0.009169148207691154,
+            0.008414469481641916,
+            0.009192834559239839,
+            0.008279470775864627,
+            0.007253723850130643,
+            0.0077106262324377894,
+            0.006892610990785454,
+            0.00681141935484974,
+            0.006244109061203505,
+            0.00580739148426801,
+            0.005438868379171349,
+            0.005404922902878178,
+            0.005190986539482286,
+            0.004438311927706788,
+            0.004042488835310857,
+            0.0037420463294869193,
+            0.0035588211490233477,
+            0.00353426571420737,
+            0.0030757462464910197,
+            0.0029857159641228223,
+            0.0026977243220531627,
+            0.0025945355974775004,
+            0.0025732072627809095,
+            0.00258396618607405
+          ],
+          "prediction_variance": [
+            5.00283895235043e-05,
+            0.005250134970992804,
+            9.254894393961877e-06
+          ]
+        }
+      ]
+    ]
+  },
+  "aggregated_results": [
+    {
+      "iteration": 0,
+      "total_samples_seen": 0.0,
+      "samples_added": 0.0,
+      "training_samples": 0,
+      "mean_total_mse": 0.58974995854186,
+      "std_total_mse": 0.0,
+      "mean_mse_per_output": [
+        0.45035472812334926,
+        0.07975378184668837,
+        0.05964144857182224
+      ],
+      "std_mse_per_output": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_train_loss": null,
+      "window_size": 1.0,
+      "num_seeds": 1,
+      "mean_prediction_variance_per_output": [
+        NaN,
+        NaN,
+        NaN
+      ],
+      "std_prediction_variance_per_output": [
+        NaN,
+        NaN,
+        NaN
+      ]
+    },
+    {
+      "iteration": 1,
+      "total_samples_seen": 600.0,
+      "samples_added": 600.0,
+      "training_samples": 30000.0,
+      "mean_total_mse": 9.024038103118053e-05,
+      "std_total_mse": 0.0,
+      "mean_mse_per_output": [
+        5.521477588161985e-05,
+        1.9345963715847276e-05,
+        1.5679641433713405e-05
+      ],
+      "std_mse_per_output": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_train_loss": 0.011090729994466529,
+      "window_size": 1.0,
+      "num_seeds": 1,
+      "mean_prediction_variance_per_output": [
+        5.00283895235043e-05,
+        0.005250134970992804,
+        9.254894393961877e-06
+      ],
+      "std_prediction_variance_per_output": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "execution_time_seconds": 16.514737
+}
