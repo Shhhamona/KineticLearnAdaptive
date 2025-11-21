@@ -1,10 +1,10 @@
 {
-  "500": {
-    "0.2": {
-      "final_mse": 1.7645023293353248e-06,
-      "final_mse_std": 5.211453274021241e-07,
-      "total_samples": 2996.2,
-      "n_iterations": 6
+  "800": {
+    "0.1": {
+      "final_mse": 9.714291471895584e-06,
+      "final_mse_std": 4.022147335366346e-06,
+      "total_samples": 1749.7,
+      "n_iterations": 3
     }
   }
 }

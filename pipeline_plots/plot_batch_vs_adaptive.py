@@ -191,7 +191,7 @@ def main():
     
     # Use specific adaptive batch sampling file
     print("\nUsing adaptive batch sampling result file...")
-    adaptive_file = results_dir / 'adaptive_batch_sampling_w1.0_s0.1_e25_20251028_185800.json'
+    adaptive_file = results_dir / 'sample_efficiency_800per_iter_shrink0.4_20251112_155054.json'
     
     if not adaptive_file.exists():
         print(f"⚠️  Adaptive file not found: {adaptive_file}")

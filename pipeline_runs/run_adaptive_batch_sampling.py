@@ -39,22 +39,22 @@ def main():
     # Configuration
     nspecies = 3
     num_pressure_conditions = 2
-    react_idx = [2]
+    react_idx = [0,1,2]
     
     # Adaptive batch sampling settings
-    n_iterations = 40  # Number of iterations (one per pool file)
-    samples_per_iteration = int(4000/n_iterations)  # Samples to grab from each pool
+    n_iterations = 10  # Number of iterations (one per pool file)
+    samples_per_iteration = int(2000/n_iterations)  # Samples to grab from each pool
     n_epochs = 50  # Train for 50 epochs at each iteration
     batch_size = 16  # Batch size for NN training
     initial_window_size = 1.0  # ±100% around center
     shrink_rate = 1  # 70% reduction each iteration
-    num_seeds = 15
+    num_seeds = 10
     
     # Neural Network hyperparameters
     nn_params = {
         'input_size': None,  # Will be set automatically from data
         'output_size': None,  # Will be set automatically from data
-        'hidden_sizes': (64, 32),  # Two hidden layers
+        'hidden_sizes': (64, 32), #(110, 60),#(64, 32),  # Two hidden layers
         'activation': 'tanh',
         'learning_rate': 0.001,
         'model_name': 'adaptive_batch_sampling_nn'

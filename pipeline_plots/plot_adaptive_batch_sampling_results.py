@@ -256,8 +256,8 @@ def main():
     
     # Path to the adaptive batch sampling results file
     # Update this path to your actual results file
-    result_file = 'pipeline_results/adaptive_batch_sampling_w1.0_s0.1_e25_20251028_185800.json'
-    result_file = 'pipeline_results/adaptive_batch_sampling_w1.0_s0.5_e100_20251106_172628.json'
+    #result_file = 'pipeline_results/adaptive_sampling_w1_s1_20251016_182309.json'
+    result_file = 'pipeline_results\sample_efficiency_800per_iter_shrink0.4_20251112_155054.json'
     
     if not Path(result_file).exists():
         print(f"⚠️  Result file not found: {result_file}")

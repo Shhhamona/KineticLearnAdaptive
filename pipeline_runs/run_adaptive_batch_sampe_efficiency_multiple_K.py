@@ -70,7 +70,7 @@ def main():
     # Configuration
     nspecies = 3
     num_pressure_conditions = 2
-    react_idx = [2]
+    react_idx = [0,1,2]
     
     # Experimental parameters
     # Keys = samples_per_iteration, Values = list of shrink_rates to test
@@ -79,17 +79,17 @@ def main():
         #50: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],    # 50 samples per iteration, test various shrink rates
         #100: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],   # 100 samples per iteration
         #200: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],   # 200 samples per iteration
-        800: [0.40],   # 300 samples per iteration
+        800: [0.1],   # 300 samples per iteration
     }
     
     # Total sample budget (will determine n_iterations from samples_per_iteration)
-    max_total_samples = 4200  # Fixed total budget
+    max_total_samples = 3000  # Fixed total budget
     
     # Training hyperparameters
     n_epochs = 50  # Train for 50 epochs at each iteration
     batch_size = 16  # Batch size for NN training
     initial_window_size = 1.0  # ±100% around center
-    num_seeds = 5
+    num_seeds = 10
     
     # Neural Network hyperparameters
     nn_params = {
@@ -405,6 +405,7 @@ def main():
                 initial_window_size=initial_window_size,
                 shrink_rate=shrink_rate,
                 num_seeds=num_seeds,
+                use_model_prediction=True,
                 window_type='output',
                 pipeline_name=f"sample_efficiency_{samples_per_iteration}per_iter_shrink{shrink_rate}",
                 results_dir="pipeline_results"
