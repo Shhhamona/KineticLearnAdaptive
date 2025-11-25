@@ -1,0 +1,234 @@
+800 samples per iteration
+0.4 factor
+
+Iteration 1:
+
+
+
+	- Uniform Sampling file
+
+        {
+            'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-08-27/batch_4000sims_20250827_010028.json',
+            'label': 'Window Batch 1 (4000 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_true/2, K_true×2]'
+        },
+
+
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.26973938e+14 1.39956298e+15 9.78644572e+14]
+   Absolute error:     [2.69739376e+13 9.95629769e+13 1.86445716e+13]
+   Relative error:     [4.49565627 7.65869053 1.94214287] %
+   MSE (original):     1.098800e+28
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.33406183e+14 1.40981308e+15 9.82427666e+14]
+   Absolute error:     [3.34061833e+13 1.09813080e+14 2.24276661e+13]
+   Relative error:     [5.56769721 8.44715997 2.33621522] %
+   MSE (original):     1.367789e+28
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.32939769e+14 1.42195694e+15 9.79670447e+14]
+   Absolute error:     [3.29397686e+13 1.21956939e+14 1.96704470e+13]
+   Relative error:     [5.48996143 9.38130296 2.0490049 ] %
+   MSE (original):     1.634545e+28
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.27138302e+14 1.43289575e+15 9.64797141e+14]
+   Absolute error:     [2.71383021e+13 1.32895750e+14 4.79714088e+12]
+   Relative error:     [ 4.52305035 10.22275002  0.49970217] %
+   MSE (original):     1.842078e+28
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.41135821e+14 1.43845343e+15 9.84789983e+14]
+   Absolute error:     [4.11358214e+13 1.38453432e+14 2.47899833e+13]
+   Relative error:     [ 6.85597023 10.65026402  2.58228992] %
+   MSE (original):     2.147605e+28
+
+
+Iteration 2:
+
+
+        {
+            'path': ['results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-21/batch_800sims_20251121_153851.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-21/batch_800sims_20251121_153853.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-21/batch_800sims_20251121_153859.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-21/batch_800sims_20251121_153925.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-21/batch_800sims_20251121_154002.json'],
+            'label': 'Window Batch 2 (4000 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_true/1.4, K_true×1.4]'
+        },
+
+
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.97612413e+14 1.28223775e+15 9.55861668e+14]
+   Absolute error:     [2.38758662e+12 1.77622525e+13 4.13833170e+12]
+   Relative error:     [0.3979311  1.36632711 0.43107622] %
+   MSE (original):     3.383240e+26
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.06454766e+14 1.32921492e+15 9.61237073e+14]
+   Absolute error:     [6.45476635e+12 2.92149199e+13 1.23707265e+12]
+   Relative error:     [1.07579439 2.24730153 0.12886173] %
+   MSE (original):     8.967059e+26
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.09090678e+14 1.34280837e+15 9.66804950e+14]
+   Absolute error:     [9.09067817e+12 4.28083665e+13 6.80495024e+12]
+   Relative error:     [1.51511303 3.29295127 0.70884898] %
+   MSE (original):     1.961504e+27
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.11907620e+14 1.33660255e+15 9.74508686e+14]
+   Absolute error:     [1.19076198e+13 3.66025515e+13 1.45086857e+13]
+   Relative error:     [1.9846033  2.81558089 1.51132142] %
+   MSE (original):     1.692040e+27
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.12101667e+14 1.34707458e+15 9.70836589e+14]
+   Absolute error:     [1.21016672e+13 4.70745836e+13 1.08365893e+13]
+   Relative error:     [2.01694454 3.62112182 1.12881139] %
+   MSE (original):     2.479898e+27
+
+✓ Predictions saved to: pipeline_results\predictions_800per_iter_shrink0.4_20251121_162719.json
+
+Iteration 3:
+
+
+✓ Results saved to: pipeline_results\sample_efficiency_800per_iter_shrink0.4_20251121_191556.json
+
+
+📊 Final Predictions (Original Scale) - All Seeds:
+======================================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.04488829e+14 1.31544895e+15 9.61573271e+14]
+   Absolute error:     [4.48882947e+12 1.54489476e+13 1.57327144e+12]
+   Relative error:     [0.74813824 1.18838058 0.16388244] %
+   MSE (original):     2.612948e+26
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00602732e+14 1.29538904e+15 9.60305374e+14]
+   Absolute error:     [6.02731705e+11 4.61096106e+12 3.05374041e+11]
+   Relative error:     [0.10045528 0.35468931 0.0318098 ] %
+   MSE (original):     2.171750e+25
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00184167e+14 1.29118214e+15 9.61527957e+14]
+   Absolute error:     [1.84167248e+11 8.81786278e+12 1.52795669e+12]
+   Relative error:     [0.03069454 0.67829714 0.15916216] %
+   MSE (original):     8.012327e+25
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01841688e+14 1.31445963e+15 9.61044371e+14]
+   Absolute error:     [1.84168822e+12 1.44596349e+13 1.04437056e+12]
+   Relative error:     [0.30694804 1.11227961 0.1087886 ] %
+   MSE (original):     2.135636e+26
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.02635544e+14 1.30270326e+15 9.63439529e+14]
+   Absolute error:     [2.63554449e+12 2.70326195e+12 3.43952944e+12]
+   Relative error:     [0.43925742 0.20794323 0.35828432] %
+   MSE (original):     2.608408e+25
+
+
+Iteration 4:
+
+
+📊 Final Predictions (Original Scale) - All Seeds:
+======================================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01395014e+14 1.31056851e+15 9.60789418e+14]
+   Absolute error:     [1.39501443e+12 1.05685141e+13 7.89417903e+11]
+   Relative error:     [0.2325024  0.81296263 0.08223103] %
+   MSE (original):     1.142627e+26
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.98104041e+14 1.28128746e+15 9.57616470e+14]
+   Absolute error:     [1.89595935e+12 1.87125377e+13 2.38352966e+12]
+   Relative error:     [0.31599322 1.43942598 0.24828434] %
+   MSE (original):     3.594349e+26
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.02758424e+14 1.32271330e+15 9.60995051e+14]
+   Absolute error:     [2.75842449e+12 2.27133023e+13 9.95050721e+11]
+   Relative error:     [0.45973742 1.7471771  0.10365112] %
+   MSE (original):     5.244931e+26
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.98395577e+14 1.28831734e+15 9.59310166e+14]
+   Absolute error:     [1.60442334e+12 1.16826569e+13 6.89833870e+11]
+   Relative error:     [0.26740389 0.89866592 0.07185769] %
+   MSE (original):     1.395345e+26
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.98548247e+14 1.28911709e+15 9.59026777e+14]
+   Absolute error:     [1.45175317e+12 1.08829058e+13 9.73222670e+11]
+   Relative error:     [0.24195886 0.8371466  0.10137736] %
+   MSE (original):     1.214924e+26
+
+✓ Predictions saved to: pipeline_results\predictions_800per_iter_shrink0.4_20251122_000540.json
+
+Iteration 5
+
+
+📊 Final Predictions (Original Scale) - All Seeds:
+======================================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.97879631e+14 1.28506413e+15 9.57869878e+14]
+   Absolute error:     [2.12036912e+12 1.49358662e+13 2.13012183e+12]
+   Relative error:     [0.35339485 1.14891279 0.22188769] %
+   MSE (original):     2.321135e+26
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.99822751e+14 1.29093504e+15 9.60952940e+14]
+   Absolute error:     [1.77248713e+11 9.06495863e+12 9.52940049e+11]
+   Relative error:     [0.02954145 0.69730451 0.09926459] %
+   MSE (original):     8.311299e+25
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01559450e+14 1.30850037e+15 9.61550957e+14]
+   Absolute error:     [1.55945046e+12 8.50037375e+12 1.55095736e+12]
+   Relative error:     [0.25990841 0.6538749  0.16155806] %
+   MSE (original):     7.709371e+25
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.98961375e+14 1.30402663e+15 9.57728956e+14]
+   Absolute error:     [1.03862461e+12 4.02663020e+12 2.27104382e+12]
+   Relative error:     [0.1731041  0.30974078 0.23656706] %
+   MSE (original):     2.245013e+25
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.98438098e+14 1.28921172e+15 9.58411023e+14]
+   Absolute error:     [1.56190171e+12 1.07882799e+13 1.58897681e+12]
+   Relative error:     [0.26031695 0.82986768 0.16551842] %
+   MSE (original):     1.213514e+26
+✓ Predictions saved to: pipeline_results\predictions_800per_iter_shrink0.4_20251122_125457.json

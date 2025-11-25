@@ -73,7 +73,8 @@ class NeuralNetModel(BaseModel):
         activation: str = 'tanh',
         learning_rate: float = 0.0001,
         model_name: str = "nn_model",
-        checkpoint_dir: str = "model_checkpoints"
+        checkpoint_dir: str = "model_checkpoints",
+        seed: Optional[int] = None
     ):
         """
         Initialize Neural Network model.
@@ -86,6 +87,7 @@ class NeuralNetModel(BaseModel):
             learning_rate: Learning rate for optimizer
             model_name: Name for the model
             checkpoint_dir: Directory to save/load checkpoints
+            seed: Random seed for reproducibility (None for random initialization)
         """
         super().__init__(model_name, checkpoint_dir)
         
@@ -94,10 +96,24 @@ class NeuralNetModel(BaseModel):
         self.hidden_sizes = hidden_sizes
         self.activation = activation
         self.learning_rate = learning_rate
+        self.seed = seed
+        
+        # Set random seeds for reproducibility
+        if seed is not None:
+            torch.manual_seed(seed)
+            np.random.seed(seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed(seed)
+                torch.cuda.manual_seed_all(seed)
+                # For complete reproducibility on CUDA
+                torch.backends.cudnn.deterministic = True
+                torch.backends.cudnn.benchmark = False
         
         # Set device (GPU if available, else CPU)
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         print(f"🔧 Using device: {self.device}")
+        if seed is not None:
+            print(f"🎲 Random seed set to: {seed}")
         
         # Create model and move to device
         self.model = SimpleNeuralNet(input_size, output_size, hidden_sizes, activation)
@@ -112,7 +128,8 @@ class NeuralNetModel(BaseModel):
             'output_size': output_size,
             'hidden_sizes': hidden_sizes,
             'activation': activation,
-            'learning_rate': learning_rate
+            'learning_rate': learning_rate,
+            'seed': seed
         })
     
     def fit(

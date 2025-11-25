@@ -1,0 +1,246 @@
+Great! Now lets update the iteration3. This file is an old one so you need to update:
+
+========================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.12411728e+14 1.27801784e+15 9.69515481e+14]
+   Absolute error:     [1.24117282e+13 2.19821633e+13 9.51548143e+12]
+   Relative error:     [2.06862137 1.69093564 0.99119598] %
+   MSE (original):     7.278109e+26
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.05219744e+14 1.28882485e+15 9.67853140e+14]
+   Absolute error:     [5.21974372e+12 1.11751463e+13 7.85313978e+12]
+   Relative error:     [0.86995729 0.85962664 0.81803539] %
+   MSE (original):     2.138014e+26
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.05436894e+14 1.23639601e+15 9.62420177e+14]
+   Absolute error:     [5.43689370e+12 6.36039919e+13 2.42017655e+12]
+   Relative error:     [0.90614895 4.89261476 0.25210172] %
+   MSE (original):     4.080885e+27
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.10265048e+14 1.27121314e+15 9.68718354e+14]
+   Absolute error:     [1.02650476e+13 2.87868624e+13 8.71835388e+12]
+   Relative error:     [1.71084126 2.21437403 0.90816186] %
+   MSE (original):     1.010064e+27
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.08480498e+14 1.28412562e+15 9.67648537e+14]
+   Absolute error:     [8.48049817e+12 1.58743813e+13 7.64853684e+12]
+   Relative error:     [1.41341636 1.22110626 0.79672259] %
+   MSE (original):     3.824149e+26
+
+✓ Predictions saved to: pipeline_results\predictions_500per_iter_shrink0.4_20251124_193921.json
+======================================================================
+
+✓ Final MSE (scaled): 2.396614e-04 ± 8.957738e-05
+✓ Total samples used: 1000
+
+
+Iteration 3:
+
+
+=================================
+Aggregated Results Summary
+======================================================================
+Iter   Samples      Added    Train#       MSE             Std Err         Train Loss      Window
+----------------------------------------------------------------------------------------------------
+0      0            0        0            1.245861e+00    0.000000e+00    N/A             1.0000
+1      500          500      25000        1.415502e-03    5.450921e-04    1.656118e-02    1.0000
+2      1000         500      25000        2.396614e-04    8.957738e-05    4.363848e-04    0.4000
+3      1500         500      25000        1.113868e-04    8.234885e-05    1.682678e-05    0.1600
+
+Execution time: 243.12 seconds
+======================================================================
+
+✓ Results saved to: pipeline_results\sample_efficiency_500per_iter_shrink0.4_20251124_221151.json
+
+
+📊 Final Predictions (Original Scale) - All Seeds:
+======================================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.04509643e+14 1.31226326e+15 9.63331850e+14]
+   Absolute error:     [4.50964325e+12 1.22632618e+13 3.33184971e+12]
+   Relative error:     [0.75160721 0.94332783 0.34706768] %
+   MSE (original):     1.818257e+26
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00935681e+14 1.28549297e+15 9.62016006e+14]
+   Absolute error:     [9.35680705e+11 1.45070298e+13 2.01600565e+12]
+   Relative error:     [0.15594678 1.11592537 0.21000059] %
+   MSE (original):     2.153937e+26
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.02387710e+14 1.29872170e+15 9.61368325e+14]
+   Absolute error:     [2.38771028e+12 1.27830321e+12 1.36832521e+12]
+   Relative error:     [0.39795171 0.09833102 0.14253388] %
+   MSE (original):     9.207533e+24
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01038534e+14 1.29953291e+15 9.61610690e+14]
+   Absolute error:     [1.03853369e+12 4.67091636e+11 1.61069043e+12]
+   Relative error:     [0.17308895 0.03593013 0.16778025] %
+   MSE (original):     3.891050e+24
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.08801288e+14 1.35278807e+15 9.66620945e+14]
+   Absolute error:     [8.80128791e+12 5.27880654e+13 6.62094491e+12]
+   Relative error:     [1.46688132 4.06062041 0.68968176] %
+   MSE (original):     2.907879e+27
+
+✓ Predictions saved to: pipeline_results\predictions_500per_iter_shrink0.4_20251124_221151.json
+======================================================================
+
+✓ Final MSE (scaled): 1.113868e-04 ± 8.234885e-05
+✓ Total samples used: 1500
+
+
+Iteration 5
+
+xecution time: 463.69 seconds
+======================================================================
+
+✓ Results saved to: pipeline_results\sample_efficiency_500per_iter_shrink0.4_20251125_183356.json
+
+
+📊 Final Predictions (Original Scale) - All Seeds:
+======================================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00026884e+14 1.29822797e+15 9.60160504e+14]
+   Absolute error:     [2.68837138e+10 1.77203030e+12 1.60504176e+11]
+   Relative error:     [0.00448062 0.13631002 0.01671919] %
+   MSE (original):     3.166576e+24
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00522981e+14 1.30106040e+15 9.60777288e+14]
+   Absolute error:     [5.22981300e+11 1.06039591e+12 7.77288199e+11]
+   Relative error:     [0.08716355 0.08156892 0.08096752] %
+   MSE (original):     2.002126e+24
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.98141877e+14 1.27897308e+15 9.58814794e+14]
+   Absolute error:     [1.85812261e+12 2.10269222e+13 1.18520642e+12]
+   Relative error:     [0.3096871  1.61745555 0.123459  ] %
+   MSE (original):     4.469888e+26
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00414835e+14 1.30232507e+15 9.59952239e+14]
+   Absolute error:     [4.14835460e+11 2.32506824e+12 4.77605586e+10]
+   Relative error:     [0.06913924 0.1788514  0.00497506] %
+   MSE (original):     5.580312e+24
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01043183e+14 1.30734396e+15 9.60291299e+14]
+   Absolute error:     [1.04318282e+12 7.34395588e+12 2.91299007e+11]
+   Relative error:     [0.1738638  0.56491968 0.03034365] %
+   MSE (original):     5.510677e+25
+
+✓ Predictions saved to: pipeline_results\predictions_500per_iter_shrink0.4_20251125_183356.json
+======================================================================
+
+✓ Final MSE (scaled): 1.579004e-05 ± 1.181897e-05
+✓ Total samples used: 2000
+
+
+Iteration 6 
+
+
+======================================================================
+Aggregated Results Summary
+======================================================================
+Iter   Samples      Added    Train#       MSE             Std Err         Train Loss      Window  
+
+----------------------------------------------------------------------------------------------------
+0      0            0        0            1.245861e+00    0.000000e+00    N/A             1.0000  
+
+1      500          500      25000        1.415502e-03    5.450921e-04    1.656118e-02    1.0000  
+
+2      1000         500      25000        2.396614e-04    8.957738e-05    4.363848e-04    0.4000  
+
+3      1500         500      25000        1.113868e-04    8.234885e-05    1.682678e-05    0.1600  
+
+4      2000         500      25000        1.579004e-05    1.181897e-05    2.772565e-06    0.0640  
+
+5      2500         500      25000        1.499245e-05    7.022975e-06    6.818799e-06    0.0256  
+
+
+Execution time: 543.19 seconds
+======================================================================
+
+✓ Results saved to: pipeline_results\sample_efficiency_500per_iter_shrink0.4_20251125_211634.json
+
+
+📊 Final Predictions (Original Scale) - All Seeds:
+======================================================================
+
+Seed 42 (index 0):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [5.99675481e+14 1.29857658e+15 9.59916079e+14]
+   Absolute error:     [3.24518743e+11 1.42341685e+12 8.39208093e+10]
+   Relative error:     [0.05408646 0.1094936  0.00874175] %
+   MSE (original):     2.138471e+24
+
+Seed 43 (index 1):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.02046393e+14 1.31640218e+15 9.61267054e+14]
+   Absolute error:     [2.04639285e+12 1.64021754e+13 1.26705362e+12]
+   Relative error:     [0.34106547 1.2617058  0.13198475] %
+   MSE (original):     2.748245e+26
+
+Seed 44 (index 2):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01072866e+14 1.30900014e+15 9.60911974e+14]
+   Absolute error:     [1.07286571e+12 9.00014079e+12 9.11973689e+11]
+   Relative error:     [0.17881095 0.69231852 0.09499726] %
+   MSE (original):     8.298527e+25
+
+Seed 45 (index 3):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.01206260e+14 1.31063805e+15 9.60746964e+14]
+   Absolute error:     [1.20625988e+12 1.06380510e+13 7.46963938e+11]
+   Relative error:     [0.20104331 0.81831161 0.07780874] %
+   MSE (original):     1.151811e+26
+
+Seed 46 (index 4):
+   True K values:      [6.0e+14 1.3e+15 9.6e+14]
+   Predicted K values: [6.00165142e+14 1.30161669e+15 9.60381242e+14]
+   Absolute error:     [1.65141591e+11 1.61669067e+12 3.81241909e+11]
+   Relative error:     [0.0275236  0.12436082 0.0397127 ] %
+   MSE (original):     2.786306e+24
+
+✓ Predictions saved to: pipeline_results\predictions_500per_iter_shrink0.4_20251125_211634.json   
+======================================================================
+
+✓ Final MSE (scaled): 1.499245e-05 ± 7.022975e-06
+✓ Total samples used: 2500
+
+======================================================================
+FINAL RESULTS SUMMARY
+======================================================================
+
+📊 Samples per Iteration: 500
+----------------------------------------------------------------------
+  Shrink rate 0.40 (5 iters):   MSE = 1.499245e-05
+
+✓ Summary saved to: pipeline_results\sample_efficiency_summary.json
+
+

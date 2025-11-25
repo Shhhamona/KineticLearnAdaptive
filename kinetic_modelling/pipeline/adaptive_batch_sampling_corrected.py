@@ -56,7 +56,8 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             initial_window_size=0.3,
             shrink_rate=0.8,
             num_seeds=5,
-            window_type='output'
+            window_type='output',
+            remove_first_pool_each_iteration=False  # Set to True to progressively remove pools
         )
         results = pipeline.run()
         ```
@@ -77,6 +78,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         num_seeds: int = 5,
         window_type: str = 'output',
         use_model_prediction: bool = True,
+        remove_first_pool_each_iteration: bool = False,
         pipeline_name: str = "adaptive_batch_sampling",
         results_dir: str = "pipeline_results"
     ):
@@ -97,6 +99,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             num_seeds: Number of seeds for robustness
             window_type: 'output' (sample based on y) or 'input' (sample based on x)
             use_model_prediction: If True, use model's prediction as center; if False, use test dataset average
+            remove_first_pool_each_iteration: If True, remove the first pool dataset after each iteration (progressive narrowing)
             pipeline_name: Name for this pipeline
             results_dir: Directory to save results
         """
@@ -115,6 +118,10 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         self.num_seeds = num_seeds
         self.window_type = window_type
         self.use_model_prediction = use_model_prediction
+        self.remove_first_pool_each_iteration = remove_first_pool_each_iteration
+        self.num_seeds = num_seeds
+        self.window_type = window_type
+        self.use_model_prediction = use_model_prediction
         
         # Store configuration
         total_pool_samples = sum(len(pool_ds) for pool_ds in pool_datasets)
@@ -130,6 +137,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             'num_seeds': num_seeds,
             'window_type': window_type,
             'use_model_prediction': use_model_prediction,
+            'remove_first_pool_each_iteration': remove_first_pool_each_iteration,
             'num_pool_datasets': len(pool_datasets),
             'pool_samples_per_dataset': [len(pool_ds) for pool_ds in pool_datasets],
             'total_pool_samples': total_pool_samples,
@@ -240,7 +248,11 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         #
         # Get K_true from pool metadata (if available)
         if hasattr(pool_dataset, 'k_true_values'):
-            k_true = pool_dataset.k_true_values  # Shape: (n_reactions,)
+            if 'K_true' in pool_dataset.k_range_str:
+                k_true = pool_dataset.k_true_values  # Shape: (n_reactions,)
+            else:
+                print(f"        ⚠️  'k_true' not found in k_range_str: {pool_dataset.k_range_str}. Using center values instead. {center.flatten()}")
+                k_true = center.flatten()  # Fallback to center if k_true not specified
             
             if verbose:
                 print(f"        CHECK 2: Verifying sampling interval within pool bounds")
@@ -455,8 +467,10 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         print(f"    Test MSE (untrained): {total_mse:.6e}")
         
         # Adaptive iterations - sample from all valid pools
+        # Create a copy of pool_datasets for this seed (so removal doesn't affect other seeds)
+        seed_pool_datasets = list(self.pool_datasets)  # Shallow copy - references same dataset objects
         total_samples_seen = 0
-        pool_used_indices = [set() for _ in range(len(self.pool_datasets))]  # Track used indices per pool
+        pool_used_indices = [set() for _ in range(len(seed_pool_datasets))]  # Track used indices per pool
         
         for iteration in range(1, self.n_iterations + 1):
             print(f"\n  Iteration {iteration}")
@@ -481,7 +495,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             
             # Validate all pools and identify which ones can be used for this window
             valid_pools = []
-            for pool_idx, pool_ds in enumerate(self.pool_datasets):
+            for pool_idx, pool_ds in enumerate(seed_pool_datasets):
                 if self._validate_pool_k_range(pool_ds, center, window_size, verbose=True):
                     # Check if pool has unused samples
                     unused_count = len(pool_ds) - len(pool_used_indices[pool_idx])
@@ -576,6 +590,17 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             print(f"    Total samples collected this iteration: {samples_added}")
             print(f"    Total samples seen so far: {total_samples_seen}")
             
+            # Remove first pool if enabled (from the seed-local copy)
+            if self.remove_first_pool_each_iteration and len(seed_pool_datasets) > 0:
+                removed_pool = seed_pool_datasets.pop(0)
+                removed_pool_label = getattr(removed_pool, 'label', 'Unknown Pool')
+                print(f"    🗑️  Removed first pool: {removed_pool_label}")
+                print(f"       Remaining pools: {len(seed_pool_datasets)}")
+                
+                # Also remove the corresponding used_indices tracker
+                if len(pool_used_indices) > 0:
+                    pool_used_indices.pop(0)
+            
             # Create dataloader for the new samples
             train_loader = self._create_dataloader(
                 sampled_x,
@@ -621,7 +646,9 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                 'pools_used': pools_used_this_iteration,  # List of pool indices used
                 'avg_train_loss': float(avg_train_loss),
                 'epoch_losses': [float(loss) for loss in epoch_losses],
-                'prediction_variance': [float(v) for v in prediction_variance]
+                'prediction_variance': [float(v) for v in prediction_variance],
+                'test_predictions_scaled': y_pred.tolist(),  # Save predictions (in scaled space)
+                'test_true_scaled': y_test.tolist()  # Save true values (in scaled space)
             })
         
         return seed_results

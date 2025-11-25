@@ -1,0 +1,21 @@
+{
+  "experiment_name": "800_samples_1.01024_factor_seed_44",
+  "description": "Adaptive learning iteration 5 with 800 samples per iteration, K mult factor 1.01024, using predicted K values from seed 44",
+  "parameters": {
+    "n_samples_per_iteration": 800,
+    "k_mult_factor": 1.064,
+    "k_center": [6.00184167e-16, 1.29118214e-15, 9.61527957e-16],
+    "loki_version": "v4"
+  },
+  "predicted_k_info": {
+    "seed": 44,
+    "seed_index": 2,
+    "iteration": 5,
+    "true_k_values": [6.0e+14, 1.3e+15, 9.6e+14],
+    "predicted_k_values": [6.00184167e+14, 1.29118214e+15, 9.61527957e+14],
+    "absolute_error": [1.84167248e+11, 8.81786278e+12, 1.52795669e+12],
+    "relative_error_percent": [0.03069454, 0.67829714, 0.15916216],
+    "mse_original": 8.012327e+25
+  },
+  "notes": "K center values are the predicted values from iteration 4. Shrink rate: 0.4^5 = 0.01024, so k_mult_factor = 1.01024"
+}

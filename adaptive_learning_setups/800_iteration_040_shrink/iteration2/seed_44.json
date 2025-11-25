@@ -1,0 +1,20 @@
+{
+  "experiment_name": "800_samples_1.4_factor_seed_44",
+  "description": "Adaptive learning with 800 samples per iteration, K mult factor 1.4, using predicted K values from seed 44",
+  "parameters": {
+    "n_samples_per_iteration": 800,
+    "k_mult_factor": 1.4,
+    "k_center": [6.32939769e-16, 1.42195694e-15, 9.79670447e-16],
+    "loki_version": "v4"
+  },
+  "predicted_k_info": {
+    "seed": 44,
+    "seed_index": 2,
+    "true_k_values": [6.0e+14, 1.3e+15, 9.6e+14],
+    "predicted_k_values": [6.32939769e+14, 1.42195694e+15, 9.79670447e+14],
+    "absolute_error": [3.29397686e+13, 1.21956939e+14, 1.96704470e+13],
+    "relative_error_percent": [5.48996143, 9.38130296, 2.0490049],
+    "mse_original": 1.634545e+28
+  },
+  "notes": "K center values are the predicted values from the neural network training with seed 44"
+}

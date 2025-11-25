@@ -1,0 +1,32 @@
+    ======================================================================
+Aggregating results across 5 seeds...
+======================================================================
+C:\Users\rodol\Documents\PlasmaML\KineticLearnAdaptive\kinetic_modelling\pipeline\adaptive_batch_sampling_corrected.py:744: RuntimeWarning: Mean of empty slice
+  avg_prediction_variance = np.nanmean(prediction_variance_array, axis=0)
+C:\Users\rodol\Documents\PlasmaML\KineticLearnAdaptive\.venv\lib\site-packages\numpy\lib\nanfunctions.py:1879: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+
+======================================================================
+Aggregated Results Summary
+======================================================================
+Iter   Samples      Added    Train#       MSE             Std Err         Train Loss      Window
+----------------------------------------------------------------------------------------------------
+0      0            0        0            1.245861e+00    0.000000e+00    N/A             1.0000
+1      300          300      15000        4.996228e-03    1.311856e-03    2.262528e-02    1.0000
+2      600          300      15000        4.297203e-03    1.489164e-03    6.909128e-03    1.0000
+3      900          300      15000        2.029549e-03    7.424590e-04    1.833833e-03    1.0000
+4      1200         300      15000        8.356285e-04    5.224802e-04    1.171600e-03    1.0000
+5      1500         300      15000        3.471844e-04    6.621718e-05    8.542960e-04    1.0000
+6      1800         300      15000        8.637679e-04    4.223947e-04    5.848761e-04    1.0000
+7      2100         300      15000        4.713368e-04    1.406371e-04    3.840557e-04    1.0000
+8      2400         300      15000        2.087089e-04    1.388842e-04    2.669305e-04    1.0000
+9      2700         300      15000        3.344937e-04    8.682009e-05    2.132557e-04    1.0000
+10     3000         300      15000        1.493117e-04    4.703309e-05    1.794846e-04    1.0000
+11     3300         300      15000        5.914099e-04    4.363711e-04    1.406184e-04    1.0000
+12     3600         300      15000        1.354372e-04    4.495153e-05    1.274071e-04    1.0000
+13     3900         300      15000        7.257641e-05    4.859693e-05    1.112191e-04    1.0000
+
+Execution time: 906.18 seconds
+======================================================================
+
+✓ Results saved to: pipeline_results\sample_efficiency_300per_iter_shrink1.0_20251124_163023.json

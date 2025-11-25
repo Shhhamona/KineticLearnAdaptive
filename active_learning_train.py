@@ -68,10 +68,12 @@ def make_k_bounds_around(k_true: np.ndarray, rel_width: float = 0.2, multiplicat
 if __name__ == '__main__':
     # Parse CLI overrides for quick experiments
     parser = argparse.ArgumentParser(description='Active learning training runner')
-    parser.add_argument('--n-samples-per-iteration', type=int, default=3000,
+    parser.add_argument('--n-samples-per-iteration', type=int, default=5,
                         help='Number of samples to generate per adaptive iteration')
     parser.add_argument('--k-mult-factor', type=float, default=1.5,
                         help='Multiplicative factor for k-bounds (e.g. 2.0 => [k/2, k*2])')
+    parser.add_argument('--k-center', type=float, nargs=3, default=[6.00E-16, 1.30E-15, 9.60E-16],
+                        help='K center values for bounds (3 floats). Example: --k-center 6e-16 1.3e-15 9.6e-16')
     parser.add_argument('--loki-version', type=str, default='v2',
                         help='LoKI version to use: v2, v3, or custom path. Maps to predefined installation directories.')
     args = parser.parse_args()
@@ -82,6 +84,7 @@ if __name__ == '__main__':
         'v3': 'C:\\MyPrograms\\LoKI_v3.1.0-v3',
         'v4': 'C:\\MyPrograms\\LoKI_v3.1.0-v4',
         'v5': 'C:\\MyPrograms\\LoKI_v3.1.0-v5',
+        'v6': 'C:\\MyPrograms\\LoKI_v3.1.0-v6',
     }
     
     # If version is in the dictionary, use the mapped path; otherwise treat it as a custom path
@@ -100,6 +103,7 @@ if __name__ == '__main__':
         'n_iterations': 1,  # More iterations with smaller batches
         'n_samples_per_iteration': args.n_samples_per_iteration,  # Smaller, more targeted batches
         'k_multiplicative_factor': args.k_mult_factor,
+        'k_center': args.k_center,  # K center values for bounds
         'loki_path': loki_path,
         'svr_params': [
             {'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'},
@@ -269,10 +273,11 @@ if __name__ == '__main__':
     try:
         # Use raw k_true (physical units) for sampler bounds
         k_true = np.array([6.00E-16, 1.30E-15, 9.60E-16])
+        k_center = np.array(config.get('k_center', [6.00E-16, 1.30E-15, 9.60E-16]))
         #k_true = np.array([9.941885789401E-16, 1.800066252209E-15, 1.380839580124E-15])
         # Use multiplicative factor from config/CLI to build k bounds
         k_mult = config.get('k_multiplicative_factor', 1.5)
-        k_bounds = make_k_bounds_around(k_true, multiplicative_factor=k_mult)
+        k_bounds = make_k_bounds_around(k_center, multiplicative_factor=k_mult)
 
         print('   K bounds for sampler:')
         for i, (lo, hi) in enumerate(k_bounds):

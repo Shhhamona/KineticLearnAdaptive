@@ -25,6 +25,7 @@ from pathlib import Path
 import sys
 import numpy as np
 import json
+from datetime import datetime
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from kinetic_modelling import (
@@ -61,6 +62,16 @@ def parse_k_range_factor(k_range_str: str) -> float:
     if match:
         return float(match.group(1))
     
+    # Try to find pattern like "K_true×N" or "K_true*N"
+    match = re.search(r'K_pred[×*](\d+\.?\d*)', k_range_str)
+    if match:
+        return float(match.group(1))
+    
+    # Try to find pattern like "K_true/N"
+    match = re.search(r'K_pred/(\d+\.?\d*)', k_range_str)
+    if match:
+        return float(match.group(1))
+    
     # Default: assume wide range
     print(f"    ⚠️  Could not parse K range from: {k_range_str}")
     return 1000.0  # Very large factor = no restriction
@@ -79,17 +90,17 @@ def main():
         #50: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],    # 50 samples per iteration, test various shrink rates
         #100: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],   # 100 samples per iteration
         #200: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],   # 200 samples per iteration
-        800: [0.1],   # 300 samples per iteration
+        500: [0.4],   # 300 samples per iteration
     }
     
     # Total sample budget (will determine n_iterations from samples_per_iteration)
-    max_total_samples = 3000  # Fixed total budget
+    max_total_samples = 500*5 + 100  # Fixed total budget
     
     # Training hyperparameters
     n_epochs = 50  # Train for 50 epochs at each iteration
     batch_size = 16  # Batch size for NN training
     initial_window_size = 1.0  # ±100% around center
-    num_seeds = 10
+    num_seeds = 5
     
     # Neural Network hyperparameters
     nn_params = {
@@ -123,154 +134,209 @@ def main():
             'label': 'Window Batch 1 (4000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/2, K_true×2]'
         },
+
+        # K-factor 1.5. 2 files. 
+        {
+            'path': ['results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_500sims_20251124_190004.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_502sims_20251124_190023.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_504sims_20251124_190049.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_506sims_20251124_190107.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_508sims_20251124_190126.json'],
+            'label': 'Window Batch 2 (2500 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_pred/1.4, K_pred×1.4]'
+        },
+
+        # K-factor 1.16. 2 files. 
+        {
+            'path': ['results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_500sims_20251124_211946.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_502sims_20251124_212010.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_504sims_20251124_212050.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_506sims_20251124_212046.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_508sims_20251124_212106.json'],
+            'label': 'Window Batch 3 (2500 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_pred/1.16001, K_pred×1.16001]'
+        },
+
+        # K-factor 1.16. 2 files. 
+        {
+            'path': ['results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_500sims_20251124_235253.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_502sims_20251124_235323.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_504sims_20251124_235338.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_506sims_20251123_235411.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-24/batch_508sims_20251123_235353.json'],
+            'label': 'Window Batch 4 (2500 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_pred/1.064001, K_pred×1.064001]'
+        },
+
+                # K-factor 1.16. 2 files. 
+        {
+            'path': ['results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_500sims_20251125_210249.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_502sims_20251125_210337.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_504sims_20251125_210342.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_506sims_20251125_210433.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_508sims_20251125_210433.json'],
+            'label': 'Window Batch 5 (2500 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_pred/1.0256001., K_pred×1.0256001]'
+        },
+        
+        {
+            'path': ['results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_500sims_20251125_234330.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_502sims_20251125_234459.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_504sims_20251125_234433.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_506sims_20251125_234526.json',
+                     'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-25/batch_508sims_20251125_234625.json'],
+            'label': 'Window Batch 6 (2500 samples) - Uniform Sampling',
+            'k_range': 'K ∈ [K_pred/1.01024001., K_pred×1.01024001.]'
+        },
+        
         
         # K-factor 1.5
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-08/batch_3000sims_20251108_061037.json',
-            'label': 'Window Batch 2 (3000 samples) - Uniform Sampling',
+            'label': 'Window Batch 3 (3000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.5, K_true×1.5]'
         },
         
         # K-factor 1.15
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-28/batch_1000sims_20250928_191628.json',
-            'label': 'Window Batch 3 (1000 samples) - Uniform Sampling',
+            'label': 'Window Batch 4 (1000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.15, K_true×1.15]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_2500sims_20250929_031845.json',
-            'label': 'Window Batch 4 (2500 samples) - Uniform Sampling',
+            'label': 'Window Batch 5 (2500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.15, K_true×1.15]'
         },
         
         # K-factor 1.05
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-08/batch_2500sims_20251108_184222.json',
-            'label': 'Window Batch 5 (2500 samples) - Uniform Sampling',
+            'label': 'Window Batch 6 (2500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.05, K_true×1.05]'
         },
         
         # K-factor 1.025
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2500sims_20251109_072738.json',
-            'label': 'Window Batch 6 (2500 samples) - Uniform Sampling',
+            'label': 'Window Batch 7 (2500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.025, K_true×1.025]'
         },
         
         # K-factor 1.01
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-10-27/batch_500sims_20251027_154921.json',
-            'label': 'Window Batch 7 (500 samples) - Uniform Sampling',
+            'label': 'Window Batch 8 (500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.01, K_true×1.01]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-07/batch_2000sims_20251107_204934.json',
-            'label': 'Window Batch 8 (2000 samples) - Uniform Sampling',
+            'label': 'Window Batch 9 (2000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.01, K_true×1.01]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2500sims_20251109_195233.json',
-            'label': 'Window Batch 9 (2500 samples) - Uniform Sampling',
+            'label': 'Window Batch 10 (2500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.01, K_true×1.01]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2525sims_20251109_195849.json',
-            'label': 'Window Batch 10 (2525 samples) - Uniform Sampling',
+            'label': 'Window Batch 11 (2525 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.01, K_true×1.01]'
         },
         
         # K-factor 1.0075
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2550sims_20251109_200200.json',
-            'label': 'Window Batch 11 (2550 samples) - Uniform Sampling',
+            'label': 'Window Batch 12 (2550 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0075, K_true×1.0075]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2575sims_20251109_200551.json',
-            'label': 'Window Batch 12 (2575 samples) - Uniform Sampling',
+            'label': 'Window Batch 13 (2575 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0075, K_true×1.0075]'
         },
         
         # K-factor 1.005
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_2000sims_20250929_205429.json',
-            'label': 'Window Batch 13 (2000 samples) - Uniform Sampling',
+            'label': 'Window Batch 14 (2000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.005, K_true×1.005]'
         },
         
         # K-factor 1.0025
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2600sims_20251109_074357.json',
-            'label': 'Window Batch 14 (2600 samples) - Uniform Sampling',
+            'label': 'Window Batch 15 (2600 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0025, K_true×1.0025]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-10/batch_2550sims_20251110_033347.json',
-            'label': 'Window Batch 15 (2550 samples) - Uniform Sampling',
+            'label': 'Window Batch 16 (2550 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0025, K_true×1.0025]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-10/batch_2575sims_20251110_033748.json',
-            'label': 'Window Batch 16 (2575 samples) - Uniform Sampling',
+            'label': 'Window Batch 17 (2575 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0025, K_true×1.0025]'
         },
         
         # K-factor 1.001
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-08/batch_2600sims_20251108_185805.json',
-            'label': 'Window Batch 17 (2600 samples) - Uniform Sampling',
+            'label': 'Window Batch 18 (2600 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.001, K_true×1.001]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-10/batch_2500sims_20251110_032616.json',
-            'label': 'Window Batch 18 (2500 samples) - Uniform Sampling',
+            'label': 'Window Batch 19 (2500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.001, K_true×1.001]'
         },
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-10/batch_2525sims_20251110_033128.json',
-            'label': 'Window Batch 19 (2525 samples) - Uniform Sampling',
+            'label': 'Window Batch 20 (2525 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.001, K_true×1.001]'
         },
         
         # K-factor 1.0005
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-28/batch_1500sims_20250928_224858.json',
-            'label': 'Window Batch 20 (1500 samples) - Uniform Sampling',
+            'label': 'Window Batch 21 (1500 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0005, K_true×1.0005]'
         },
         
         # K-factor 1.00025
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2700sims_20251109_075908.json',
-            'label': 'Window Batch 21 (2700 samples) - Uniform Sampling',
+            'label': 'Window Batch 22 (2700 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.00025, K_true×1.00025]'
         },
         
         # K-factor 1.0001
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-08/batch_2700sims_20251108_191338.json',
-            'label': 'Window Batch 22 (2700 samples) - Uniform Sampling',
+            'label': 'Window Batch 23 (2700 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.0001, K_true×1.0001]'
         },
         
         # K-factor 1.00005
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-09-29/batch_2000sims_20250929_125706.json',
-            'label': 'Window Batch 23 (2000 samples) - Uniform Sampling',
+            'label': 'Window Batch 24 (2000 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.00005, K_true×1.00005]'
         },
         
         # K-factor 1.000025
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-09/batch_2750sims_20251109_080611.json',
-            'label': 'Window Batch 24 (2750 samples) - Uniform Sampling',
+            'label': 'Window Batch 25 (2750 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.000025, K_true×1.000025]'
         },
         
         # K-factor 1.00001 - Narrowest bounds
         {
             'path': 'results/batch_simulations/lokisimulator/boundsbasedsampler/2025-11-08/batch_2750sims_20251108_191922.json',
-            'label': 'Window Batch 25 (2750 samples) - Uniform Sampling',
+            'label': 'Window Batch 26 (2750 samples) - Uniform Sampling',
             'k_range': 'K ∈ [K_true/1.00001, K_true×1.00001]'
         }
     ]
@@ -317,6 +383,7 @@ def main():
     x_sample, y_sample = test_dataset.get_data()
     nn_params['input_size'] = x_sample.shape[1]
     nn_params['output_size'] = y_sample.shape[1]
+    nn_params['seed'] = 42  # Random initialization for each run
     
     print(f"\n🧠 Neural Network Configuration:")
     print(f"   Input size: {nn_params['input_size']}")
@@ -338,20 +405,75 @@ def main():
     print("\n📂 Loading all pool datasets...")
     pool_datasets = []
     for i, batch_info in enumerate(BATCH_FILES):
-        batch_path = Path(batch_info['path'])
-        if not batch_path.exists():
-            print(f"⚠️  Pool file not found: {batch_path}")
-            print(f"   Skipping: {batch_info['label']}")
-            continue
+        batch_path = batch_info['path']
         
-        pool_ds = MultiPressureDataset(
-            nspecies=nspecies,
-            num_pressure_conditions=num_pressure_conditions,
-            src_file=str(batch_path),
-            react_idx=react_idx,
-            scaler_input=reference_dataset.scaler_input,
-            scaler_output=reference_dataset.scaler_output
-        )
+        # Check if path is a list (multiple files to merge) or a single file
+        if isinstance(batch_path, list):
+            # Multiple files - load each and merge them
+            print(f"\n📦 Loading merged pool from {len(batch_path)} files:")
+            
+            all_x_data = []
+            all_y_data = []
+            
+            for file_idx, single_path in enumerate(batch_path):
+                single_path_obj = Path(single_path)
+                if not single_path_obj.exists():
+                    print(f"⚠️  Pool file not found: {single_path_obj}")
+                    continue
+                
+                # Load individual dataset
+                temp_ds = MultiPressureDataset(
+                    nspecies=nspecies,
+                    num_pressure_conditions=num_pressure_conditions,
+                    src_file=str(single_path_obj),
+                    react_idx=react_idx,
+                    scaler_input=reference_dataset.scaler_input,
+                    scaler_output=reference_dataset.scaler_output
+                )
+                
+                # Extract processed data
+                x_data, y_data = temp_ds.get_data()
+                all_x_data.append(x_data)
+                all_y_data.append(y_data)
+                
+                print(f"   ✓ File {file_idx + 1}/{len(batch_path)}: {len(temp_ds)} samples - {single_path_obj.name}")
+            
+            if len(all_x_data) == 0:
+                print(f"   ⚠️  No valid files found, skipping this pool")
+                continue
+            
+            # Concatenate all data
+            merged_x = np.vstack(all_x_data)
+            merged_y = np.vstack(all_y_data)
+            
+            print(f"   ✓ Merged total: {len(merged_x)} samples")
+            
+            # Create merged dataset using _init_from_processed_arrays
+            pool_ds = MultiPressureDataset(
+                nspecies=nspecies,
+                num_pressure_conditions=num_pressure_conditions,
+                processed_x=merged_x,
+                processed_y=merged_y,
+                scaler_input=reference_dataset.scaler_input,
+                scaler_output=reference_dataset.scaler_output
+            )
+            
+        else:
+            # Single file - load normally
+            batch_path_obj = Path(batch_path)
+            if not batch_path_obj.exists():
+                print(f"⚠️  Pool file not found: {batch_path_obj}")
+                print(f"   Skipping: {batch_info['label']}")
+                continue
+            
+            pool_ds = MultiPressureDataset(
+                nspecies=nspecies,
+                num_pressure_conditions=num_pressure_conditions,
+                src_file=str(batch_path_obj),
+                react_idx=react_idx,
+                scaler_input=reference_dataset.scaler_input,
+                scaler_output=reference_dataset.scaler_output
+            )
         
         # Attach K range metadata for validation
         pool_ds.k_range_factor = parse_k_range_factor(batch_info['k_range'])
@@ -406,6 +528,7 @@ def main():
                 shrink_rate=shrink_rate,
                 num_seeds=num_seeds,
                 use_model_prediction=True,
+                remove_first_pool_each_iteration=True,
                 window_type='output',
                 pipeline_name=f"sample_efficiency_{samples_per_iteration}per_iter_shrink{shrink_rate}",
                 results_dir="pipeline_results"
@@ -421,6 +544,96 @@ def main():
                 final_mse_std = agg[-1]['std_total_mse']
                 total_samples_seen = agg[-1]['total_samples_seen']
                 
+                # Get final predictions in original scale for ALL seeds
+                # The predictions are saved in the results (in scaled space)
+                predictions_per_seed = []
+                if 'raw_results' in pipeline.results and 'all_seed_results' in pipeline.results['raw_results']:
+                    all_seed_results = pipeline.results['raw_results']['all_seed_results']
+                    
+                    print(f"\n📊 Final Predictions (Original Scale) - All Seeds:")
+                    print("="*70)
+                    
+                    # Process each seed
+                    for seed_idx, seed_results in enumerate(all_seed_results):
+                        if len(seed_results) > 0:
+                            # Get the last iteration for this seed
+                            final_iteration = seed_results[-1]
+                            
+                            # Get the predictions and true values (in scaled space)
+                            if 'test_predictions_scaled' in final_iteration and 'test_true_scaled' in final_iteration:
+                                y_pred_scaled = np.array(final_iteration['test_predictions_scaled'])
+                                y_test_scaled = np.array(final_iteration['test_true_scaled'])
+                                
+                                # Convert predictions back to original scale
+                                # scaler_output is a list (one per pressure condition), use first one [0]
+                                y_pred_original = test_dataset.scaler_output[0].inverse_transform(y_pred_scaled)
+                                y_test_original = test_dataset.scaler_output[0].inverse_transform(y_test_scaled)
+                                
+                                # Calculate errors per K value
+                                absolute_error = np.abs(y_pred_original[0] - y_test_original[0])
+                                relative_error = 100 * absolute_error / y_test_original[0]
+                                
+                                # Calculate MSE in original scale
+                                mse_original_scale = np.mean((y_pred_original - y_test_original) ** 2, axis=0)
+                                total_mse_original = np.sum(mse_original_scale)
+                                
+                                # Store for this seed
+                                seed_prediction_data = {
+                                    'seed': final_iteration['seed'],
+                                    'seed_index': seed_idx,
+                                    'true_K_values': y_test_original[0].tolist(),
+                                    'predicted_K_values': y_pred_original[0].tolist(),
+                                    'absolute_error': absolute_error.tolist(),
+                                    'relative_error_percent': relative_error.tolist(),
+                                    'mse_per_K': mse_original_scale.tolist(),
+                                    'total_mse': float(total_mse_original),
+                                    'total_samples_seen': final_iteration['total_samples_seen'],
+                                    'iteration': final_iteration['iteration']
+                                }
+                                predictions_per_seed.append(seed_prediction_data)
+                                
+                                # Print summary for this seed
+                                print(f"\nSeed {final_iteration['seed']} (index {seed_idx}):")
+                                print(f"   True K values:      {y_test_original[0]}")
+                                print(f"   Predicted K values: {y_pred_original[0]}")
+                                print(f"   Absolute error:     {absolute_error}")
+                                print(f"   Relative error:     {relative_error} %")
+                                print(f"   MSE (original):     {total_mse_original:.6e}")
+                    
+                    # Save predictions to a separate file
+                    if len(predictions_per_seed) > 0:
+                        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                        predictions_file = Path(f"pipeline_results/predictions_{samples_per_iteration}per_iter_shrink{shrink_rate}_{timestamp}.json")
+                        predictions_file.parent.mkdir(parents=True, exist_ok=True)
+                        
+                        predictions_output = {
+                            'experiment_config': {
+                                'samples_per_iteration': samples_per_iteration,
+                                'shrink_rate': shrink_rate,
+                                'n_iterations': n_iterations,
+                                'total_samples': samples_per_iteration * n_iterations,
+                                'n_epochs': n_epochs,
+                                'batch_size': batch_size,
+                                'initial_window_size': initial_window_size,
+                                'num_seeds': num_seeds,
+                                'timestamp': timestamp
+                            },
+                            'predictions_per_seed': predictions_per_seed,
+                            'mean_predictions': {
+                                'mean_predicted_K': np.mean([p['predicted_K_values'] for p in predictions_per_seed], axis=0).tolist(),
+                                'std_predicted_K': np.std([p['predicted_K_values'] for p in predictions_per_seed], axis=0).tolist(),
+                                'mean_absolute_error': np.mean([p['absolute_error'] for p in predictions_per_seed], axis=0).tolist(),
+                                'mean_relative_error': np.mean([p['relative_error_percent'] for p in predictions_per_seed], axis=0).tolist(),
+                                'mean_total_mse': np.mean([p['total_mse'] for p in predictions_per_seed])
+                            }
+                        }
+                        
+                        with open(predictions_file, 'w') as f:
+                            json.dump(predictions_output, f, indent=2)
+                        
+                        print(f"\n✓ Predictions saved to: {predictions_file}")
+                        print("="*70)
+                
                 all_results[samples_per_iteration][shrink_rate] = {
                     'final_mse': final_mse,
                     'final_mse_std': final_mse_std,
@@ -428,7 +641,7 @@ def main():
                     'n_iterations': n_iterations
                 }
                 
-                print(f"\n✓ Final MSE: {final_mse:.6e} ± {final_mse_std:.6e}")
+                print(f"\n✓ Final MSE (scaled): {final_mse:.6e} ± {final_mse_std:.6e}")
                 print(f"✓ Total samples used: {total_samples_seen:.0f}")
     
     # Display comparison summary
