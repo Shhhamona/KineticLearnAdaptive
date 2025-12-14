@@ -82,8 +82,8 @@ class WindowSampler(BaseSampler):
             val_max = val * factor
             
             # Ensure bounds are within [0, 1] since data is scaled
-            val_min = max(0.0, val_min)
-            val_max = min(1.0, val_max)
+            #val_min = max(0.0, val_min)
+            #val_max = min(1.0, val_max)
             
             bounds.append((val_min, val_max))
         
@@ -113,40 +113,54 @@ class WindowSampler(BaseSampler):
         # Get data from dataset
         x_data, y_data = dataset.get_data()
         
-        # Shuffle first if requested
+        # Create index array to track original positions after shuffling
+        indices = np.arange(len(x_data))
+        
+        # Shuffle first if requested (using same method as _shuffle_dataset to maintain consistency)
         if shuffle:
-            x_data, y_data = self._shuffle_dataset(x_data, y_data, seed)
+            if seed is not None:
+                np.random.seed(seed)
+            np.random.shuffle(indices)
+            x_data = x_data[indices].copy()
+            y_data = y_data[indices].copy()
 
-        print("self.window_type", self.window_type)
+        #print("self.window_type", self.window_type)
 
-        print("x_data", x_data)
-        print("y_data", y_data)
+        #print("x_data", x_data)
+        #print("y_data", y_data)
         
         # Determine which data to check against bounds
         if self.window_type == 'output':
             check_data = y_data
         else:  # 'input'
             check_data = x_data
+
+
+        print("check_data length", len(check_data))
         
-        # Find samples within bounds
+        # Find samples within bounds and exclude specified indices AFTER shuffling
         if exclude_indices is None:
             exclude_indices = set()
         
         available_indices = []
         
         for idx in range(len(check_data)):
-            if idx in exclude_indices:
+            # Check if the ORIGINAL index (before shuffling) is in exclude list
+            if indices[idx] in exclude_indices:
                 continue
             
             # Check if sample is within all bounds
             within_bounds = True
             for dim_idx, (dim_min, dim_max) in enumerate(self.bounds):
+                #print(f"    Checking dimension {dim_idx}: value={check_data[idx, dim_idx]:.4f}, bounds=({dim_min:.4f}, {dim_max:.4f})")
                 if not (dim_min <= check_data[idx, dim_idx] <= dim_max):
                     within_bounds = False
                     break
             
             if within_bounds:
                 available_indices.append(idx)
+
+        print("available_indices length", len(available_indices))
         
         # Check if we found any samples
         if len(available_indices) == 0:
@@ -159,6 +173,8 @@ class WindowSampler(BaseSampler):
         # Select up to n_samples from available
         n_to_select = min(n_samples, len(available_indices))
         selected_indices = available_indices[:n_to_select]
+
+        #print("selected_indices", selected_indices)
         
         sampled_x = x_data[selected_indices]
         sampled_y = y_data[selected_indices]

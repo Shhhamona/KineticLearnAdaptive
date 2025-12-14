@@ -25,12 +25,12 @@ def main(train_dataset_path, train_label):
     nspecies = 3
     num_pressure_conditions = 2
     react_idx = [0, 1, 2]
-    
+
     # Training settings
-    batch_size = 64
-    num_epochs = 25 #400     # Train for 100 epochs
+    batch_size = 16
+    num_epochs = 50 #400     # Train for 100 epochs
     num_seeds = 5         # 5 seeds for robustness
-    eval_frequency = 25 #400   # Evaluate every 10 batches (not every batch!)
+    eval_frequency = 200 #400   # Evaluate every 10 batches (not every batch!)
     max_samples_per_file = 2000  # Max samples to load from each batch file
     
     # Neural network hyperparameters
@@ -138,6 +138,7 @@ def main(train_dataset_path, train_label):
         'learning_rate': learning_rate,
         'model_name': 'batch_training_nn'
     }
+    model_params['seed'] = 42  # Seed initialization for each run
     
     # Create and run pipeline
     print("\n🚀 Creating pipeline...")
@@ -174,7 +175,7 @@ def main(train_dataset_path, train_label):
 
 if __name__ == "__main__":
 
-    sampling_strats = False 
+    sampling_strats = True 
     
     if sampling_strats:
         train_datasets = [
@@ -195,7 +196,6 @@ if __name__ == "__main__":
 
         for train_file in train_datasets:
             main(train_file, labels[train_file])
-            break
     else:
         BATCH_FILES = [
             {
@@ -222,6 +222,7 @@ if __name__ == "__main__":
 
         for batch in BATCH_FILES:
             main(batch['path'], batch['label'])
+            #break
 
 
 

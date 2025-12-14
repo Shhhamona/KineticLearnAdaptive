@@ -79,6 +79,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         window_type: str = 'output',
         use_model_prediction: bool = True,
         remove_first_pool_each_iteration: bool = False,
+        shifted: bool = False,
         pipeline_name: str = "adaptive_batch_sampling",
         results_dir: str = "pipeline_results"
     ):
@@ -119,6 +120,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         self.window_type = window_type
         self.use_model_prediction = use_model_prediction
         self.remove_first_pool_each_iteration = remove_first_pool_each_iteration
+        self.shifted = shifted
         self.num_seeds = num_seeds
         self.window_type = window_type
         self.use_model_prediction = use_model_prediction
@@ -428,6 +430,10 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
         
         # Create a new model for this seed
         print(f"  Initializing Neural Network model...")
+
+        ##uncomment this part to get model seed working
+        ## REsults shown
+        ##self.model_params['seed'] = seed
         model = self.model_class(**self.model_params)
         
         seed_results = []
@@ -478,15 +484,34 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             # Recalculate center point
             # For iteration 1, use test dataset center (using first pool with broad range)
             # For iteration 2+, use model predictions if enabled
-            if iteration == 1:
-                center = self._calculate_center_point(self.test_dataset, model=None)
-                print(f"    Center from test dataset: {center.flatten()}")
+
+            if iteration == 1 and self.shifted and self.remove_first_pool_each_iteration:
+                max = np.max(self.pool_datasets[0].y_data, axis=0, keepdims=True)
+                print(f"    Max from first pool (shifted setup): {max.flatten()}")
+                min = np.min(self.pool_datasets[0].y_data, axis=0, keepdims=True)
+                print(f"    Min from first pool (shifted setup): {min.flatten()}")
+                center = max / (1+self.initial_window_size)
             else:
-                center = self._calculate_center_point(self.test_dataset, model)
-                if self.use_model_prediction:
-                    print(f"    Updated center from model prediction: {center.flatten()}")
+                if self.shifted and (not self.remove_first_pool_each_iteration):
+                    # For shifted setup, always use test dataset center
+                    max = np.max(self.pool_datasets[0].y_data, axis=0, keepdims=True)
+                    print(f"    Max from first pool (shifted setup): {max.flatten()}")
+                    min = np.min(self.pool_datasets[0].y_data, axis=0, keepdims=True)
+                    print(f"    Min from first pool (shifted setup): {min.flatten()}")
+                    center = max / (1+self.initial_window_size)
+                    print(f"    Center from dataset (shifted setup): {center.flatten()}")
+                    dataset_size = len(self.pool_datasets[0])
+                    print(f"    Dataset size from first pool (shifted setup): {dataset_size}")
                 else:
-                    print(f"    Center from test dataset: {center.flatten()}")
+                    if iteration == 1:
+                            center = self._calculate_center_point(self.test_dataset, model=None)
+                            print(f"    Center from test dataset: {center.flatten()}")
+                    else:
+                        center = self._calculate_center_point(self.test_dataset, model)
+                        if self.use_model_prediction:
+                            print(f"    Updated center from model prediction: {center.flatten()}")
+                        else:
+                            print(f"    Center from test dataset: {center.flatten()}")
             
             # Calculate adaptive window size
             window_size = self.initial_window_size * (self.shrink_rate ** (iteration - 1))
@@ -524,6 +549,9 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                     break
                 
                 pool_label = getattr(current_pool, 'label', f'Pool {pool_idx + 1}')
+
+                print(f"    Sampling from Center {center.flatten()} ..")
+                print(f"    Sampling SSize {window_size:.4f} ..")
                 
                 # Create window sampler with current window size
                 window_sampler = WindowSampler(
@@ -538,6 +566,10 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                     
                     # Use pool-specific used indices
                     used_indices = pool_used_indices[pool_idx]
+
+                    print(f"    Samples needed: {samples_needed}, Used indices count: {len(used_indices)}")
+
+                    #print(f"       Currently used indices in this pool: {sorted(used_indices)}")
                     
                     sampled_subset = window_sampler.sample(
                         current_pool,
@@ -546,6 +578,8 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                         seed=seed + pool_idx,  # Different seed for each pool
                         exclude_indices=used_indices if len(used_indices) > 0 else None
                     )
+
+                    #print(f"       Sampled subset head: {sampled_subset.get_data()[0][:20]}")  # Print first 5 x samples
                     
                     sampled_x, sampled_y = sampled_subset.get_data()
                     samples_obtained = len(sampled_x)
@@ -558,6 +592,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
                             for pool_idx_check in range(len(pool_x)):
                                 if pool_idx_check not in used_indices:
                                     if np.allclose(pool_x[pool_idx_check], sampled_x[new_sample_idx]):
+                                        #print(f"          ✓ Marking pool index {pool_idx_check} as used")
                                         used_indices.add(pool_idx_check)
                                         break
                         
@@ -612,7 +647,7 @@ class AdaptiveBatchSamplingPipeline(BasePipeline):
             # Train the model for n_epochs (continuing from previous weights)
             print(f"    Training for {self.n_epochs} epochs with batch size {self.batch_size}...")
             epoch_losses, prediction_variance = self._train_for_epochs(
-                model, train_loader, self.n_epochs, x_test=x_test, eval_frequency=10
+                model, train_loader, self.n_epochs, x_test=x_test, eval_frequency=100
             )
             avg_train_loss = np.mean(epoch_losses)
             

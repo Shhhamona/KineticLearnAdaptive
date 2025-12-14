@@ -1,0 +1,70 @@
+{
+  "experiment_config": {
+    "samples_per_iteration": 800,
+    "shrink_rate": 0.4,
+    "n_iterations": 2,
+    "total_samples": 1600,
+    "n_epochs": 50,
+    "batch_size": 16,
+    "initial_window_size": 2.0,
+    "num_seeds": 1,
+    "timestamp": "20251208_140600"
+  },
+  "predictions_per_seed": [
+    {
+      "seed": 42,
+      "seed_index": 0,
+      "true_K_values": [
+        600000000000000.0,
+        1299999999999999.8,
+        960000000000000.0
+      ],
+      "predicted_K_values": [
+        603048601524509.1,
+        1339664495783932.0,
+        960262004626729.9
+      ],
+      "absolute_error": [
+        3048601524509.125,
+        39664495783932.25,
+        262004626729.875
+      ],
+      "relative_error_percent": [
+        0.5081002540848542,
+        3.0511150603024815,
+        0.027292148617695314
+      ],
+      "mse_per_K": [
+        9.293971255239361e+24,
+        1.573272225793579e+27,
+        6.8646424427861125e+22
+      ],
+      "total_mse": 1.5826348434732462e+27,
+      "total_samples_seen": 1600,
+      "iteration": 2
+    }
+  ],
+  "mean_predictions": {
+    "mean_predicted_K": [
+      603048601524509.1,
+      1339664495783932.0,
+      960262004626729.9
+    ],
+    "std_predicted_K": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mean_absolute_error": [
+      3048601524509.125,
+      39664495783932.25,
+      262004626729.875
+    ],
+    "mean_relative_error": [
+      0.5081002540848542,
+      3.0511150603024815,
+      0.027292148617695314
+    ],
+    "mean_total_mse": 1.5826348434732462e+27
+  }
+}

@@ -47,6 +47,8 @@ class RandomSampler(BaseSampler):
         """Generate random uniform samples within bounds."""
         n_k = len(center)
         samples = np.zeros((n_samples, n_k))
+
+        np.random.seed(self.random_state)
         
         for i in range(n_k):
             samples[:, i] = np.random.uniform(bounds[i, 0], bounds[i, 1], n_samples)

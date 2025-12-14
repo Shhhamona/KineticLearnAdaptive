@@ -70,7 +70,7 @@ def main():
     # Configuration
     nspecies = 3
     num_pressure_conditions = 2
-    react_idx = [2]
+    react_idx = [0,1, 2]
     
     # Experimental parameters
     # Keys = samples_per_iteration, Values = list of shrink_rates to test
@@ -79,17 +79,17 @@ def main():
         #50: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],    # 50 samples per iteration, test various shrink rates
         #100: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],   # 100 samples per iteration
         #200: [0.0, 0.05, 0.10, 0.15, 0.20, 0.30],   # 200 samples per iteration
-        800: [0.40],   # 300 samples per iteration
+        400: [1],   # 300 samples per iteration
     }
     
     # Total sample budget (will determine n_iterations from samples_per_iteration)
-    max_total_samples = 4200  # Fixed total budget
+    max_total_samples = 1500  # Fixed total budget
     
     # Training hyperparameters
     n_epochs = 50  # Train for 50 epochs at each iteration
     batch_size = 16  # Batch size for NN training
-    initial_window_size = 1.0  # ±100% around center
-    num_seeds = 5
+    initial_window_size = 1  # ±100% around center
+    num_seeds = 1
     
     # Neural Network hyperparameters
     nn_params = {
@@ -317,7 +317,8 @@ def main():
     x_sample, y_sample = test_dataset.get_data()
     nn_params['input_size'] = x_sample.shape[1]
     nn_params['output_size'] = y_sample.shape[1]
-    
+    nn_params['seed'] = 42  # Random initialization for each run
+
     print(f"\n🧠 Neural Network Configuration:")
     print(f"   Input size: {nn_params['input_size']}")
     print(f"   Hidden layers: {nn_params['hidden_sizes']}")
@@ -402,10 +403,11 @@ def main():
                 samples_per_iteration=samples_per_iteration,
                 n_epochs=n_epochs,
                 batch_size=batch_size,
+                use_model_prediction=True,  # Use true K values for window centering
                 initial_window_size=initial_window_size,
                 shrink_rate=shrink_rate,
                 num_seeds=num_seeds,
-                window_type='output',
+                window_type='output', #OUtput - K space
                 pipeline_name=f"sample_efficiency_{samples_per_iteration}per_iter_shrink{shrink_rate}",
                 results_dir="pipeline_results"
             )

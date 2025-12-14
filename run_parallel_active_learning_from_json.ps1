@@ -2,7 +2,7 @@
 # Reads experiment configurations from JSON files
 
 param(
-    [string]$ConfigDir = "adaptive_learning_setups\500_iteration_040_shrink\iteration6",
+    [string]$ConfigDir = "adaptive_learning_setups\al_800_iteration_040_shrink_shifted\iteration5",
     [switch]$DryRun
 )
 
@@ -46,6 +46,8 @@ foreach ($configFile in $configFiles) {
             KMultFactor = $params.k_mult_factor
             KCenter = $params.k_center  # Array of 3 values
             LokiVersion = $params.loki_version
+            ErrorTolerance = $params.error_tolerance
+            SamplingSeed = $params.sampling_seed
             LogFile = "results\logs\$($expName).log"
             Description = $config.description
         }
@@ -57,6 +59,8 @@ foreach ($configFile in $configFiles) {
         Write-Host "  K mult factor: $($experiment.KMultFactor)" -ForegroundColor Gray
         Write-Host "  K center: [$($experiment.KCenter[0]), $($experiment.KCenter[1]), $($experiment.KCenter[2])]" -ForegroundColor Gray
         Write-Host "  LoKI version: $($experiment.LokiVersion)" -ForegroundColor Gray
+        Write-Host "  ErrorTolerance: $($experiment.ErrorTolerance)" -ForegroundColor Gray
+        Write-Host "  SamplingSeed: $($experiment.SamplingSeed)" -ForegroundColor Gray
         if ($config.predicted_k_info) {
             Write-Host "  Source: Seed $($config.predicted_k_info.seed) (MSE: $($config.predicted_k_info.mse_original))" -ForegroundColor Gray
         }
@@ -81,7 +85,7 @@ if ($DryRun) {
     foreach ($exp in $experiments) {
         Write-Host "$($exp.Name):" -ForegroundColor Yellow
         $kCenterStr = "$($exp.KCenter[0]) $($exp.KCenter[1]) $($exp.KCenter[2])"
-        Write-Host "  python active_learning_train.py --n-samples-per-iteration $($exp.NSamples) --k-mult-factor $($exp.KMultFactor) --k-center $kCenterStr --loki-version $($exp.LokiVersion)" -ForegroundColor Gray
+        Write-Host "  python active_learning_train.py --n-samples-per-iteration $($exp.NSamples) --k-mult-factor $($exp.KMultFactor) --k-center $kCenterStr --loki-version $($exp.LokiVersion) --error-tolerance $($exp.ErrorTolerance) --sampling-seed $($exp.SamplingSeed)" -ForegroundColor Gray
         Write-Host ""
     }
     
@@ -122,7 +126,7 @@ foreach ($exp in $experiments) {
     # Format k-center values for command line
     $kCenterStr = "$($exp.KCenter[0]) $($exp.KCenter[1]) $($exp.KCenter[2])"
     
-    $command = "`"$pythonExe`" `"$scriptPath`" --n-samples-per-iteration $($exp.NSamples) --k-mult-factor $($exp.KMultFactor) --k-center $kCenterStr --loki-version $($exp.LokiVersion)"
+    $command = "`"$pythonExe`" `"$scriptPath`" --n-samples-per-iteration $($exp.NSamples) --k-mult-factor $($exp.KMultFactor) --k-center $kCenterStr --loki-version $($exp.LokiVersion) --error-tolerance $($exp.ErrorTolerance) --sampling-seed $($exp.SamplingSeed)"
     
     # Convert log file to absolute path
     $absoluteLogFile = Join-Path $workingDir $exp.LogFile

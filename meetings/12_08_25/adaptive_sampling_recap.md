@@ -1,4 +1,4 @@
-# Rate Coefficient Calculation - Sampling Method Comparasion and Adaptive Learning 
+# Rate Coefficient Inverse Calculation - Sampling Method Comparasion and Adaptive Learning 
 
 ## Setup
 
@@ -48,17 +48,22 @@ Values obtained from hyperparameter exploration done by Marcelo's work.
 Morris Method - From Discreet approach to Sampling Between Intervals
 
 
-<img src="plots/adaptive_batch_sampling_20251209_194312.png" width="1000">
+<img src="plots/ScreenshotCorrected.png" width="1000">
 
 
 ### 2 - Neural Network Training - Adaptive Sampling Method Review
 
-Basic Idea: For a budget of N_samples instead of training always wihitin the same  K boundries - Iteratevily narrow boundries. Focus on central point being predicted
+Baseline
+
+Given a budget of N_samples, within a k range of [k_min, k_max], sample randomly N_samples from the k_range. The rate coeficient predicted is given by a NN trained on all N_samples, predicting the K_true value. 
+
+Adaptive sampling
+For a budget of N_budget, train the NN model with dataset of size  sample_per_iteration, for N_iterations, so that N_iteraionsx sample_per_iteraion = N_budget. In each iteration, reduce the size of the k_range by shrink_rate, and sample uniformly arround the predicted value for k_true. 
 
 Parameters to control
 
-- Number samples per iteration :
-- Shrink Rate per Iteration : 
+- Number samples per iteration : iteraiton_sample
+- Shrink Rate per Iteration : shrink_rate
 
 
 
@@ -121,7 +126,7 @@ K_shifted = [4.0e-16, 8.666e-16,1.44e-15]
 ### Other Topics?
 
 - Explore more hyperparameters - Maybe with grid
-- 
+- Complex example
 - Train Neural Network with Uniform sampling with decreasing range
 
 

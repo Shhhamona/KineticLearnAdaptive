@@ -1,0 +1,22 @@
+{
+  "experiment_name": "800_samples_1.2_factor_seed_42",
+  "description": "Adaptive learning with 800 samples per iteration, K mult factor 1.2, using predicted K values from seed 42",
+  "parameters": {
+    "n_samples_per_iteration": 800,
+    "k_mult_factor": 1.2,
+    "k_center": [6.26973938e-16, 1.39956298e-15, 9.78644572e-16],
+    "loki_version": "v2",
+    "error_tolerance": "low",
+    "sampling_seed": 42
+  },
+  "predicted_k_info": {
+    "seed": 42,
+    "seed_index": 0,
+    "true_k_values": [6.0e+14, 1.3e+15, 9.6e+14],
+    "predicted_k_values": [6.26973938e+14, 1.39956298e+15, 9.78644572e+14],
+    "absolute_error": [2.69739376e+13, 9.95629769e+13, 1.86445716e+13],
+    "relative_error_percent": [4.49565627, 7.65869053, 1.94214287],
+    "mse_original": 1.098800e+28
+  },
+  "notes": "K center values are the predicted values from the neural network training with seed 42"
+}

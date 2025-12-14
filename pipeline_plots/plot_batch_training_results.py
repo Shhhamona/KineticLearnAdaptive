@@ -403,6 +403,7 @@ def main():
         'Morris Continuous',
     ]
 
+    """
     # Define label prefixes to search for
     label_prefixes = [
         'Uniform Sampling-K_factor_2',
@@ -434,7 +435,7 @@ def main():
         'K ∈ [K_true/1.005, K_true×1.005]',
         'K ∈ [K_true/1.00005, K_true×1.00005]',
     ]
-    
+    """
     # Find the latest file for each label prefix
     results_files = []
     for prefix in label_prefixes:

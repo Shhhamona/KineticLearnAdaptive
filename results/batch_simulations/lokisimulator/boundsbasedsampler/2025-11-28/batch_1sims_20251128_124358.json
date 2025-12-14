@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "batch_timestamp": "2025-11-28T12:43:58.639980",
+    "sampler_type": "BoundsBasedSampler",
+    "simulator_type": "LoKISimulator",
+    "simulation_type": "simple",
+    "chemistry_name": "O2_simple",
+    "pressure_conditions_pa": [
+      133.322,
+      1333.22
+    ],
+    "pressure_conditions_torr": [
+      1.0,
+      10.0
+    ],
+    "n_pressure_conditions": 2,
+    "unique_file_combinations": 1,
+    "parallel_workers": 1
+  },
+  "n_simulations": 1,
+  "n_successful": 1,
+  "success_rate": 1.0,
+  "total_time": 30.01942777633667,
+  "parameter_sets": [
+    {
+      "k_values": [
+        6.3708610696262625e-16,
+        2.5038928974993366e-15,
+        1.5340712762084235e-15
+      ],
+      "setup_file": "setup_O2_simple.in",
+      "chem_file": "O2_simple_1.chem",
+      "metadata": {
+        "sample_index": 0,
+        "sampling_method": "BoundsBasedSampler",
+        "pressure_conditions_pa": [
+          133.322,
+          1333.22
+        ],
+        "pressure_conditions_torr": [
+          1.0,
+          10.0
+        ],
+        "n_pressure_conditions": 2
+      }
+    }
+  ],
+  "compositions": [
+    [
+      1.85238110903617e+22,
+      1.60991785724326e+21,
+      5.48045018501901e+21
+    ],
+    [
+      2.21478783199399e+23,
+      2.46512106698124e+21,
+      3.21965344302522e+22
+    ]
+  ],
+  "execution_times": [
+    30.01942777633667
+  ],
+  "success_mask": [
+    true
+  ]
+}

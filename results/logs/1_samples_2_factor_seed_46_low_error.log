@@ -1,0 +1,447 @@
+﻿[2025-11-28 12:09:31] Starting experiment: 1_samples_2_factor_seed_46_low_error
+Working Directory: C:\Users\rodol\Documents\PlasmaML\KineticLearnAdaptive
+Command: "C:\Users\rodol\Documents\PlasmaML\KineticLearnAdaptive\.venv\Scripts\python.exe" "C:\Users\rodol\Documents\PlasmaML\KineticLearnAdaptive\active_learning_train.py" --n-samples-per-iteration 1 --k-mult-factor 2 --k-center 6E-16 1.3E-15 9.6E-16 --loki-version v6
+
+******************************************************************************
+*     __    _      __    ____           __ __ ____           __  _           *
+*    / /   (_)____/ /_  / __ \____     / //_//  _/___  ___  / /_(_)_________ *
+*   / /   / / ___/ __ \/ / / / __ \   / ,<   / // __ \/ _ \/ __/ / ___/ ___/ *
+*  / /___/ (__  ) /_/ / /_/ / / / /  / /| |_/ // / / /  __/ /_/ / /__(__  )  *
+* /_____/_/____/_.___/\____/_/ /_/  /_/ |_/___/_/ /_/\___/\__/_/\___/____/   *
+*                                                                            *
+*                   _        _  _____       ____  _   __                     *
+*                  | |   ___| |/ /_ _| __ _|__ / / | /  \                    *
+*                  | |__/ _ \ ' < | |  \ V /|_ \_| || () |                   *
+*                  |____\___/_|\_\___|  \_/|___(_)_(_)__/                    *
+*                                                                            *
+******************************************************************************
+Parsing setup file ...
+  Finished (0.237388 seconds).
+Performing selfdiagnostic of the setup file ...
+  Finished (0.004763 seconds).
+Initializing simulation:
+	- Setting up heavy-species kinetics ...
+	    Finished (0.372274 seconds).
+	- Setting up other components ...
+	    Finished (0.000822 seconds).
+	- Configuring CLI ...
+	    Finished (0.008572 seconds).
+	- Setting up Output ...
+	    Finished (0.045197 seconds).
+  Finished (3.270434 seconds).
+Starting calculations: ...
+	- Integrating particle rate-balance equations ...
+	    Finished (1.753615 seconds).
+	- New pressure cycle iteration (1): relative error = -7.883707e-02
+	- Integrating particle rate-balance equations ...
+	    Finished (1.430270 seconds).
+	- New pressure cycle iteration (2): relative error = 5.881282e-03
+	- Integrating particle rate-balance equations ...
+	    Finished (1.628417 seconds).
+	- New pressure cycle iteration (3): relative error = -2.163228e-06
+	- Integrating particle rate-balance equations ...
+	    Finished (1.337685 seconds).
+	- New pressure cycle iteration (4): relative error = -5.891639e-11
+	- Integrating particle rate-balance equations ...
+	    Finished (1.407816 seconds).
+	- New pressure cycle iteration (5): relative error = -2.131809e-15
+  Finished (13.410458 seconds).
+******************************************************************************
+*     __    _      __    ____           __ __ ____           __  _           *
+*    / /   (_)____/ /_  / __ \____     / //_//  _/___  ___  / /_(_)_________ *
+*   / /   / / ___/ __ \/ / / / __ \   / ,<   / // __ \/ _ \/ __/ / ___/ ___/ *
+*  / /___/ (__  ) /_/ / /_/ / / / /  / /| |_/ // / / /  __/ /_/ / /__(__  )  *
+* /_____/_/____/_.___/\____/_/ /_/  /_/ |_/___/_/ /_/\___/\__/_/\___/____/   *
+*                                                                            *
+*                   _        _  _____       ____  _   __                     *
+*                  | |   ___| |/ /_ _| __ _|__ / / | /  \                    *
+*                  | |__/ _ \ ' < | |  \ V /|_ \_| || () |                   *
+*                  |____\___/_|\_\___|  \_/|___(_)_(_)__/                    *
+*                                                                            *
+******************************************************************************
+Parsing setup file ...
+  Finished (0.171650 seconds).
+Performing selfdiagnostic of the setup file ...
+  Finished (0.002858 seconds).
+Initializing simulation:
+	- Setting up heavy-species kinetics ...
+	    Finished (0.261744 seconds).
+	- Setting up other components ...
+	    Finished (0.000743 seconds).
+	- Configuring CLI ...
+	    Finished (0.005571 seconds).
+	- Setting up Output ...
+	    Finished (0.034157 seconds).
+  Finished (3.125650 seconds).
+Starting calculations: ...
+	- Integrating particle rate-balance equations ...
+	    Finished (1.581892 seconds).
+	- New pressure cycle iteration (1): relative error = -4.254882e-02
+	- Integrating particle rate-balance equations ...
+	    Finished (1.457987 seconds).
+	- New pressure cycle iteration (2): relative error = 7.716175e-04
+	- Integrating particle rate-balance equations ...
+	    Finished (1.405509 seconds).
+	- New pressure cycle iteration (3): relative error = -4.015095e-07
+	- Integrating particle rate-balance equations ...
+	    Finished (1.351829 seconds).
+	- New pressure cycle iteration (4): relative error = -3.883304e-12
+	- Integrating particle rate-balance equations ...
+	    Finished (1.249318 seconds).
+	- New pressure cycle iteration (5): relative error = 3.922529e-15
+  Finished (12.743836 seconds).
+Configuration: {'nspecies': 3, 'num_pressure_conditions': 2, 'pressure_conditions_pa': [133.322, 1333.22], 'initial_samples_from_uniform': 50, 'n_iterations': 1, 'n_samples_per_iteration': 1, 'k_multiplicative_factor': 2.0, 'k_center': [6e-16, 1.3e-15, 9.6e-16], 'loki_path': 'C:\\MyPrograms\\LoKI_v3.1.0-v6', 'svr_params': [{'C': 10, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'}, {'C': 20, 'epsilon': 0.005, 'gamma': 5, 'kernel': 'rbf'}, {'C': 5, 'epsilon': 0.005, 'gamma': 2, 'kernel': 'rbf'}]}
+­ƒôé Loading training and test data
+Ô£à Data loaded
+
+­ƒö¼ PHASE 1: Initial MSE Analysis (100, 200, 300, 400, 500)
+­ƒôè Subset sizes: [51]
+­ƒÄ▓ Number of seeds: 1
+
+­ƒÄ▓ Running seed 1/1...
+   calculate_mse_for_dataset: Test data checksum y_test.mean()=0.615031, x_test.shape=(100, 6)
+   calculate_mse_for_dataset: Using seed=42 for shuffling
+   DEBUG: First 3 x_train samples after shuffle:
+[[0.89216812 0.35686139 0.70667064 0.95011161 0.24441127 0.73297753]
+ [0.75640762 0.64585016 0.9800678  0.90400998 0.44066173 0.98238042]
+ [0.88823616 0.77124395 0.45099134 0.97585568 0.83674509 0.42844922]]
+   DEBUG: First 3 y_train samples after shuffle:
+[[0.38810753 0.57080839 0.61991352]
+ [0.9273859  0.70797416 0.97250347]
+ [0.83639567 0.73225559 0.26153988]]
+   DEBUG: mse_list shape = (3, 1)
+   DEBUG: subset_sizes = [51]
+   DEBUG: mse_array = 
+[[1.13039022e-04]
+ [4.30575897e-03]
+ [2.39389887e-05]]
+   DEBUG: total_mse_list = [0.00444274]
+   ­ƒôê Total MSE for each subset size: [0.00444274]
+   ­ƒôè Size 51: Individual MSEs = [0.000113039022362814, 0.00430575897028612, 2.3938988744788586e-05], Sum = 0.004443
+
+­ƒÅå PHASE 1 RESULTS:
+­ƒôè Mean Total MSE: [0.00444274]
+­ƒôè Std Error: [0.]
+
+­ƒö¼ PHASE 2: Training final models on 50 samples
+DEBUG (active): x_train.shape=(50, 6), y_train.shape=(50, 3)
+DEBUG (active): x_test.shape=(100, 6), y_test.shape=(100, 3)
+DEBUG (active): Test data hash: -4772105646543335785, 2304898632473034523
+DEBUG (train_initial_models) [seed=42]: TRAINING DATA
+   X_train first 3 rows:
+[[0.89216812 0.35686139 0.70667064 0.95011161 0.24441127 0.73297753]
+ [0.75640762 0.64585016 0.9800678  0.90400998 0.44066173 0.98238042]
+ [0.88823616 0.77124395 0.45099134 0.97585568 0.83674509 0.42844922]]
+   Y_train first 3 rows:
+[[0.38810753 0.57080839 0.61991352]
+ [0.9273859  0.70797416 0.97250347]
+ [0.83639567 0.73225559 0.26153988]]
+   X_train range: [0.156009, 0.998697]
+   Y_train range: [0.251811, 0.999899]
+   X_train.mean()=0.69300529, Y_train.mean()=0.61176956
+DEBUG (train_initial_models) [seed=42]: TEST DATA
+   X_test first 3 rows:
+[[0.78475867 0.61341724 0.90484506 0.91602632 0.42392432 0.90926993]
+ [0.87406964 0.20235626 0.86844509 0.92961866 0.13772041 0.88950009]
+ [0.8311625  0.71276688 0.68275994 0.9491669  0.49619651 0.67975385]]
+   Y_test first 3 rows:
+[[0.82849682 0.68405077 0.8600603 ]
+ [0.26556599 0.89103446 0.83872146]
+ [0.72524172 0.30127046 0.54511075]]
+   X_test range: [0.120690, 0.994307]
+   Y_test range: [0.252963, 0.991772]
+   X_test.mean()=0.70006626, Y_test.mean()=0.61503144
+DEBUG (active) [seed=42]: Output 0: Test MSE=0.000114, Train MSE=0.000013
+DEBUG (active) [seed=42]: Output 1: Test MSE=0.004327, Train MSE=0.000126
+DEBUG (active) [seed=42]: Output 2: Test MSE=0.000025, Train MSE=0.000014
+DEBUG: Completed run 1/1 (seed=42) - per-output test MSE: [0.00011433790698831907, 0.004327418496354738, 2.4826518440434804e-05]
+Test MSE per output (mean over runs=1): [0.00011433790698831907, 0.004327418496354738, 2.4826518440434804e-05]
+Train MSE per output (mean over runs=1): [1.3298768645033961e-05, 0.00012616415715306295, 1.4390333847166188e-05]
+Total Test MSE (mean sum): 0.004467
+Total Train MSE (mean sum): 0.000154
+Overfitting ratio (Test/Train): 29.031
+
+==== DEBUG: Initial Training Data (First 5 Rows) ====
+Raw compositions (X, first 5):
+ [[0.80759803 0.64345149 0.80778309 0.92940155 0.47056459 0.81252482]
+ [0.85633469 0.19996368 0.93022753 0.92127465 0.13053221 0.94469592]
+ [0.90710173 0.70566964 0.42950433 0.98128764 0.75227472 0.41350776]
+ [0.84760223 0.8088259  0.56456964 0.96359964 0.67518332 0.54507117]
+ [0.8242656  0.52567642 0.82765058 0.93000412 0.34749972 0.83763635]
+ [0.96536344 0.41484323 0.42048351 0.98899911 0.4052142  0.4457739 ]
+ [0.9269795  0.35267788 0.59117815 0.96555589 0.28628574 0.62408999]
+ [0.87755392 0.82590425 0.45177715 0.97680518 0.8524824  0.418656  ]
+ [0.86099535 0.35342712 0.81475748 0.93557459 0.21250856 0.83370118]
+ [0.9263535  0.34372613 0.59911596 0.96644669 0.23140201 0.6313001 ]
+ [0.79116801 0.5534648  0.92200587 0.91463096 0.38255677 0.92795725]
+ [0.84983693 0.79369904 0.56680152 0.95892298 0.76892278 0.55298755]
+ [0.88866038 0.19031306 0.82671513 0.93542243 0.13576263 0.85274649]
+ [0.85216161 0.50545704 0.74604713 0.94073595 0.38103591 0.76092711]
+ [0.87390716 0.73729026 0.52169027 0.96670038 0.73409341 0.51131985]
+ [0.76684777 0.60351926 0.97209951 0.9087403  0.34641546 0.97423894]
+ [0.81415865 0.64127676 0.78691629 0.93295696 0.46209486 0.79172142]
+ [0.88164857 0.39316102 0.71882469 0.94701822 0.28888365 0.74234165]
+ [0.75417651 0.80035921 0.88732293 0.91721228 0.50237639 0.88319386]
+ [0.88063073 0.80735873 0.45336984 0.97762209 0.81242719 0.42284859]
+ [0.86201314 0.58081282 0.66366934 0.95197451 0.4451599  0.67376774]
+ [0.93952304 0.32910566 0.56388886 0.97006798 0.2663219  0.59985902]
+ [0.79078303 0.46426924 0.9812307  0.91028049 0.25621479 0.9856008 ]
+ [0.7661795  0.63482712 0.95404025 0.91054732 0.37509031 0.95590033]
+ [0.88318777 0.58122178 0.59150174 0.96355559 0.44243863 0.60015102]
+ [0.7937538  0.46273813 0.97213528 0.91076473 0.27795122 0.97737789]
+ [0.88018411 0.80571604 0.45595303 0.97983731 0.74836034 0.42372861]
+ [0.89378731 0.70619747 0.47437203 0.97900128 0.61807454 0.45976326]
+ [0.87980197 0.76570593 0.48322605 0.97531729 0.70895341 0.4619882 ]
+ [0.78939806 0.45869091 0.98955519 0.90629904 0.32566189 0.99477946]
+ [0.86725297 0.66662245 0.59016499 0.95767366 0.63385901 0.59279752]
+ [0.86988991 0.546072   0.65947715 0.9525568  0.43220681 0.67308378]
+ [0.79951635 0.64397408 0.83488763 0.92377767 0.50634337 0.84016176]
+ [0.89094349 0.38378195 0.69335062 0.94994069 0.30669602 0.71940893]
+ [0.96026425 0.28770959 0.52033542 0.9765648  0.24940594 0.56218462]
+ [0.93787193 0.41061309 0.51657868 0.97434183 0.38105432 0.54544284]
+ [0.94908597 0.35111662 0.51712717 0.97737793 0.27440377 0.55108538]
+ [0.80519714 0.74007869 0.75319988 0.93658548 0.53746141 0.75071048]
+ [0.87399805 0.28627338 0.81420299 0.93704695 0.16130537 0.83631588]
+ [0.83572818 0.66473119 0.69844282 0.94667385 0.47532731 0.7006528 ]
+ [0.88112054 0.58852737 0.59377794 0.9612693  0.4926081  0.60299866]
+ [0.76989311 0.70332365 0.89695344 0.91680028 0.45311599 0.89743398]
+ [0.93677971 0.37436343 0.54382167 0.97225779 0.30981995 0.57557694]
+ [0.78550602 0.69512535 0.84925508 0.92280785 0.48792547 0.85071674]
+ [0.80323827 0.40310946 0.9786431  0.91082051 0.24559818 0.98463781]
+ [0.84179437 0.80684977 0.58557418 0.960783   0.65459067 0.56797954]
+ [0.83827538 0.36830379 0.88225348 0.92464603 0.24476177 0.89618258]
+ [0.88689253 0.78852966 0.44433134 0.97423814 0.91581037 0.4202058 ]
+ [0.81234091 0.40337644 0.94755587 0.91543341 0.24359815 0.95552966]
+ [0.84693395 0.27988826 0.91025701 0.922302   0.18733995 0.92473291]]
+Raw k values (Y, first 5):
+ [[0.82849682 0.69278735 0.71924853]
+ [0.26556599 0.83063725 0.92191333]
+ [0.72524172 0.66929196 0.25077969]
+ [0.81160912 0.38917239 0.38437529]
+ [0.62388503 0.52592988 0.75799325]
+ [0.41860068 0.76801479 0.29344454]
+ [0.3985502  0.83040831 0.48551872]
+ [0.82040431 0.51217981 0.25184134]
+ [0.37683601 0.37843313 0.75638   ]
+ [0.31625728 0.35334133 0.49567593]
+ [0.76402571 0.74856207 0.88944148]
+ [0.96505239 0.82884209 0.38963913]
+ [0.25296313 0.99781009 0.78554946]
+ [0.63414905 0.79275979 0.652139  ]
+ [0.85947229 0.8198297  0.34682168]
+ [0.70939997 0.26312309 0.96212345]
+ [0.79132254 0.61983765 0.6909661 ]
+ [0.46891064 0.76124871 0.63062699]
+ [0.93833777 0.28075913 0.81915614]
+ [0.78593785 0.47570753 0.25720222]
+ [0.6569133  0.61905547 0.53940213]
+ [0.35663026 0.77600557 0.45845913]
+ [0.53000962 0.25218097 0.98245689]
+ [0.75560599 0.30062911 0.93260766]
+ [0.58137933 0.44291032 0.45296507]
+ [0.5755149  0.46109652 0.96886149]
+ [0.71333069 0.28555659 0.26037075]
+ [0.63485854 0.32907707 0.29932465]
+ [0.73780353 0.43221327 0.29822785]
+ [0.70078457 0.97974522 0.99527704]
+ [0.85392393 0.99667787 0.43823161]
+ [0.64124027 0.73246608 0.53901882]
+ [0.93149378 0.95892669 0.75690658]
+ [0.48943081 0.98112153 0.60062063]
+ [0.31784694 0.9064439  0.41731055]
+ [0.47552868 0.97436195 0.39486902]
+ [0.33549084 0.53885868 0.40450362]
+ [0.87151766 0.50835245 0.63387633]
+ [0.28517442 0.26062355 0.76154137]
+ [0.71972086 0.43249427 0.57168244]
+ [0.66069467 0.69717929 0.45452361]
+ [0.86447186 0.41960573 0.84157634]
+ [0.39921371 0.74461037 0.42993693]
+ [0.89264455 0.59675111 0.77247462]
+ [0.51374341 0.54168094 0.98120523]
+ [0.81599201 0.37808473 0.40992636]
+ [0.47197489 0.71675412 0.8455733 ]
+ [0.91295934 0.89047581 0.25093208]
+ [0.49413751 0.49020362 0.93560199]
+ [0.37376478 0.83209587 0.88993304]]
+
+Ô£à Initial training complete
+Total samples (initial): 50
+Total MSE (initial): 0.004467
+Current training data shapes: X=(50, 6), Y=(50, 3)
+   ­ƒÆ¥ Saved initial training snapshot: results\training_snapshots\train_500_X.txt, results\training_snapshots\train_500_Y.txt
+   ­ƒÆ¥ Saved test dataset snapshot: results\training_snapshots\test_X.txt, results\training_snapshots\test_Y.txt
+
+­ƒöì COMPARISON:
+   Phase 1 MSE (size 500): 0.004443
+   Phase 2 MSE (size 500): 0.004467
+   Match: Ô£à
+
+-- PHASE 3: Adaptive sampling (not implemented)
+   We now have trained models ready for adaptive sampling loop
+   Next: Add 1 adaptive samples and retrain
+
+­ƒö¼ SCALING CHECK: Using k_true = [9.94188579e-16 1.80006625e-15 1.38083958e-15]
+   Raw bounds (multiplicative factor 2.0):
+     k[0]: 9.937e-16 -> 9.947e-16
+     k[1]: 1.799e-15 -> 1.801e-15
+     k[2]: 1.380e-15 -> 1.382e-15
+   Scaled center (first-pressure scaler): [0.82849682 0.69278735 0.71924853]
+   Scaled center (manual using scale_): [0.82849682 0.69278735 0.71924853]
+
+­ƒöÄ DATASET CHECK:
+   x shape: (2000, 6)
+   y shape: (2000, 3)
+   x (first 5 rows):
+[[0.80759803 0.64345149 0.80778309 0.92940155 0.47056459 0.81252482]
+ [0.85633469 0.19996368 0.93022753 0.92127465 0.13053221 0.94469592]
+ [0.90710173 0.70566964 0.42950433 0.98128764 0.75227472 0.41350776]
+ [0.84760223 0.8088259  0.56456964 0.96359964 0.67518332 0.54507117]
+ [0.8242656  0.52567642 0.82765058 0.93000412 0.34749972 0.83763635]]
+   y (first 5 rows):
+[[0.82849682 0.69278735 0.71924853]
+ [0.26556599 0.83063725 0.92191333]
+ [0.72524172 0.66929196 0.25077969]
+ [0.81160912 0.38917239 0.38437529]
+ [0.62388503 0.52592988 0.75799325]]
+   scaler_input (first pressure): MaxAbsScaler()
+   scaler_output (first pressure): MaxAbsScaler()
+
+Ô£à All steps completed successfully!
+
+­ƒö¼ PHASE 3: Adaptive Sampling (1 iterations)
+
+­ƒöº INITIALIZING BATCH SIMULATOR (mock)
+   K bounds for sampler:
+     k[0]: 3.000e-16 -> 1.200e-15
+     k[1]: 6.500e-16 -> 2.600e-15
+     k[2]: 4.800e-16 -> 1.920e-15
+­ƒö¼ Using O2_simple simulation (faster, less accurate)
+   Initialized real LoKISimulator (will use genFiles).
+
+­ƒöä ITERATION 1/1
+   Current training size: 50
+   Generated 1 parameter sets:
+     PS 0: k_values=[9.94188579e-16 6.90466301e-16 1.39245346e-15]
+   ­ƒÜÇ Running batch simulations...
+Running batch of 1 simulations...
+   ´┐¢ Simulator: LoKISimulator
+  Running 1 simulations with setup_O2_simple.in/O2_simple_1.chem
+    ­ƒöº Pressure conditions: [133.322, 1333.22] Pa ([1.0, 10.0] Torr)
+­ƒöº Pressure conditions: [133.322, 1333.22] Pa ([1.0, 10.0] Torr)
+­ƒöº Setting up O2_simple simulation:
+   ­ƒôè Full K array shape: (1, 9)
+   ­ƒôì K columns being varied: [0, 1, 2]
+­ƒöº Setting multiple pressure conditions: 2 pressures
+   ­ƒôê Total simulations after pressure expansion: 2
+­ƒÜÇ Starting LoKI O2_simple simulation...
+Setup files:  <_io.TextIOWrapper name='C:\\MyPrograms\\LoKI_v3.1.0-v6\\Code\\Input\\O2_simple_1\\setup_O2_simple_0.in' mode='w' encoding='cp1252'>
+Setup files:  <_io.TextIOWrapper name='C:\\MyPrograms\\LoKI_v3.1.0-v6\\Code\\Input\\O2_simple_1\\setup_O2_simple_1.in' mode='w' encoding='cp1252'>
+Running LoKI for setup file: O2_simple_1\setup_O2_simple_0.in
+Running LoKI for setup file: O2_simple_1\setup_O2_simple_1.in
+­ƒôû Reading LoKI output densities...
+Output File address:  C:\MyPrograms\LoKI_v3.1.0-v6\Code\Output\O2_simple_1_0\chemFinalDensities.txt
+Output File address:  C:\MyPrograms\LoKI_v3.1.0-v6\Code\Output\O2_simple_1_1\chemFinalDensities.txt
+Ô£à LoKI simulation completed successfully!
+   ­ƒôè Output shape: (2, 3)
+­ƒÆ¥ Simulation results saved: sim_42dc024c9a02_20251128_121017.json
+   ­ƒôè 1 simulations, 43.47s execution time
+Batch completed in 43.47s
+  Success rate: 100.0% (1/1)
+   Batch Results: 1/1 successful
+   ­ƒÆ¥ Saving batch results...
+­ƒôü Batch results saved to: C:\Users\rodol\Documents\PlasmaML\KineticLearnAdaptive\results\batch_simulations\lokisimulator\boundsbasedsampler\2025-11-28\batch_1sims_20251128_121017.json
+   Ô£à Batch results saved to: None
+
+==== DEBUG!!!!!!!!!!!: New Batch Data BEFORE Scaling (First 5 Rows) ====
+Raw compositions (first 5):
+ [[1.87969364e+22 3.05866247e+21 3.75839714e+21]
+ [2.29180053e+23 5.55104078e+21 2.14088671e+22]]
+Raw k values (first 5):
+ [[9.73923494e-16 1.62208867e-15 8.03707170e-16]]
+
+­ƒöº APPLYING TRAINING SCALERS
+   raw_compositions shape: (2, 3)
+   raw_k_values shape: (1, 3)
+   nspecies: 3, num_pressure_conditions: 2
+   k_data after *1e30: min=8.037e+14, max=1.622e+15
+   x_data reshaped: (2, 1, 3)
+   y_data reshaped: (1, 1, 3)
+   x_data[0] min=3.059e+21, max=1.880e+22
+   x_data[1] min=5.551e+21, max=2.292e+23
+   Applying scaler_input[0] to x_data[0]
+     Before: min=3.059e+21, max=1.880e+22
+     After: min=5.821e-01, max=8.575e-01
+   Applying scaler_input[1] to x_data[1]
+     Before: min=5.551e+21, max=2.292e+23
+     After: min=5.752e-01, max=9.603e-01
+   Applying scaler_output[0] to y_data
+     Before: min=8.037e+14, max=1.622e+15
+     After: min=4.186e-01, max=8.116e-01
+   Final new_x shape: (1, 6)
+   Final new_y_scaled shape: (1, 3)
+   new_x range: min=5.752e-01, max=9.603e-01
+   new_y_scaled range: min=4.186e-01, max=8.116e-01
+
+==== DEBUG !!!!!!!!!!!!!!!!: New Batch Data AFTER Scaling (First 5 Rows) ====
+Scaled X (first 5):
+ [[0.85745611 0.72975038 0.58214125 0.96034942 0.63348498 0.5752098 ]]
+Scaled Y (first 5):
+ [[0.81160912 0.62428953 0.41863313]]
+
+­ƒöä RETRAINING MODELS WITH NEW DATA
+   Using provided seeds list for shuffling (or default [42] if None)
+   Test data shape: x_test=(100, 6), y_test=(100, 3)
+   Test data checksum: y_test.mean()=0.615031 (for consistency check)
+   Test data hash: -4772105646543335785, 2304898632473034523
+   Current training size: 50
+   New samples: 1
+   Augmented training size: 51
+   Test size: 100
+
+­ƒÄ▓ Retrain run 1/1 with seed=42...
+DEBUG (retrain_models_with_new_data) [seed=42]: TRAINING DATA
+   X_train_shuffled first 3 rows:
+[[0.78550602 0.69512535 0.84925508 0.92280785 0.48792547 0.85071674]
+ [0.88112054 0.58852737 0.59377794 0.9612693  0.4926081  0.60299866]
+ [0.83827538 0.36830379 0.88225348 0.92464603 0.24476177 0.89618258]]
+   Y_train_shuffled first 3 rows:
+[[0.89264455 0.59675111 0.77247462]
+ [0.66069467 0.69717929 0.45452361]
+ [0.47197489 0.71675412 0.8455733 ]]
+   X_train_shuffled range: [0.130532, 0.994779]
+   Y_train_shuffled range: [0.250780, 0.997810]
+   X_train_shuffled.mean()=0.70071118, Y_train_shuffled.mean()=0.61730258
+   ­ƒÆ¥ Training snapshots saved: results/training_snapshots\retrain_x_train_shuffled_4ddede40.txt, results/training_snapshots\retrain_y_train_shuffled_4ddede40.txt
+   Training model for output 0 (seed=42)...
+     Output 0: Test MSE=0.000025, Train MSE=0.000014
+   Training model for output 1 (seed=42)...
+     Output 1: Test MSE=0.000623, Train MSE=0.000439
+   Training model for output 2 (seed=42)...
+     Output 2: Test MSE=0.000025, Train MSE=0.000015
+DEBUG: Completed retrain run 1/1 (seed=42) - per-output test MSE: [2.547568884310818e-05, 0.0006231392248061822, 2.5227673876338907e-05]
+   Ô£à Retraining complete (averaged over 1 runs)
+   Test MSE per output (mean): [2.547568884310818e-05, 0.0006231392248061822, 2.5227673876338907e-05]
+   Train MSE per output (mean): [1.3721484496174952e-05, 0.0004385941782426134, 1.5463286033402988e-05]
+   Total Test MSE (mean sum): 0.000674
+   Total Train MSE (mean sum): 0.000468
+   Overfitting ratio (Test/Train): 1.441
+   Ô£à Iteration 1 complete:
+     Training size: 51
+     Total MSE: 0.000674
+     MSE change: -0.003793
+   ­ƒÆ¥ Saved augmented training snapshot (600): results\training_snapshots\train_600_X.txt, results\training_snapshots\train_600_Y.txt
+
+­ƒÅå ACTIVE LEARNING COMPLETE!
+   ­ƒôê Training Evolution:
+     Initial:  50 samples ÔåÆ MSE = 0.004467
+      Iter 1:  51 samples ÔåÆ MSE = 0.000674
+   ­ƒôè Overall Performance:
+     Total samples added: 1
+     Final training size: 51
+     MSE improvement: -0.003793 (-84.91%)
+     ­ƒÄ» Result: Ô£à IMPROVED
+
+­ƒÄë ACTIVE LEARNING PIPELINE COMPLETE!
+
+[2025-11-28 12:10:17] Experiment completed: 1_samples_2_factor_seed_46_low_error

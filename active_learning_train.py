@@ -76,6 +76,10 @@ if __name__ == '__main__':
                         help='K center values for bounds (3 floats). Example: --k-center 6e-16 1.3e-15 9.6e-16')
     parser.add_argument('--loki-version', type=str, default='v2',
                         help='LoKI version to use: v2, v3, or custom path. Maps to predefined installation directories.')
+    parser.add_argument('--error-tolerance', type=str, default='medium',
+                        help='Error tolerance level: low, medium, high.')
+    parser.add_argument('--sampling-seed', type=int, default=42,
+                        help='Random seed for sampling.')
     args = parser.parse_args()
 
     # Map LoKI version to installation path
@@ -93,6 +97,11 @@ if __name__ == '__main__':
     else:
         # Assume it's a custom path provided directly
         loki_path = args.loki_version
+
+    if args.error_tolerance == 'medium':
+        arg_setup_file = 'setup_O2_simple.in'
+    elif args.error_tolerance == 'low':
+        arg_setup_file = 'setup_O2_simple_low_error.in'
 
     # Configuration (same as baseline)
     config = {
@@ -284,20 +293,20 @@ if __name__ == '__main__':
             print(f'     k[{i}]: {lo:.3e} -> {hi:.3e}')
 
         # Create a bounds-based sampler with these bounds using random sampling
-        sampler = BoundsBasedSampler(k_bounds=k_bounds, sampling_method='random')
+        sampler = BoundsBasedSampler(k_bounds=k_bounds, sampling_method='random', random_state=args.sampling_seed)
 
         # Try to create a real LoKI simulator; fall back to MockSimulator if unavailable
         try:
             loki_path = config.get('loki_path', 'C:\\MyPrograms\\LoKI_v3.1.0-v2')  # adapt if your LoKI is elsewhere
             k_columns = [0, 1, 2]
-            loki_sim = LoKISimulator(setup_file='setup_O2_simple.in', chem_file='O2_simple_1.chem',
+            loki_sim = LoKISimulator(setup_file=arg_setup_file, chem_file='O2_simple_1.chem',
                                     loki_path=loki_path, k_columns=k_columns,
                                     simulation_type='simple', pressure_conditions=config['pressure_conditions_pa'])
             batch_sim = BatchSimulator(base_simulator=loki_sim, sampler=sampler)
             print('   Initialized real LoKISimulator (will use genFiles).')
         except Exception as e:
             print('   Could not initialize LoKISimulator, falling back to MockSimulator:', e)
-            mock_sim = MockSimulator(setup_file='setup_O2_simple.in', chem_file='O2_simple_1.chem',
+            mock_sim = MockSimulator(setup_file=arg_setup_file, chem_file='O2_simple_1.chem',
                                      loki_path='', true_k=k_true, pressure_conditions=config['pressure_conditions_pa'])
             batch_sim = BatchSimulator(base_simulator=mock_sim, sampler=sampler)
 
